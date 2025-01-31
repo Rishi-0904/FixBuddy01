@@ -14,7 +14,10 @@ const PORT = 3000;
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
-
+app.get('/login', (req, res) => {
+    // Using path.join to correctly form the path to 'login.html'
+    res.sendFile(path.join(__dirname, 'templates', 'login.html'));
+});
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/authDB", {
     useNewUrlParser: true,
