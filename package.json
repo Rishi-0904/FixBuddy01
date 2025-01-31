@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Rishi-0904/FixBuddy01#readme",
   "description": "",
   "dependencies": {
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "mongoose": "^8.9.6"
   }
 }
