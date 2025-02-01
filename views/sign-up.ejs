@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="sign-up.css">
+    <style>@import url('https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@100..400&display=swap');</style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <h2>FixBuddy</h2>
+        <form id="signupForm" action="/signup" method="POST">
+            <!-- Name Field -->
+            <input class="align" type="text" id="name" name="name" placeholder="Full Name" required>
+
+            <!-- Email Field -->
+            <input class="align" id="email" name="email" placeholder="Email Address" required>
+
+            <!-- Password Field -->
+            <input class="align" id="password" name="password" placeholder="Password" required>
+
+            <!-- Confirm Password Field -->
+            <input class="align" type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+
+            <!-- Error message for passwords not matching -->
+            <div id="passwordError" class="error-message"></div>
+
+            <!-- Submit Button -->
+            <input type="submit" value="Sign Up">
+        </form>
+
+        <!-- Login link for users who already have an account -->
+        <div class="login-link">
+            <p class="already">Already have an account? <a href="/login/login.html">Log In</a></p>
+        </div>
+    </div>
+
+    <script src="sign-up.js"></script>
+
+</body>
+</html>

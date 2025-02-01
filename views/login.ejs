@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+  <div class="login-container">
+    <form id="login-form" , action="/login" , method="post">
+      <h1 style="color: rgb(255, 255, 255);text-shadow: 1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black;">Fix <span style="color: orange;text-shadow: none;">Buddy</span></h1>
+      
+      <!-- Username Block -->
+      <div class="input-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <!-- Password Block-->
+      <div class="input-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+      </div>
+      
+      <div id="error-message" class="error-message"></div>
+
+      <!-- Submit Button -->
+      <button class="login" type="submit">Login</button>
+      
+      <div class="sign-up">New to FixBuddy?</div>
+      <a href="http://localhost:3000/sign-up">Sign up now</a>
+    </form>
+  </div>
+
+  <script src="login.js"></script>
+</body>
+</html>
