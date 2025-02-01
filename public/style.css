@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root {
+    --color-primary: #007BFF;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header Styles */
+ .header {
+    background-color: #007BFF;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+} 
+
+.header .logo h1 {
+    font-size: 26px;
+}
+
+.header .logo span {
+    color: #f3a847; /* Accent color for logo */
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-left: 20px;
+}
+
+.nav ul li a {
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: #f3a847; /* Hover effect with accent color */
+}
+
+/* Hero Section */
+.main {
+    background: url('https://via.placeholder.com/1500x600') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 120px 20px;
+}
+
+.main h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.main p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    padding: 12px 25px;
+    background-color: #007BFF; /* Blue background for buttons */
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.cta-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Services Section */
+.services {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.services h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #007BFF; /* Blue color for the heading */
+}
+
+.service-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.service-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #007BFF; /* Blue border for cards */
+}
+
+.service-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.service-card h3 {
+    margin-top: 15px;
+    font-size: 22px;
+    color: #007BFF; /* Blue color for service title */
+}
+
+.service-card p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* How It Works Section */
+.how-it-works {
+    background-color: #f7f7f7;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.how-it-works h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #007BFF; /* Blue color for headings */
+}
+
+.steps {
+    display: flex;
+    justify-content: space-around;
+}
+
+.step {
+    background-color: #fff;
+    padding: 20px;
+    width: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #007BFF; /* Blue border for steps */
+}
+
+.step h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #007BFF; /* Blue color for step titles */
+}
+
+.step p {
+    font-size: 14px;
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: #007BFF; /* Blue color for heading */
+}
+
+.testimonial-cards {
+    display: flex;
+    justify-content: space-around;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    padding: 20px;
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid #007BFF; /* Blue border for testimonial cards */
+}
+
+.testimonial-card p {
+    font-style: italic;
+    font-size: 16px;
+    color: #555; /* Slight gray color for testimonial text */
+}
+
+.testimonial-card h3 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #007BFF; /* Blue color for customer names */
+}
+
+.footer {
+    background-color: #007BFF; /* Blue footer background */
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
