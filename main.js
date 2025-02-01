@@ -1,14 +1,17 @@
 const express = require("express");
+const path = require('path');
+
+const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-
+app.use(express.static('public'))
 app.set("view engine" , "html")
 
-const app = express();
+
 const PORT = 3000;
 
 // Middleware
@@ -17,6 +20,10 @@ app.use(cors());
 app.get('/login', (req, res) => {
     // Using path.join to correctly form the path to 'login.html'
     res.sendFile(path.join(__dirname, 'templates', 'login.html'));
+});
+app.get('/sign-up', (req, res) => {
+    // Using path.join to correctly form the path to 'login.html'
+    res.sendFile(path.join(__dirname, 'templates', 'sign-up.html'));
 });
 // Connect to MongoDB
 mongoose.connect("mongodb://127.0.0.1:27017/authDB", {
