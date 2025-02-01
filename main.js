@@ -1,15 +1,24 @@
 const express = require("express");
+const path = require('path');
+
+const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
+<<<<<<< HEAD
+
+=======
+app.use(express.static('public'))
+app.set("view engine" , "html")
+>>>>>>> 30e22eb666cda07717a3d2e59a60da8ef97c992c
 
 
-const app = express();
 const PORT = 3000;
 
+<<<<<<< HEAD
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
@@ -17,6 +26,19 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine" , "ejs")
 
 
+=======
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
+app.get('/login', (req, res) => {
+    // Using path.join to correctly form the path to 'login.html'
+    res.sendFile(path.join(__dirname, 'templates', 'login.html'));
+});
+app.get('/sign-up', (req, res) => {
+    // Using path.join to correctly form the path to 'login.html'
+    res.sendFile(path.join(__dirname, 'templates', 'sign-up.html'));
+});
+>>>>>>> 30e22eb666cda07717a3d2e59a60da8ef97c992c
 // Connect to MongoDB
 
 mongoose.connect("mongodb://localhost:27017/myDatabase", {
