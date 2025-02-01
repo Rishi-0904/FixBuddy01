@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: rgb(150, 150, 123);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+a{
+    color: rgb(50, 123, 212);
+}
+a:hover{
+    color: whitesmoke;
+}
+.signup-container {
+    background-color: rgb(23, 74, 51);
+    align-items: center;
+    align-self: center;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    max-width: 400px;
+    max-height: 370px;
+}
+h2 {
+    text-align: center;
+    color:#f5efef;
+    margin-bottom: 25px;
+    font-family: "Playwrite IN", serif;
+}
+
+/* Input Fields */
+input {
+    width: 100%;
+    align-items:center;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #137616;
+}
+.already{
+    color: burlywood;;
+}
+/* Error message */
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.align{
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    margin-inline-start: -11px;
+}
+/* Login Link */
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    
+}
+
+#signupForm{
+    align-items: center;
+    align-content: center;
+    align-self: center;
+    align-tracks: center;
+}

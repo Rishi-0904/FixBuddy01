@@ -41,7 +41,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 app.get('/' , (req,res)=>{
-    res.render("home")
+    res.render("index")
 })
 
 app.get("/login" , (req , res)=>{
