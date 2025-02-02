@@ -5,12 +5,9 @@ const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const bodyParser = require("body-parser");
 const cors = require("cors");
-require("dotenv").config();
 app.use(express.static("public"))
 
-app.use(bodyParser.json());
 app.use(cors());
 
 const PORT = 3000;
@@ -22,10 +19,9 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine" , "ejs")
 
 
-// Connect to MongoDB
+// Connecting  to MongoDB
 
 mongoose.connect("mongodb://localhost:27017/myDatabase", {
-    useNewUrlParser: true, // 
 }).then(() => console.log("MongoDB Connected"))
   .catch(err => console.error("MongoDB Connection Error:", err));
 
@@ -130,5 +126,5 @@ app.get("/profile", authenticateJWT, async (req, res) => {
 
 // Starting the Server
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is running...`);
 });
