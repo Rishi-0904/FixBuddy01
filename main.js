@@ -53,13 +53,13 @@ app.get('/sign-up' , (req,res)=>{
     res.render("sign-up")
 })
 
-app.post("/signup", async (req, res) => {
+app.post("/sign-up", async (req, res) => {
     try {
-        const { name, email, password, confirmPassword } = req.body;
+        const { name, email, password } = req.body;
 
         console.log(req.body); 
 
-        if (!name || !email || !password || !confirmPassword) {
+        if (!name || !email || !password ) {
             return res.status(400).json({ message: "All fields are required" });
         }
 
