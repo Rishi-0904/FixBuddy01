@@ -26,7 +26,8 @@ header {
 #logo{
     text-align: left;
     position: relative;
-    top: -30px;
+    top: -23px;
+    left: 8px;
     font-size: large;
 }
 /* Font size of logo */
