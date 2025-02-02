@@ -3,17 +3,24 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: rgb(20, 16, 37);
+}
 :root {
-    --color-primary: #007BFF;
+    --color-primary:indigo;
+    --color-secondary:#d08700;
+    
 }
 a {
     text-decoration: none;
     color: inherit;
 }
 
+
 /* Header Styles */
  .header {
-    background-color: #007BFF;
+    /* position: absolute; */
+    background-color:var(--color-primary) ;
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -34,9 +41,10 @@ a {
 }
 
 .nav ul li {
+    /* text-shadow: 2px 2px 5px  rgba(0, 0, 0, 0.5); */
     margin-left: 20px;
 }
-
+ 
 .nav ul li a {
     color: #fff;
     font-size: 16px;
@@ -49,11 +57,18 @@ a {
 
 /* Hero Section */
 .main {
-    background: url('https://via.placeholder.com/1500x600') no-repeat center center/cover;
+    /* height: 50px; */
+
     color: #fff;
     text-align: center;
     padding: 120px 20px;
 }
+/* .main-content{
+    height: 10px;
+    width: 95vw;
+    position: absolute;
+    background: url('background-image.jpg') no-repeat center center/cover;
+} */
 
 .main h2 {
     font-size: 36px;
@@ -66,8 +81,9 @@ a {
 }
 
 .cta-button {
+    /* background:url('carpenter.jpg'); */
     padding: 12px 25px;
-    background-color: #007BFF; /* Blue background for buttons */
+    background-color: var(--color-primary); /* Blue background for buttons */
     color: #fff;
     border: none;
     font-size: 16px;
@@ -76,7 +92,7 @@ a {
 }
 
 .cta-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color:var(--color-primary) ; /* Darker blue on hover */
 }
 
 /* Services Section */
@@ -88,7 +104,7 @@ a {
 .services h2 {
     font-size: 32px;
     margin-bottom: 40px;
-    color: #007BFF; /* Blue color for the heading */
+    color: #ffb300; /* Blue color for the heading */
 }
 
 .service-cards {
@@ -104,7 +120,7 @@ a {
     width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border: 2px solid #007BFF; /* Blue border for cards */
+    border: 2px solid ; /* Blue border for cards */
 }
 
 .service-card img {
@@ -116,7 +132,7 @@ a {
 .service-card h3 {
     margin-top: 15px;
     font-size: 22px;
-    color: #007BFF; /* Blue color for service title */
+    color: var(--color-primary); /* Blue color for service title */
 }
 
 .service-card p {
@@ -126,15 +142,15 @@ a {
 
 /* How It Works Section */
 .how-it-works {
-    background-color: #f7f7f7;
+    background-color: indigo;
     padding: 50px 20px;
     text-align: center;
 }
 
 .how-it-works h2 {
-    font-size: 32px;
+    font-size: 42px;
     margin-bottom: 40px;
-    color: #007BFF; /* Blue color for headings */
+    color: #ffb300; /* Blue color for headings */
 }
 
 .steps {
@@ -148,13 +164,13 @@ a {
     width: 250px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid #007BFF; /* Blue border for steps */
+    border: 2px solid ; /* Blue border for steps */
 }
 
 .step h3 {
     font-size: 24px;
     margin-bottom: 15px;
-    color: #007BFF; /* Blue color for step titles */
+    color: var(--color-primary); /* Blue color for step titles */
 }
 
 .step p {
@@ -170,8 +186,9 @@ a {
 .testimonials h2 {
     font-size: 32px;
     margin-bottom: 40px;
-    color: #007BFF; /* Blue color for heading */
+    color:#e6a205; /* Blue color for heading */
 }
+
 
 .testimonial-cards {
     display: flex;
@@ -185,7 +202,7 @@ a {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border: 2px solid #007BFF; /* Blue border for testimonial cards */
+    border: 2px solid ; /* Blue border for testimonial cards */
 }
 
 .testimonial-card p {
@@ -198,11 +215,11 @@ a {
     margin-top: 15px;
     font-size: 18px;
     font-weight: bold;
-    color: #007BFF; /* Blue color for customer names */
+    color: var(--color-primary); /* Blue color for customer names */
 }
 
 .footer {
-    background-color: #007BFF; /* Blue footer background */
+    background-color:var(--color-primary) ; /* Blue footer background */
     color: #fff;
     text-align: center;
     padding: 20px 0;

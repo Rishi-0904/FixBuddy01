@@ -1,90 +1,89 @@
 /* Basic Reset */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  label{
-    color: #007BFF;
-  }
- h1{
-  position: relative;
-  left: 25%;
- }
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(20, 17, 15);
-    height: 100vh;
-  }
-  .sign-up{
-    font-weight: bold;
-    display: inline-block;
-    margin-top: 20px;
-    color: rgb(155, 165, 225);
-  }
-  .login{
-    margin-top: 15px;
-  }
-  .login-container {
-  
-    background-color: rgb(255, 255, 255);
-    padding: 30px;
-    border: 2px solid black;
-    box-shadow: -10px 8px 8px rgb(24, 47, 1);
-    width: 350px;
-    height: 400px;
-    border-radius: 10px;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgb(255, 255, 255);
-  }
-  
-  .input-group {
-    margin-bottom: 20px;
-  }
-  
-  .input-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0062ca;
-  }
-  
-  .error-message {
-    color: red;
-    font-size: 14px;
-    text-align: center;
-    margin-bottom: 10px;
-  }a{
-    color: rgb(50, 123, 212);
-  }
-  a:hover{
-    color: orange;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+label{
+  color: #dd8f00;
+}
+h1{
+position: relative;
+left: 25%;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(20, 16, 37);
+  height: 100vh;
+}
+.sign-up{
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
+  color: #dac2dd;
+}
+.login{
+  margin-top: 15px;
+}
+.login-container {
+
+  background-color: indigo;
+  padding: 30px;
+  border: 2px solid black;
+  /* box-shadow: -10px 8px 8px rgb(24, 47, 1); */
+  width: 350px;
+  height: 400px;
+  border-radius: 10px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #d08700;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #db6220;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}a{
+  color: #f2bc16;
+}
+a:hover{
+  color: orange;
+}
