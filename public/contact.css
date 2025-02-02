@@ -7,7 +7,14 @@ body {
     color: #333;
     background-color: rgb(20, 16, 37);
 }
-
+.contact-us{
+    position: relative;
+    top:-35px;
+}
+header p{
+    position: relative;
+    top:-45px;
+}
 /* Header Section */
 header {
     background: indigo;
@@ -37,7 +44,7 @@ header {
     justify-content: space-between;
     align-items: flex-start;
     max-width: 900px;
-    margin: 40px auto;
+    margin: 30px auto;
     background: white;
     padding: 20px;
     border-radius: 8px;
