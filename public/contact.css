@@ -56,12 +56,12 @@ header {
     width: 48%;
 }
 .how-to-find-us h1{
-    color: indigo;
+    color: rgb(38,3,105);
 }
 
 /* Form Styling */
 .contact-form h2, .how-to-find-us h2 {
-    color: indigo;
+    color: rgb(38,3,105);
     margin-bottom: 10px;
 }
 
@@ -90,7 +90,7 @@ textarea {
 }
 
 button {
-    background: indigo;
+    background: rgb(38,3,105);
     color: white;
     border: none;
     padding: 12px;
@@ -101,9 +101,8 @@ button {
 }
 
 button:hover {
-    background: #0056b3;
+    background: #290366;
 }
-
 /* Contact Info Styling */
 .how-to-find-us p {
     font-size: 16px;
