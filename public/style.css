@@ -219,12 +219,7 @@ a {
     color: var(--color-primary); /* Blue color for customer names */
 }
 
-.footer {
-    background-color:var(--color-primary) ; /* Blue footer background */
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
+
 
 .service-card{
     transition: transform 0.5s ease-in-out;

@@ -47,6 +47,9 @@ app.get('/contact' , (req,res)=>{
 app.get("/login" , (req , res)=>{
     res.render("login")
 })
+app.get('/electrician' , (req,res)=>{
+    res.render("electrician")
+})
 
 
 app.get('/sign-up' , (req,res)=>{
