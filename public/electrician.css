@@ -1,0 +1,188 @@
+/* General resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+}
+  
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+  
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+  
+header ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+  
+header ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+  
+header ul li a:hover {
+    color: #f39c12;
+}
+
+/* Main Section */
+main {
+    flex: 1; /* Ensures the main content area takes available space */
+    padding: 3rem 2rem;
+    text-align: center;
+}
+  
+.profiles h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* Grid Layout for Profile Cards */
+.profile-cards {
+    display: grid;
+    align-items: start;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Dynamic columns */
+    gap: 2rem; /* Gap between cards */
+    justify-items: center; /* Centers the cards */
+    margin: 0 auto;
+    max-width: 1200px; /* Prevents cards from stretching too wide on large screens */
+}
+
+/* Profile Card Style */
+.profile-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    max-width: 350px; /* Prevents the card from being too wide */
+    padding-bottom: 20px;
+    margin-left: 10%;
+    height: 100%;
+}
+.header {
+    background-color: #007BFF;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+} 
+
+.header .logo h1 {
+    font-size: 26px;
+}
+
+.header .logo span {
+    color: #f3a847; /* Accent color for logo */
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-left: 20px;
+}
+
+.nav ul li a {
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: #f3a847; /* Hover effect with accent color */
+}
+.profile-card:hover {
+    transform: translateY(-10px);
+}
+
+.profile-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.profile-card h2 {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+    color: #333;
+}
+
+.profile-card p {
+    font-size: 1rem;
+    color: #666;
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Rating Stars */
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 1rem;
+}
+
+.star {
+    font-size: 1.5rem;
+    color: #ddd;
+}
+
+.star.filled {
+    color: #f39c12;
+}
+
+.contact-btn {
+    background-color: #f39c12;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.contact-btn:hover {
+    background-color: #e67e22;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    padding: 1rem 0;
+    text-align: center;
+    margin-top: auto; /* Ensures footer stays at the bottom of the page */
+}
