@@ -50,7 +50,12 @@ app.get("/login" , (req , res)=>{
 app.get('/electrician' , (req,res)=>{
     res.render("electrician")
 })
-
+app.get('/carpenter' , (req,res)=>{
+    res.render("carpenter")
+})
+app.get('/plumber' , (req,res)=>{
+    res.render("plumber")
+})
 
 app.get('/sign-up' , (req,res)=>{
     res.render("sign-up")
