@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join FixBuddy as a Professional</title>
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <h1>Fix <span>Buddy</span></h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="main">
+            <h2>Become a FixBuddy Professional</h2>
+            <p>Join a community of skilled professionals providing top-notch services to customers!</p>
+            <button class="cta-button">Apply Now</button>
+        </div>
+    </section>
+
+    <!-- Why Join Us Section -->
+    <section class="why-join">
+        <div class="container">
+            <h2>Why Work with FixBuddy?</h2>
+            <p>We offer excellent opportunities for professionals in various fields. Here's why you should join us:</p>
+            <ul>
+                <li>Competitive pay and bonuses</li>
+                <li>Flexible working hours</li>
+                <li>Training and certification programs</li>
+                <li>Access to a wide customer base</li>
+                <li>24/7 support and guidance</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="application-form">
+        <div class="container">
+            <h2>Fill Out the Application Form</h2>
+            <p>Please complete the form below to apply as a professional with FixBuddy. We are excited to review your application!</p>
+
+            <!-- Form Container -->
+            <div class="form-container">
+                <form action="/submit-job-application" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="service">Select Service Area</label>
+                        <select id="service" name="service" required>
+                            <option value="painter">Painter</option>
+                            <option value="mover">Mover</option>
+                            <option value="cleaner">Cleaner</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Experience (in years)</label>
+                        <input type="number" id="experience" name="experience" required placeholder="Enter your years of experience">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Tell Us About Yourself</label>
+                        <textarea id="message" name="message" rows="5" required placeholder="Tell us why you'd be a great fit for FixBuddy"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit">Submit Application</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Professionals Say</h2>
+            <p>Here's what some of our professionals have to say about working with FixBuddy:</p>
+            <div class="testimonial-cards">
+                <div class="testimonial-card">
+                    <p>"Working with FixBuddy has given me the flexibility I need to balance work and personal life. The support from the team is amazing!"</p>
+                    <h3>Ravi Kumar</h3>
+                    <p>Painter</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p>"I love the diversity of customers that I get to serve. It has helped me grow my skills and expand my business."</p>
+                    <h3>Priya Sharma</h3>
+                    <p>Mover</p>
+                </div>
+
+                <div class="testimonial-card">
+                    <p>"The pay is great and the ability to choose my own hours has given me the freedom I always wanted."</p>
+                    <h3>Amit Verma</h3>
+                    <p>Cleaner</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
+    </footer>
+
+</body>
+</html>
