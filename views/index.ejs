@@ -31,18 +31,24 @@
             </ul>
         </nav>
     </header>
-    <section class="main">
-        <div class="search-container">
-            
+<section class="main">
+    <div class="search-container">
         <div class="main-content">
             <h2>Your Trusted Home Service Provider</h2>
             <p>Professional services for cleaning, repairs, beauty, and more at the comfort of your home.</p>
             <div class="search-bar">
-                <input type="text" placeholder="">
-                <button class="search-button">Search a service →</button>
+                <!-- Search input field -->
+                <input type="text" id="search-input" placeholder="Search for a service..." autocomplete="off" oninput="showSuggestions()"/>
+                
+                <!-- Suggestions container (will show matching services as the user types) -->
+                <div id="suggestions-container" class="suggestions-container"></div>
+                
+                <!-- Search Button -->
+                <button class="search-button" onclick="performSearch()">Search →</button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
    <!-- Services Section -->
    <section id="services" class="services">
@@ -129,6 +135,68 @@
     <p>&copy; 2025 Fix Buddy. All rights reserved.</p>
 </footer>
 
-<script src="script.js"></script>
+<script>
+    // List of available services
+    const services = [
+        "Electrician",
+        "Carpenter",
+        "Plumber",
+        "Cleaning",
+        "Painter",
+        "Gardener",
+        "Mover"
+    ];
+
+    // Function to show suggestions based on user input
+    function showSuggestions() {
+        const input = document.getElementById("search-input").value.trim().toLowerCase();
+        const suggestionsContainer = document.getElementById("suggestions-container");
+        suggestionsContainer.innerHTML = ""; // Clear previous suggestions
+
+        // If input is not empty, show suggestions
+        if (input) {
+            const filteredServices = services.filter(service =>
+                service.toLowerCase().includes(input)
+            );
+
+            if (filteredServices.length > 0) {
+                filteredServices.forEach(service => {
+                    const suggestion = document.createElement("div");
+                    suggestion.classList.add("suggestion");
+                    suggestion.textContent = service;
+                    suggestion.onclick = () => selectService(service);
+                    suggestionsContainer.appendChild(suggestion);
+                });
+            } else {
+                const noResults = document.createElement("div");
+                noResults.classList.add("suggestion");
+                noResults.textContent = "No services found";
+                suggestionsContainer.appendChild(noResults);
+            }
+        }
+    }
+
+    // Function to select a service when clicked from suggestions
+    function selectService(service) {
+        document.getElementById("search-input").value = service;
+        document.getElementById("suggestions-container").innerHTML = ""; // Clear suggestions
+    }
+
+    // Function to perform the search when the search button is clicked
+    function performSearch() {
+        const query = document.getElementById("search-input").value.trim();
+
+        if (services.includes(query)) {
+            // If the search term matches one of the services, redirect to the corresponding page
+            window.location.href = `/${query.toLowerCase()}?query=${encodeURIComponent(query)}`;
+        } else {
+            alert("Please enter a valid service.");
+        }
+    }
+</script>
+
+
+
+
 </body>
 </html>

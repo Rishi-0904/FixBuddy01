@@ -62,41 +62,97 @@ a {
     display: flex;
     justify-content: center;
 }
-
+/* General input and button style improvements */
 .search-bar {
+    position: relative;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px; /* Limit max width for better readability */
+    margin: 0 auto; /* Center the search bar */
     gap: 10px;
 }
 
 .search-bar input {
-    width: 60%;
-    padding: 10px;
+    width: 100%;  /* Make it flexible */
+    max-width: 500px; /* Optional: limit input field width */
+    padding: 12px 15px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
     outline: none;
+    background-color: #fff;
+    color: #333;
+    box-sizing: border-box;
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.search-bar input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
 }
 
 .search-bar input::placeholder {
-    color: #999;
+    color: #aaa;
 }
 
+/* Search button styling */
 .search-button {
-    background-color: #007bff;
+    background-color: #ffb300;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 16px;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
 .search-button:hover {
-    background-color: #0056b3;
+    background-color: #e68900; /* Darken the button on hover */
 }
+
+.search-button:focus {
+    outline: none; /* Remove outline on button focus */
+}
+
+/* Suggestions container */
+.suggestions-container {
+    position: absolute;
+    top: 50px;  /* Position it below the input */
+    left: 0;
+    width: 100%; /* Match width with input field */
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    z-index: 100;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: none;  /* Hidden initially */
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Suggestion item styling */
+.suggestion {
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.suggestion:hover {
+    background-color: #f0f0f0;
+}
+
+/* When the suggestions are visible */
+.suggestions-container.show {
+    display: block;
+}
+
+/* Mobile responsiveness */
 
 .main h2 {
     font-size: 36px;
@@ -351,4 +407,64 @@ a {
     .testimonial-card h3 {
         font-size: 16px;
     }
+    /* .search-bar {
+        position: relative;
+        width: 300px;
+        margin: 50px auto;
+        font-family: Arial, sans-serif;
+    }
+    .suggestions-container {
+        position: absolute;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        width: 100%;
+        z-index: 100;
+        display: none;
+        max-height: 200px;
+        overflow-y: auto;
+        margin-top: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    #search-input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .suggestion-item {
+        padding: 8px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+    
+    .suggestion-item:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .search-bar {
+        position: relative;
+    } */
+
+}
+.search-bar input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    background-color: transparent;  /* Ensures the input field background is transparent */
+    box-sizing: border-box;  /* Ensures padding doesn't affect the width */
+}
+
+.search-bar input:focus {
+    border-color: #007bff;  /* Optional: changes border color when focused */
+}
+
+.search-bar input::placeholder {
+    color: #999;
+}
+#search-input{
+    color: white;
 }
