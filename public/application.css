@@ -1,0 +1,256 @@
+/* Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(20, 16, 37);
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+}
+
+:root {
+    --color-primary: rgb(38, 3, 105);
+    --color-secondary: #d08700;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--color-primary);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header .logo h1 {
+    font-size: 26px;
+}
+
+.header .logo span {
+    color: #f3a847;
+}
+
+.nav ul {
+    list-style: none;
+    display: flex;
+}
+
+.nav ul li {
+    margin-left: 20px;
+}
+
+.nav ul li a {
+    color: #fff;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+    color: #f3a847;
+}
+
+/* Hero Section */
+.hero {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.hero .main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.cta-button {
+    padding: 12px 25px;
+    background-color: var(--color-primary);
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: var(--color-secondary);
+}
+
+/* Why Join Section */
+.why-join {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: rgb(20, 16, 37);
+}
+
+.why-join h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.why-join ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    margin-top: 20px;
+    text-align: left;
+    color: #ffb300;
+}
+
+.why-join ul li {
+    margin-bottom: 10px;
+}
+
+/* Application Form Section */
+.application-form {
+    padding: 60px 20px;
+    background-color: #1e1c3c;
+}
+
+.application-form .container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #232144;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.application-form h2 {
+    text-align: center;
+    color: #ffb300;
+    margin-bottom: 20px;
+}
+
+.application-form .form-container {
+    margin-top: 40px;
+}
+
+.application-form .form-group {
+    margin-bottom: 20px;
+}
+
+.application-form .form-group input,
+.application-form .form-group select,
+.application-form .form-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #2d2b50;
+    color: white;
+    outline: none;
+}
+
+.application-form .form-group textarea {
+    min-height: 100px;
+}
+
+.application-form .form-group button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.application-form .form-group button:hover {
+    background-color: var(--color-secondary);
+}
+
+/* Testimonials Section */
+.testimonials {
+    padding: 60px 20px;
+    background-color: rgb(20, 16, 37);
+    text-align: center;
+}
+
+.testimonials h2 {
+    font-size: 36px;
+    color: #ffb300;
+    margin-bottom: 20px;
+}
+
+.testimonial-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.testimonial-card {
+    background-color: #fff;
+    padding: 20px;
+    width: 280px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    font-size: 16px;
+    color: #555;
+}
+
+.testimonial-card h3 {
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero h2 {
+        font-size: 36px;
+    }
+
+    .why-join h2 {
+        font-size: 28px;
+    }
+
+    .application-form .container {
+        width: 90%;
+    }
+
+    .testimonial-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
