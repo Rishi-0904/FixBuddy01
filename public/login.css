@@ -19,6 +19,13 @@ body {
   background-color: rgb(20, 16, 37);
   height: 100vh;
 }
+.err{
+  position: relative;
+   top:20px;
+  text-align: center;
+
+
+}
 .sign-up{
   font-weight: bold;
   display: inline-block;
