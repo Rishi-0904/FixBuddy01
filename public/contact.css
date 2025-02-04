@@ -10,23 +10,24 @@ body {
 /* Header Section */
 .contact-us{
     position: relative;
-    top:-35px;
+    top:-20px;
 }
 header p{
     position: relative;
-    top:-45px;
+    top:-30px;
 }
 header {
     background: indigo;
     color: white;
     text-align: center;
-    padding: 2px;
+    padding: 0px;
+    margin-top: -25px;
 }
 /* adjusting logo position */
 #logo{
     text-align: left;
     position: relative;
-    top: -23px;
+    top: -5px;
     left: 8px;
     font-size: large;
 }
@@ -121,7 +122,5 @@ button:hover {
         width: 100%;
     }
     
-    iframe {
-        height: 200px;
-    }
+  
 }
