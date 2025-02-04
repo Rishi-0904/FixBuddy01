@@ -26,13 +26,28 @@
       
       </div>
       
-      <div id="error-message" class="error-message"></div>
+     <div class="err">
+        <% if (typeof error !== "undefined" && error) { %>
+          <p style="color: rgb(255, 83, 83);"><%= error %></p>
+        <% } %>
+      </div>
 
       <!-- Submit Button -->
       <button class="sign-up" type="submit">Sign-up</button>
       
       <div class="login">Already have an account? </div>
       <a href="http://localhost:3000/login">log in</a>
+
+    <% if (typeof success !== "undefined" && success) { %>
+        <script>
+            alert("<%= success %>");
+            setTimeout(function() {
+                window.location.href = "/"; // Redirect to home page after 2 seconds
+            });
+        </script>
+    <% } %>
+
+
     </form>
   </div>
 
