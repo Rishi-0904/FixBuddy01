@@ -1,38 +1,26 @@
 const express = require("express");
 const path = require('path');
+
 const app = express();
 const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 app.use(express.static("public"))
+
+app.use(cors());
+
 const PORT = 3000;
+
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
-app.use(cookieParser());
-app.use((req, res, next) => {
-    res.locals.user = null; // Initialize `user` property to avoid undefined error
-
-    const token = req.cookies.token;
-    
-    if (token) {
-        try {
-            const decoded = jwt.verify(token, "sekurety");
-            res.locals.user = decoded; // Attach user data to all views
-        } catch (err) {
-            console.error("JWT Verification Error:", err);
-        }
-    }
-    
-    next();
-});
-
 
 app.set("view engine" , "ejs")
 
 
 // Connecting  to MongoDB
+
 mongoose.connect("mongodb://localhost:27017/myDatabase", {
 }).then(() => console.log("MongoDB Connected"))
   .catch(err => console.error("MongoDB Connection Error:", err));
@@ -95,6 +83,10 @@ app.post("/sign-up", async (req, res) => {
         const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
 
+        // res.status(201).json({ message: "User registered successfully" });
+        // alert("Signup Successful! Redirecting to Home Page...");
+        // window.location.href = "/"; // Redirect to home page
+
         res.render("sign-up", { error: null, success: "Signup successful! Redirecting..." });
 
     } catch (err) {
@@ -115,49 +107,38 @@ app.post("/login", async (req, res) => {
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.render("login", { error: "Invalid Username or Email !!" });
 
-        const token = jwt.sign({ id: user._id, email: user.email }, "sekurety" , { expiresIn: "1h" });
-        
-        res.cookie("token", token, { httpOnly: true }); 
-        res.render( "login", { error :null , success: "Login successful !!" });
+        const token = jwt.sign({ id: user._id, email: user.email }, "secretKey", { expiresIn: "1h" });
+
+        res.json({ message: "Login successful", token });
     } catch (err) {
-        res.render("login", { error: err.message });
+        res.status(500).json({ message: "Error logging in", error: err.message });
     }
 });
 
-app.get("/logout", (req, res) => {
-    res.clearCookie("token"); // Remove token from cookies
-    res.render("index" , {success: "Logged Out Successfully "}); // Redirect to home page after logout
-});
+const authenticateJWT = (req, res, next) => {
+    const token = req.header("Authorization");
 
-
-const authenticateUser = (req, res, next) => {
-res.locals.user = null; // Initialize `user` property to avoid undefined error
-
-    const token = req.cookies.token ;
-
-    
-    if (!token) {
-        return  res.render("login", { error: "Please login first !!" });
-    }
+    if (!token) return res.status(401).json({ message: "Access Denied" });
 
     try {
-        const decoded = jwt.verify(token, "sekurety" );
-        req.user = decoded; // Attach user info to request
-        res.local.user=decoded;
+        const decoded = jwt.verify(token.split(" ")[1], "secretKey"); 
+        req.user = decoded;
         next();
-    } catch (error) {
-        res.local.user=null;
-        res.render("login", { error: "Please login first !!" });
+    } catch (err) {
+        res.status(403).json({ message: "Invalid token" });
     }
 };
 
 //  PROTECTED ROUTE 
-app.get("/profile", authenticateUser, async (req, res) => {
+app.get("/profile", authenticateJWT, async (req, res) => {
     const user = await User.findById(req.user.id);
-    if (!user) return  res.render("/profile", { error: "No user found !!" });
+    if (!user) return res.status(404).json({ message: "User not found" });
 
-    res.render("profile")
+    res.json({ message: "Profile fetched", user });
 });
+const contactRouter = require("./routes/contact");
+
+app.use(contactRouter); // Mount the contact routes
 
 // Starting the Server
 app.listen(PORT, () => {
