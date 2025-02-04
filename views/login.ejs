@@ -24,7 +24,12 @@
         <input type="password" id="password" name="password" required>
       </div>
       
-      <div id="error-message" class="error-message"></div>
+      <div class="err">
+        <% if (typeof error !== "undefined" && error) { %>
+          <p style="color: rgb(255, 83, 83);"><%= error %></p>
+        <% } %>
+      </div>
+      
 
       <!-- Submit Button -->
       <button class="login" type="submit">Login</button>
