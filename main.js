@@ -136,6 +136,9 @@ app.get("/profile", authenticateJWT, async (req, res) => {
 
     res.json({ message: "Profile fetched", user });
 });
+const contactRouter = require("./routes/contact");
+
+app.use(contactRouter); // Mount the contact routes
 
 // Starting the Server
 app.listen(PORT, () => {
