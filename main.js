@@ -68,13 +68,13 @@ app.post("/sign-up", async (req, res) => {
         console.log(req.body); 
 
         if (!name || !email || !password ) {
-            return res.status(400).json({ message: "All fields are required" });
+            return  res.render("sign-up", { error: "All fields are required !!" });
         }
 
 
         // Checking if user already exists
         const existingUser = await User.findOne({ email });
-        if (existingUser) return res.status(400).json({ message: "Email already in use" });
+        if (existingUser) return res.render("sign-up", { error: "Email already in use !!" });
 
         // Hashing passwords
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -83,7 +83,12 @@ app.post("/sign-up", async (req, res) => {
         const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
 
-        res.status(201).json({ message: "User registered successfully" });
+        // res.status(201).json({ message: "User registered successfully" });
+        // alert("Signup Successful! Redirecting to Home Page...");
+        // window.location.href = "/"; // Redirect to home page
+
+        res.render("sign-up", { error: null, success: "Signup successful! Redirecting..." });
+
     } catch (err) {
         res.status(500).json({ message: "Error signing up", error: err.message });
     }
@@ -97,10 +102,10 @@ app.post("/login", async (req, res) => {
         console.log({email, password})
 
         const user = await User.findOne({ email });
-        if (!user) return res.status(400).json({ message: "User not found" });
+        if (!user) return res.render("login", { error: "Invalid Username or Email !!" });
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({ message: "Invalid password" });
+        if (!isMatch) return res.render("login", { error: "Invalid Username or Email !!" });
 
         const token = jwt.sign({ id: user._id, email: user.email }, "secretKey", { expiresIn: "1h" });
 
