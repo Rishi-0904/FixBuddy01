@@ -18,7 +18,16 @@
                 <li><a href="services">Services</a></li>
                 <li><a href="testimonials">Testimonials</a></li>
                 <li><a href="/contact">Contact</a></li>
-                <li><a href="/login">Login</a></li>
+                <% if (user) { %>
+                    <!-- If the user is logged in, show profile icon -->
+                    <li><a href="/profile">
+                        <img style="height: 25px;" src="/images/profile-icon.jpg" alt="Profile" class="profile-icon">
+                    </a></li>
+                    <li><a href="/logout">Logout</a></li>
+                <% } else { %>
+                    <!-- If the user is not logged in, show login -->
+                    <li><a href="/login">Login</a></li>
+                <% } %>
             </ul>
         </nav>
     </header>
