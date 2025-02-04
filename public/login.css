@@ -19,6 +19,13 @@ body {
   background-color: rgb(20, 16, 37);
   height: 100vh;
 }
+.err{
+  position: relative;
+   top:20px;
+  text-align: center;
+
+
+}
 .sign-up{
   font-weight: bold;
   display: inline-block;
@@ -34,7 +41,7 @@ h1{
 }
 .login-container {
 
-  background-color: indigo;
+  background-color: rgb(38,3,105);
   padding: 30px;
   border: 2px solid black;
   /* box-shadow: -10px 8px 8px rgb(24, 47, 1); */

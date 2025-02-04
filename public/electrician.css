@@ -7,8 +7,8 @@
   
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    background-color:rgb(20, 16, 37);
+    color: #5c0f0f;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -61,7 +61,7 @@ main {
 .profiles h1 {
     font-size: 2.5rem;
     margin-bottom: 2rem;
-    color: #333;
+    color: #f39c12;
 }
 
 /* Grid Layout for Profile Cards */
@@ -89,8 +89,9 @@ main {
     margin-left: 10%;
     height: 100%;
 }
+
 .header {
-    background-color: #007BFF;
+    background-color: rgb(38, 3, 105);
     color: #fff;
     display: flex;
     justify-content: space-between;
@@ -116,7 +117,8 @@ main {
 
 .nav ul li a {
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
+    font-style: Arial;
     transition: color 0.3s ease;
 }
 
@@ -136,14 +138,19 @@ main {
 .profile-card h2 {
     font-size: 1.5rem;
     margin: 1rem 0;
-    color: #333;
+    color: #252525;
+    font-family: "Roboto Condensed", serif;
 }
 
 .profile-card p {
     font-size: 1rem;
-    color: #666;
+    color: #110404;
     padding: 0 1rem;
     margin-bottom: 1.5rem;
+    font-family: "Roboto Condensed", serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
 }
 
 /* Rating Stars */
@@ -177,12 +184,10 @@ main {
 .contact-btn:hover {
     background-color: #e67e22;
 }
-
-/* Footer */
 footer {
-    background-color: #333;
+    background-color: rgb(38, 3, 105);
     color: white;
     padding: 1rem 0;
     text-align: center;
-    margin-top: auto; /* Ensures footer stays at the bottom of the page */
+    margin-top: auto; 
 }

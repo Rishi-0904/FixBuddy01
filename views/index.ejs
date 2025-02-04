@@ -17,95 +17,118 @@
             <ul>
                 <li><a href="services">Services</a></li>
                 <li><a href="testimonials">Testimonials</a></li>
-                <li><a href="/login">Login</a></li>
-
-
                 <li><a href="/contact">Contact</a></li>
+                <% if (user) { %>
+                    <!-- If the user is logged in, show profile icon -->
+                    <li><a href="/profile">
+                        <img style="height: 25px;" src="/images/profile-icon.jpg" alt="Profile" class="profile-icon">
+                    </a></li>
+                    <li><a href="/logout">Logout</a></li>
+                <% } else { %>
+                    <!-- If the user is not logged in, show login -->
+                    <li><a href="/login">Login</a></li>
+                <% } %>
             </ul>
         </nav>
     </header>
     <section class="main">
+        <div class="search-container">
+            
         <div class="main-content">
             <h2>Your Trusted Home Service Provider</h2>
             <p>Professional services for cleaning, repairs, beauty, and more at the comfort of your home.</p>
-            <button class="cta-button">Book a Service</button>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <h2>Our Services</h2>
-        <div class="service-cards">
-            <div class="service-card">
-                <img src="/images/electrician-image.jpg" alt="Electrician">
-                <h3>Electrician</h3>
-                <p>Need an electrical fix? Our skilled electricians ensure safety and efficiency every time.</p>
-            </div>
-            <div class="service-card">
-                <img src="/images/carpenter.jpg" alt="Carpenter">
-                <h3>Carpenter</h3>
-                <p>From furniture assembly to home repairs, our carpenters deliver craftsmanship you can rely on.</p>
-            </div>
-            <div class="service-card" >
-                <img src="/images/plumber.jpg" alt="Plumber">
-                <h3>Plumber</h3>
-                <p>Got plumbing problems? We provide fast, reliable solutions for everything from leaks to full system installs</p>
+            <div class="search-bar">
+                <input type="text" placeholder="">
+                <button class="search-button">Search a service →</button>
             </div>
         </div>
     </section>
 
-    <!-- How It Works Section -->
-    <section id="how-it-works" class="how-it-works">
-        <h2>How It Works</h2>
-        <div class="steps">
-            <div class="step">
-                <h3>Step 1: Choose Your Service</h3>
-                <p>Select the type of service you need from our range of options.</p>
-            </div>
-            <div class="step">
-                <h3>Step 2: Book a Time</h3>
-                <p>Pick a time slot that fits your schedule, and we'll confirm your booking.</p>
-            </div>
-            <div class="step">
-                <h3>Step 3: Enjoy the Service</h3>
-                <p>Our professionals arrive at your door and provide top-quality service.</p>
-            </div>
+   <!-- Services Section -->
+   <section id="services" class="services">
+    <h2>Our Services</h2>
+    <div class="service-cards" id="service-cards">
+        <div class="service-card" onclick="window.location.href='/electrician'">
+            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Electrician">
+            <h3>Electrician</h3>
+            <p>Need an electrical fix? Our skilled electricians ensure safety and efficiency every time.</p>
         </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials">
-        <h2>What Our Customers Say</h2>
-        <div class="testimonial-cards">
-            <div class="testimonial-card">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati, reprehenderit minima laboriosam eius eveniet corrupti voluptatum alias exercitationem dolorum modi.</p>
-                <h3>Devansh</h3>
-            </div>
-            <div class="testimonial-card">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit earum optio harum at ipsam suscipit cumque amet aliquid id sunt?</p>
-                <h3>Sanyam</h3>
-            </div>
-            <div class="testimonial-card">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt illo laboriosam illum explicabo, delectus possimus est corrupti autem harum ipsum?</p>
-                <h3>Rishi</h3>
-            </div>
+        <div class="service-card" onclick="window.location.href='/carpenter'">
+            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Carpenter">
+            <h3>Carpenter</h3>
+            <p>From furniture assembly to home repairs, our carpenters deliver craftsmanship you can rely on.</p>
         </div>
-    </section>
+        <div class="service-card" onclick="window.location.href='/plumber'">
+            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Plumber">
+            <h3>Plumber</h3>
+            <p>Got plumbing problems? We provide fast, reliable solutions for everything from leaks to full system installs.</p>
+        </div>
+        <!-- Additional services -->
+        <div class="service-card" onclick="window.location.href='/cleaning'">
+            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Cleaning">
+            <h3>Cleaning</h3>
+            <p>Our cleaning professionals will leave your home spotless, with eco-friendly products for a safe environment.</p>
+        </div>
+        <div class="service-card" onclick="window.location.href='/painter'">
+            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Painter">
+            <h3>Painter</h3>
+            <p>Enhance the beauty of your home with professional painting services for interiors and exteriors.</p>
+        </div>
+        <div class="service-card" onclick="window.location.href='/gardener'">
+            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Gardener">
+            <h3>Gardener</h3>
+            <p>Transform your garden with expert gardening services to keep your plants healthy and vibrant.</p>
+        </div>
+        <div class="service-card" onclick="window.location.href='/mover'">
+            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Mover">
+            <h3>Mover</h3>
+            <p>Need help with moving? Our team makes it easy and stress-free, no matter the size of your move.</p>
+        </div>
+    </div>
+</section>
 
-    <!-- Contact Section
-    <section id="contact" class="contact">
-        <h2>Get In Touch</h2>
-        <form action="#">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit" class="cta-button">Send Message</button>
-        </form>
-    </section> -->
+<!-- How It Works Section -->
+<section id="how-it-works" class="how-it-works">
+    <h2>How It Works</h2>
+    <div class="steps">
+        <div class="step">
+            <h3>Step 1: Choose Your Service</h3>
+            <p>Select the type of service you need from our range of options.</p>
+        </div>
+        <div class="step">
+            <h3>Step 2: Book a Time</h3>
+            <p>Pick a time slot that fits your schedule, and we'll confirm your booking.</p>
+        </div>
+        <div class="step">
+            <h3>Step 3: Enjoy the Service</h3>
+            <p>Our professionals arrive at your door and provide top-quality service.</p>
+        </div>
+    </div>
+</section>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-        
-    </footer>
+<!-- Testimonials Section -->
+<section id="testimonials" class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial-cards">
+        <div class="testimonial-card">
+            <p>Used this site for plumbing repairs. The booking process was easy, and the plumber was on time, professional, and fixed the issue quickly. Transparent pricing with no hidden fees. Highly recommend!</p>
+            <h3>Devansh</h3>
+        </div>
+        <div class="testimonial-card">
+            <p>Booked a cleaning service. The team did an excellent job, but they were 15 minutes late. The website was user-friendly, and the service was top-notch. Would use again, just hope for better punctuality next time.</p>
+            <h3>Sanyam</h3>
+        </div>
+        <div class="testimonial-card">
+            <p>Had an electrician come through for a lighting issue. Service was good, but the pricing was higher than expected. The website had some bugs, but the technician was professional. Room for improvement in pricing transparency.</p>
+            <h3>Rishi</h3>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Fix Buddy. All rights reserved.</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

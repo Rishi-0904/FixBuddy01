@@ -3,36 +3,36 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     background-color: rgb(20, 16, 37);
 }
+
 :root {
-    --color-primary:indigo;
-    --color-secondary:#d08700;
-    
+    --color-primary: rgb(38, 3, 105);
+    --color-secondary: #d08700;
 }
+
 a {
     text-decoration: none;
     color: inherit;
 }
 
-
 /* Header Styles */
- .header {
-    /* position: absolute; */
-    background-color:var(--color-primary) ;
+.header {
+    background-color: var(--color-primary);
     color: #fff;
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
-} 
+}
 
 .header .logo h1 {
     font-size: 26px;
 }
 
 .header .logo span {
-    color: #f3a847; /* Accent color for logo */
+    color: #f3a847;
 }
 
 .nav ul {
@@ -41,10 +41,9 @@ a {
 }
 
 .nav ul li {
-    /* text-shadow: 2px 2px 5px  rgba(0, 0, 0, 0.5); */
     margin-left: 20px;
 }
- 
+
 .nav ul li a {
     color: #fff;
     font-size: 16px;
@@ -52,23 +51,52 @@ a {
 }
 
 .nav ul li a:hover {
-    color: #f3a847; /* Hover effect with accent color */
+    color: #f3a847;
 }
 
 /* Hero Section */
 .main {
-    /* height: 50px; */
-
     color: #fff;
     text-align: center;
     padding: 120px 20px;
+    display: flex;
+    justify-content: center;
 }
-/* .main-content{
-    height: 10px;
-    width: 95vw;
-    position: absolute;
-    background: url('background-image.jpg') no-repeat center center/cover;
-} */
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-bar input {
+    width: 60%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+.search-bar input::placeholder {
+    color: #999;
+}
+
+.search-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
 
 .main h2 {
     font-size: 36px;
@@ -81,9 +109,8 @@ a {
 }
 
 .cta-button {
-    /* background:url('carpenter.jpg'); */
     padding: 12px 25px;
-    background-color: var(--color-primary); /* Blue background for buttons */
+    background-color: var(--color-primary);
     color: #fff;
     border: none;
     font-size: 16px;
@@ -92,7 +119,7 @@ a {
 }
 
 .cta-button:hover {
-    background-color:var(--color-primary) ; /* Darker blue on hover */
+    background-color: var(--color-primary);
 }
 
 /* Services Section */
@@ -104,7 +131,7 @@ a {
 .services h2 {
     font-size: 32px;
     margin-bottom: 40px;
-    color: #ffb300; /* Blue color for the heading */
+    color: #ffb300;
 }
 
 .service-cards {
@@ -120,8 +147,12 @@ a {
     width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border: 2px solid ; /* Blue border for cards */
-    
+    border: 2px solid;
+    transition: transform 0.5s ease-in-out;
+}
+
+.service-card:hover {
+    transform: scale(1.05);
 }
 
 .service-card img {
@@ -133,7 +164,7 @@ a {
 .service-card h3 {
     margin-top: 15px;
     font-size: 22px;
-    color: var(--color-primary); /* Blue color for service title */
+    color: var(--color-primary);
 }
 
 .service-card p {
@@ -143,7 +174,7 @@ a {
 
 /* How It Works Section */
 .how-it-works {
-    background-color: indigo;
+    background-color: rgb(38, 3, 105);
     padding: 50px 20px;
     text-align: center;
 }
@@ -151,7 +182,7 @@ a {
 .how-it-works h2 {
     font-size: 42px;
     margin-bottom: 40px;
-    color: #ffb300; /* Blue color for headings */
+    color: #ffb300;
 }
 
 .steps {
@@ -165,13 +196,13 @@ a {
     width: 250px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border: 2px solid ; /* Blue border for steps */
+    border: 2px solid;
 }
 
 .step h3 {
     font-size: 24px;
     margin-bottom: 15px;
-    color: var(--color-primary); /* Blue color for step titles */
+    color: var(--color-primary);
 }
 
 .step p {
@@ -187,9 +218,8 @@ a {
 .testimonials h2 {
     font-size: 32px;
     margin-bottom: 40px;
-    color:#e6a205; /* Blue color for heading */
+    color: #e6a205;
 }
-
 
 .testimonial-cards {
     display: flex;
@@ -203,33 +233,122 @@ a {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    border: 2px solid ; /* Blue border for testimonial cards */
+    border: 2px solid;
 }
 
 .testimonial-card p {
     font-style: italic;
     font-size: 16px;
-    color: #555; /* Slight gray color for testimonial text */
+    color: #555;
 }
 
 .testimonial-card h3 {
     margin-top: 15px;
     font-size: 18px;
     font-weight: bold;
-    color: var(--color-primary); /* Blue color for customer names */
+    color: var(--color-primary);
 }
 
-.footer {
-    background-color:var(--color-primary) ; /* Blue footer background */
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header .logo h1 {
+        font-size: 22px;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav ul li {
+        margin-left: 0;
+        margin-bottom: 15px;
+    }
+
+    .main {
+        flex-direction: column;
+        padding: 100px 20px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .service-cards {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .service-card {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .steps {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .step {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .testimonial-cards {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .testimonial-card {
+        width: 80%;
+        margin: 0 auto;
+    }
 }
 
-.service-card{
-    transition: transform 0.5s ease-in-out;
+@media (max-width: 480px) {
+    .main h2 {
+        font-size: 28px;
+    }
 
-}
-.service-card:hover{
-    transform: scale(1.05);
+    .main p {
+        font-size: 16px;
+    }
+
+    .search-bar input {
+        width: 80%;
+    }
+
+    .search-button {
+        font-size: 14px;
+    }
+
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .service-card h3 {
+        font-size: 20px;
+    }
+
+    .service-card p {
+        font-size: 12px;
+    }
+
+    .step h3 {
+        font-size: 20px;
+    }
+
+    .step p {
+        font-size: 12px;
+    }
+
+    .testimonial-card h3 {
+        font-size: 16px;
+    }
 }
