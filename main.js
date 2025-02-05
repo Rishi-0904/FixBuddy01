@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require('path');
-
+const multer = require('multer');
 const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
@@ -8,18 +8,29 @@ const jwt = require("jsonwebtoken");
 const cors = require("cors");
 app.use(express.static("public"))
 const cookieParser = require("cookie-parser"); 
+const Professional = require('./models/professional');
+
 const authenticateJWT = require("./middlewares/auth");
 app.use(cors());
-
+const professionalRoutes = require('./routes/professionalRoutes');
 const PORT = 3000;
-
+app.use(express.static(path.join(__dirname, 'uploads')));  // Serve static files
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
 app.use(cookieParser());  // This should be before authenticateJWT
 app.use(authenticateJWT);
 app.set("view engine" , "ejs")
-
+// Set up file upload with multer
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 
 // Connecting  to MongoDB
 
@@ -35,13 +46,15 @@ const userSchema = new mongoose.Schema({
     password: String
 
 });
-
+app.use('/submit-job-application', upload.fields([{ name: 'profile-picture' }, { name: 'certificates' }]), professionalRoutes);
 const User = mongoose.model("User", userSchema);
 
 app.get('/' , (req,res)=>{
     res.render("index",{ user: req.user })
 })
-
+app.get('/check' , (req,res)=>{
+    res.render("check",{ user: req.user })
+})
 app.get('/contact' , (req,res)=>{
     res.render("contact")
 })
@@ -59,6 +72,16 @@ app.get('/application' , (req,res)=>{
 app.get('/electrician' , (req,res)=>{
     res.render("electrician")
 })
+app.get('/electricians', (req, res) => {
+    Professional.find({ service: 'Electrician' }) // Filter professionals by service
+        .then(professionals => {
+            res.json(professionals); // Send data as JSON
+        })
+        .catch(err => {
+            console.error('Error fetching professionals:', err);
+            res.status(500).json({ message: 'Error fetching professionals', error: err });
+        });
+});
 app.get('/carpenter' , (req,res)=>{
     res.render("carpenter")
 })
@@ -86,6 +109,15 @@ app.get('/repair' , (req,res)=>{
 app.get('/pestcontrol' , (req,res)=>{
     res.render("pestcontrol")
 })
+app.get('/professionals', (req, res) => {
+    Professional.find()
+        .then(professionals => {
+            res.json(professionals);
+        })
+        .catch(err => {
+            res.status(500).json({ message: "Error fetching professionals", error: err });
+        });
+});
 app.post("/sign-up", async (req, res) => {
     try {
         const { name, email, password } = req.body;
