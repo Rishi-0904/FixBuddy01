@@ -1,51 +1,50 @@
 const express = require('express');
-const Professional = require('../models/professional'); // Relative path to models/professional.js
-
+const Professional = require('../models/professional'); // Import the Professional model
 const router = express.Router();
 
-router.post('/', (req, res) => {
-    const { name, email, phone, service, experience, message } = req.body;
-    const profilePicture = req.files['profile-picture'] ? req.files['profile-picture'][0].path : '';
-    const certificates = req.files['certificates'] ? req.files['certificates'][0].path : '';
+// Pre-filled Electricians
+const preFilledElectricians = [
+  { 
+    name: 'John Doe', 
+    email: 'john@example.com', 
+    phone: '123-456-7890', 
+    service: 'Electrician', 
+    experience: 5, 
+    message: 'Experienced in residential and commercial electrical work.', 
+    profilePicture: '/uploads/john.jpg', 
+    rating: 4.5 // Ensure pre-filled data has a rating
+  },
+  { 
+    name: 'Jane Smith', 
+    email: 'jane@example.com', 
+    phone: '987-654-3210', 
+    service: 'Electrician', 
+    experience: 3, 
+    message: 'Specializes in troubleshooting and repair.', 
+    profilePicture: '/uploads/jane.jpg', 
+    rating: 4.8 // Ensure pre-filled data has a rating
+  }
+];
 
-    // Create a new professional entry
-    const newProfessional = new Professional({
-        name,
-        email,
-        phone,
-        service,
-        experience,
-        message,
-        profilePicture,
-        certificates
-    });
+// Route to get all professionals
+router.get('/professionals', (req, res) => {
+    Professional.find()
+      .then(professionals => {
+        // Combine pre-filled electricians with the database records
+        const combinedData = [...preFilledElectricians, ...professionals];
 
-    // Save the professional data to the database
-    newProfessional.save()
-        .then(() => {
-            res.status(201).json({ message: "Application submitted successfully" });
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Error submitting application", error: err });
-        });
+        // Log the combined data to check the structure
+        console.log("Combined Data:", combinedData); // Log the data for debugging
+  
+        // Sort the combined data by rating in descending order
+        combinedData.sort((a, b) => (b.rating || 0) - (a.rating || 0));  // Handle undefined ratings
+    
+        // Send the sorted data as a response
+        res.json(combinedData);
+      })
+      .catch(err => {
+        res.status(500).json({ message: "Error fetching professionals", error: err.message });
+      });
 });
 
 module.exports = router;
-router.get('/professionals', (req, res) => {
-    Professional.find({ service: 'electrician' })  // Only fetch electricians
-        .then(professionals => {
-            res.json(professionals);  // Send the array of professionals as a JSON response
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Error fetching professionals", error: err });
-        });
-});
-router.get('/professionals', (req, res) => {
-    Professional.find()
-        .then(professionals => {
-            res.json(professionals);
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Error fetching professionals", error: err });
-        });
-});
