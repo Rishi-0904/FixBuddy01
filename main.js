@@ -13,6 +13,7 @@ const Professional = require('./models/professional');
 const authenticateJWT = require("./middlewares/auth");
 app.use(cors());
 const professionalRoutes = require('./routes/professionalRoutes');
+app.use(professionalRoutes);
 const PORT = 3000;
 app.use(express.static(path.join(__dirname, 'uploads')));  // Serve static files
 app.use('/uploads', express.static('uploads'));
