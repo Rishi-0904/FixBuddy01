@@ -4,10 +4,10 @@
     padding: 0;
     box-sizing: border-box;
 }
-  
+
 body {
     font-family: 'Arial', sans-serif;
-    background-color:rgb(20, 16, 37);
+    background-color: rgb(20, 16, 37);
     color: #5c0f0f;
     display: flex;
     flex-direction: column;
@@ -20,90 +20,25 @@ header {
     color: white;
     padding: 1rem 0;
     text-align: center;
-}
-  
-header nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 2rem;
-}
-  
-header .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-  
-header ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-  
-header ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    transition: color 0.3s;
-}
-  
-header ul li a:hover {
-    color: #f39c12;
+    position: relative;
 }
 
-/* Main Section */
-main {
-    flex: 1; /* Ensures the main content area takes available space */
-    padding: 3rem 2rem;
-    text-align: center;
-}
-  
-.profiles h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    color: #f39c12;
-}
-
-/* Grid Layout for Profile Cards */
-.profile-cards {
-    display: grid;
-    align-items: start;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Dynamic columns */
-    gap: 2rem; /* Gap between cards */
-    justify-items: center; /* Centers the cards */
-    margin: 0 auto;
-    max-width: 1200px; /* Prevents cards from stretching too wide on large screens */
-}
-
-/* Profile Card Style */
-.profile-card {
-    background-color: white;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-    width: 100%;
-    max-width: 350px; /* Prevents the card from being too wide */
-    padding-bottom: 20px;
-    margin-left: 10%;
-    height: 100%;
-}
-
+/* Navigation */
 .header {
     background-color: rgb(38, 3, 105);
     color: #fff;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 15px 30px;
-} 
+}
 
 .header .logo h1 {
     font-size: 26px;
 }
 
 .header .logo span {
-    color: #f3a847; /* Accent color for logo */
+    color: #f3a847; /* Accent color */
 }
 
 .nav ul {
@@ -118,13 +53,56 @@ main {
 .nav ul li a {
     color: #fff;
     font-size: 18px;
-    font-style: Arial;
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .nav ul li a:hover {
-    color: #f3a847; /* Hover effect with accent color */
+    color: #f3a847;
 }
+
+/* Mobile Navigation */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+/* Main Section */
+main {
+    flex: 1;
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.profiles h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #f39c12;
+}
+
+/* Grid Layout for Profile Cards */
+.profile-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* Profile Card */
+.profile-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    max-width: 350px;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
 .profile-card:hover {
     transform: translateY(-10px);
 }
@@ -139,7 +117,6 @@ main {
     font-size: 1.5rem;
     margin: 1rem 0;
     color: #252525;
-    font-family: "Roboto Condensed", serif;
 }
 
 .profile-card p {
@@ -147,10 +124,6 @@ main {
     color: #110404;
     padding: 0 1rem;
     margin-bottom: 1.5rem;
-    font-family: "Roboto Condensed", serif;
-    font-optical-sizing: auto;
-    font-weight: 450;
-    font-style: normal;
 }
 
 /* Rating Stars */
@@ -170,6 +143,7 @@ main {
     color: #f39c12;
 }
 
+/* Contact Button */
 .contact-btn {
     background-color: #f39c12;
     color: white;
@@ -178,16 +152,99 @@ main {
     border-radius: 25px;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    margin-bottom: 1rem;
 }
 
 .contact-btn:hover {
     background-color: #e67e22;
 }
+
+/* Footer */
 footer {
     background-color: rgb(38, 3, 105);
     color: white;
     padding: 1rem 0;
     text-align: center;
-    margin-top: auto; 
+    margin-top: auto;
+}
+
+/* ------------------ Responsive Styles ------------------ */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .profile-cards {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .profile-card {
+        max-width: 100%;
+    }
+}
+
+/* Mobile Screens */
+@media (max-width: 600px) {
+    .header {
+        padding: 10px 20px;
+    }
+
+    .header .logo h1 {
+        font-size: 22px;
+    }
+
+    .menu-toggle {
+        display: block;
+        color: white;
+    }
+
+    .nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0px;
+        background-color: rgb(38, 3, 105);
+        padding: 10px 0;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .nav ul li {
+        margin: 10px 0;
+    }
+
+    .profile-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card img {
+        height: 150px;
+    }
+
+    .profile-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .profile-card p {
+        font-size: 0.9rem;
+    }
+
+    .contact-btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
 }
