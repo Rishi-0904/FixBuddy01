@@ -28,7 +28,7 @@
         <div class="main">
             <h2>Become a FixBuddy Professional</h2>
             <p>Join a community of skilled professionals providing top-notch services to customers!</p>
-            <button class="cta-button">Apply Now</button>
+            <a href="#form"><button class="cta-button" >Apply Now</button></a>
         </div>
     </section>
 
@@ -54,14 +54,14 @@
             <p>Please complete the form below to apply as a professional with FixBuddy. We are excited to review your application!</p>
 
             <!-- Form Container -->
-            <div class="form-container">
+            <div class="form-container" >
                 <form action="/submit-job-application" method="POST">
-                    <div class="form-group">
+                    <div class="form-group" id="form">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" required placeholder="Enter your full name">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="form">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" required placeholder="Enter your email">
                     </div>
