@@ -198,6 +198,49 @@ html {
     justify-content: space-around;
     gap: 20px;
 }
+/* .service-cards {
+    overflow:scroll;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    background-color: rgb(38, 3, 105);
+    padding: 10px 0;
+} */
+
+.service-card {
+    display: inline-block;
+    white-space: nowrap;
+}
+/* Add this to your existing .service-cards styles */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.service-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    overflow:visible;  /*Hide the overflowing content */
+    position: relative;
+    width: 100%;
+    background-color: rgb(20, 16, 37);
+    animation: scroll 15s linear infinite;  /* Apply the scroll animation */
+}
+
+.service-card {
+    display: inline-block;
+    text-wrap:initial;
+    flex-shrink: 0; /* Prevent the cards from shrinking */
+    width: 300px;
+    /* height: 500px; */
+}
+
+
 
 .service-card {
     background-color: #fff;
