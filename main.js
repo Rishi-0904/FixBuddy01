@@ -53,7 +53,9 @@ app.get("/logout", (req, res) => {
     res.clearCookie("token"); // Clear the JWT token cookie
     res.redirect("/"); // Redirect to homepage after logout
 });
-
+app.get('/application' , (req,res)=>{
+    res.render("application",{ user: req.user })
+})
 app.get('/electrician' , (req,res)=>{
     res.render("electrician")
 })
@@ -63,11 +65,27 @@ app.get('/carpenter' , (req,res)=>{
 app.get('/plumber' , (req,res)=>{
     res.render("plumber")
 })
-
-app.get('/sign-up' , (req,res)=>{
-    res.render("sign-up")
+app.get('/plumber' , (req,res)=>{
+    res.render("plumber")
 })
-
+app.get('/cleaner' , (req,res)=>{
+    res.render("cleaner")
+})
+app.get('/painter' , (req,res)=>{
+    res.render("painter")
+})
+app.get('/gardener' , (req,res)=>{
+    res.render("gardener")
+})
+app.get('/mover' , (req,res)=>{
+    res.render("mover")
+})
+app.get('/repair' , (req,res)=>{
+    res.render("repair")
+})
+app.get('/pestcontrol' , (req,res)=>{
+    res.render("pestcontrol")
+})
 app.post("/sign-up", async (req, res) => {
     try {
         const { name, email, password } = req.body;

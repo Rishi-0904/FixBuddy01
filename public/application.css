@@ -20,7 +20,9 @@ a {
     text-decoration: none;
     color: inherit;
 }
-
+html {
+    scroll-behavior: smooth;
+}
 /* Header Styles */
 .header {
     background-color: var(--color-primary);
