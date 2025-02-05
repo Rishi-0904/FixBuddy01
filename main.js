@@ -15,6 +15,7 @@ app.use(cors());
 const professionalRoutes = require('./routes/professionalRoutes');
 const PORT = 3000;
 app.use(express.static(path.join(__dirname, 'uploads')));  // Serve static files
+app.use('/uploads', express.static('uploads'));
 
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
