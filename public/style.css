@@ -229,7 +229,7 @@ html {
     position: relative;
     width: 100%;
     background-color: rgb(20, 16, 37);
-    animation: scroll 15s linear infinite;  /* Apply the scroll animation */
+    animation: scroll 10s linear infinite;  /* Apply the scroll animation */
 }
 
 .service-card {
@@ -382,7 +382,7 @@ html {
     }
 
     .service-cards {
-        flex-direction: column;
+        flex-direction: row;
         gap: 30px;
     }
 
@@ -432,6 +432,10 @@ html {
     .cta-button {
         padding: 10px 20px;
         font-size: 14px;
+    }
+    .service-cards {
+        flex-direction: row;
+        gap: 30px;
     }
 
     .service-card h3 {
@@ -513,4 +517,68 @@ html {
 }
 #search-input{
     color: white;
+}
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .main {
+        flex-direction: column;
+        padding: 100px 20px;
+    }
+
+    .service-cards {
+        flex-direction: row;
+    }
+
+    .step {
+        width: 100%;  /* Expand step section on small screens */
+    }
+
+    .testimonial-cards {
+        flex-direction: column;
+    }
+
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .main h2 {
+        font-size: 24px; /* Adjust size for small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .main h2 {
+        font-size: 20px;
+    }
+
+    .main p {
+        font-size: 14px;
+    }
+
+    .search-bar input {
+        width: 80%;
+    }
+
+    .service-card h3 {
+        font-size: 18px;
+    }
+
+    .step h3 {
+        font-size: 18px;
+    }
+
+    .testimonial-card h3 {
+        font-size: 16px;
+    }
 }
