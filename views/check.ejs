@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .professional-list {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .professional-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+        }
+        .professional-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .professional-card h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #333;
+        }
+        .professional-card p {
+            margin: 5px 0;
+        }
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<section class="professional-list">
+    <h2>Our Professionals</h2>
+    <div id="professionals-list"></div>
+    <div id="error-message" class="error-message" style="display: none;">There was an error loading the professionals. Please try again later.</div>
+</section>
+
+<script>
+    // Fetch and display professional data
+    fetch('/professionals')
+        .then(response => response.json())
+        .then(professionals => {
+            const listContainer = document.getElementById('professionals-list');
+            const errorMessage = document.getElementById('error-message');
+
+            // Hide error message if data is loaded
+            errorMessage.style.display = 'none';
+
+            // Check if professionals array is empty
+            if (professionals.length === 0) {
+                listContainer.innerHTML = '<p>No professionals available at the moment.</p>';
+                return;
+            }
+
+            // Render the professionals
+            professionals.forEach(prof => {
+                listContainer.innerHTML += `
+                    <div class="professional-card">
+                        <img src="${prof.profilePicture}" alt="${prof.name}" />
+                        <div>
+                            <h3>${prof.name}</h3>
+                            <p><strong>Service:</strong> ${prof.service}</p>
+                            <p><strong>Experience:</strong> ${prof.experience} years</p>
+                            <p>${prof.message}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error("Error fetching professionals:", err);
+            // Show error message on UI
+            const errorMessage = document.getElementById('error-message');
+            errorMessage.style.display = 'block';
+        });
+</script>
+
+</body>
+</html>
