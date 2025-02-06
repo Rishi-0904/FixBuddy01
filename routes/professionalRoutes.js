@@ -73,39 +73,56 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
   }
 });
 
-
 router.post("/submit-login", async (req, res) => {
   const { email, password } = req.body;
 
   try {
+    // Check if both email and password are provided
+    if (!email || !password) {
+      console.log("Email or password is missing in the request body.");
+      return res.status(400).json({ error: "Email and password are required." });
+    }
+
+    console.log("Received login request with email:", email);
+
     // First, check if the professional exists by their email
     const professional = await Professional.findOne({ email });
 
     if (!professional) {
+      console.log(`Professional not found with email: ${email}`);
       // If the professional is not found, return an error
       return res.status(400).json({ error: "Invalid email or password" });
+    }
+
+    console.log("Professional found:", professional);
+
+    // Check if the password field exists
+    if (!professional.password) {
+      console.log(`No password field found for professional: ${email}`);
+      return res.status(500).json({ error: "Password not found in the database" });
     }
 
     // Now that we have the professional, compare the password
     const isMatch = await bcrypt.compare(password, professional.password);
 
     if (!isMatch) {
+      console.log("Password does not match for email:", email);
       // If the password doesn't match, return an error
       return res.status(400).json({ error: "Invalid email or password" });
     }
 
+    console.log("Login successful for email:", email);
+
     // If both checks pass, respond with a success message
     return res.json({ message: "Login successful" });
 
-    // If you want to redirect the user after a successful login, you can do this:
-    // return res.redirect("/dashboard");
-
   } catch (error) {
-    console.error("Error during login:", error);
+    console.error("Error during login:", error);  // Log detailed error
     // If something goes wrong, return a generic server error
-    return res.status(500).json({ error: "Server error", details: error.message });
+    return res.status(500).json({ error: "Server error during login", details: error.message });
   }
 });
+
 
 
 module.exports = router;
