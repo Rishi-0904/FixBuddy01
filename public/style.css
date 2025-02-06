@@ -534,3 +534,72 @@ html {
         font-size: 16px;
     }
 }
+/* Keyframes for scrolling animation */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-33.33%); /* Scroll 1/3 of the total width (3 cards) */
+    }
+    50% {
+        transform: translateX(-66.66%); /* Scroll 2/3 of the total width (6 cards) */
+    }
+    75% {
+        transform: translateX(-99.99%); /* Scroll 3/3 of the total width (9 cards) */
+    }
+    100% {
+        transform: translateX(0); /* Reset back to the start */
+    }
+}
+
+/* Wrapper for the cards */
+.service-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflowing cards */
+    position: relative;
+    width: 100%;
+}
+
+/* Service Cards container */
+.service-cards {
+    display: flex; /* Horizontal layout */
+    gap: 20px; /* Space between cards */
+    animation: scroll 18s ease-in-out infinite; /* Infinite scroll with pause effect */
+    transition: transform 1s ease;
+}
+
+/* Individual service card */
+.service-card {
+    flex: 0 0 25%; /* Each card takes up 25% of the container width */
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 2px solid;
+    transition: transform 0.5s ease-in-out;
+}
+
+.service-card:hover {
+    transform: scale(1.05); /* Hover effect to slightly scale up */
+}
+
+.service-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.service-card h3 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: var(--color-primary);
+}
+
+.service-card p {
+    margin-top: 5px;
+    font-size: 12px;
+}
