@@ -73,29 +73,39 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
   }
 });
 
+
 router.post("/submit-login", async (req, res) => {
-    try {
-      console.log("Received request body:", req.body); // ✅ Debugging step
+  const { email, password } = req.body;
 
-      const { email, password } = req.body;
-  
+  try {
+    // First, check if the professional exists by their email
+    const professional = await Professional.findOne({ email });
 
-      // Check if professional exists
-      const professional = await Professional.findOne({ email });
-      if (!professional) {
-        return res.status(400).json({ error: "Invalid email or password" });
-      }
-  
-      // Compare hashed password
-      const isMatch = await bcrypt.compare(password, professional.password);
-      if (!isMatch) {
-        return res.status(400).json({ error: "Invalid email or password" });
-      }
-  
-      return res.redirect("/dashboard")
-    } catch (error) {
-      res.status(500).json({ error: "Server error", details: error.message });
+    if (!professional) {
+      // If the professional is not found, return an error
+      return res.status(400).json({ error: "Invalid email or password" });
     }
-  });
+
+    // Now that we have the professional, compare the password
+    const isMatch = await bcrypt.compare(password, professional.password);
+
+    if (!isMatch) {
+      // If the password doesn't match, return an error
+      return res.status(400).json({ error: "Invalid email or password" });
+    }
+
+    // If both checks pass, respond with a success message
+    return res.json({ message: "Login successful" });
+
+    // If you want to redirect the user after a successful login, you can do this:
+    // return res.redirect("/dashboard");
+
+  } catch (error) {
+    console.error("Error during login:", error);
+    // If something goes wrong, return a generic server error
+    return res.status(500).json({ error: "Server error", details: error.message });
+  }
+});
+
 
 module.exports = router;

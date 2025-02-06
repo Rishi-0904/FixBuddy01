@@ -6,8 +6,8 @@
     <title>FixBuddy Professional Login</title>
     <link rel="stylesheet" href="prologin.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -45,47 +45,56 @@
                         <input type="password" id="password" name="password" required placeholder="Enter your password">
                     </div>
 
+                    <!-- Error message container -->
+                    <div id="error-message" style="color: red; display: none;"></div>
+
                     <div class="form-group">
                         <button type="submit">Login</button>
                     </div>
                 </form>
             </div>
         </div>
+    </section>
 
     <!-- Footer Section -->
     <footer>
         <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
-<!-- 
-<script>
 
-    document.getElementById("login-form").addEventListener("submit", async function (event) {
-    event.preventDefault();
+    <script>
+        document.getElementById("login-form").addEventListener("submit", async function (event) {
+            event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMessageElement = document.getElementById("error-message");
 
-    try {
-        const response = await fetch("http://localhost:5000/api/professionals/submit-login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        }); 
+            try {
+                const response = await fetch("/submit-login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password }),
+                });
 
-        const data = await response.json();
-        
-        if (response.ok) {
-            alert("Login successful!");
-            window.location.href = "dashboard.html"; // Redirect to dashboard
-        } else {
-            alert(data.error);
-        }
-    } catch (error) {
-        console.error("Error:", error);
-    }
-});
-</script> -->
-
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Successful login, redirect to the dashboard
+                    alert("Login successful!");
+                    window.location.href = "/dashboard"; // Redirect to dashboard
+                } else {
+                    // Display error message above the login button
+                    errorMessageElement.style.display = "block"; // Show the error message container
+                    errorMessageElement.innerText = data.error || "An unknown error occurred.";
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                // Handle network or other errors
+                errorMessageElement.style.display = "block";
+                errorMessageElement.innerText = "An error occurred while trying to log in. Please try again later.";
+            }
+        });
+    </script>
 
 </body>
 </html>
