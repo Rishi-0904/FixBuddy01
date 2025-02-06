@@ -7,6 +7,7 @@ body {
     color: #fff;
 }
 
+/* HEADER */
 .header {
     background-color: #28156f;
     color: white;
@@ -15,18 +16,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap; /* Allows wrapping */
 }
 
-.header .logo h1 {
-    margin: 0;
-    font-size: 30px;
-    font-weight: 700;
-}
-
+/* Navigation */
 .nav ul {
     list-style-type: none;
     padding: 0;
     display: flex;
+    flex-wrap: wrap; /* Adjust nav links */
 }
 
 .nav ul li {
@@ -40,6 +38,7 @@ body {
     text-transform: uppercase;
     font-weight: 500;
     letter-spacing: 0.5px;
+  
 }
 
 .nav ul li a.active {
@@ -48,15 +47,18 @@ body {
     padding-bottom: 5px;
 }
 
+/* Dashboard */
 .dashboard {
     padding: 40px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
+/* Profile Section */
 .profile-section {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap; /* Ensures wrapping on smaller screens */
     margin-bottom: 40px;
     border-radius: 10px;
     background: #2a1b5d;
@@ -66,6 +68,7 @@ body {
 
 .profile-info {
     display: flex;
+    flex-wrap: wrap; /* Wrap content for small screens */
     align-items: center;
 }
 
@@ -77,17 +80,7 @@ body {
     border: 3px solid #fff;
 }
 
-.profile-details h2 {
-    font-size: 32px;
-    margin: 0;
-    font-weight: 700;
-}
-
-.profile-details p {
-    font-size: 18px;
-    margin: 5px 0;
-}
-
+/* Buttons */
 .button {
     display: inline-block;
     background-color: #300689;
@@ -98,12 +91,16 @@ body {
     margin-top: 15px;
     font-size: 18px;
     transition: background-color 0.3s ease;
+    text-align: center;
+    display: block;
+    margin: auto;
 }
 
 .button:hover {
     background-color: #120135;
 }
 
+/* Work History */
 .work-history {
     margin-top: 40px;
 }
@@ -116,49 +113,14 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.history-item h4 {
-    font-size: 24px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.history-item ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.history-item li {
-    font-size: 18px;
-    margin-bottom: 10px;
-    line-height: 1.6;
-}
-
-.history-item a.button {
-    margin-top: 15px;
-    padding: 12px 20px;
-    font-size: 18px;
-    width: 100%;
-    text-align: center;
-}
-
+/* Quick Actions */
 .quick-actions {
     margin-top: 60px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.quick-actions h3 {
-    font-size: 26px;
-    margin-bottom: 20px;
-    font-weight: 700;
     text-align: center;
-    width: 100%;
 }
 
 .action-buttons {
-    display: flex;
-    justify-content: space-between;
+    text-align: center; /* Centers the button */
     width: 100%;
 }
 
@@ -170,15 +132,19 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 48%;
+    width: 50%;
+    max-width: 300px;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease;
+    display: block;
+    margin: auto;
 }
 
 .action-btn:hover {
     background-color: #218838;
 }
 
+/* Footer */
 footer {
     text-align: center;
     padding: 20px;
@@ -188,10 +154,78 @@ footer {
     font-size: 16px;
 }
 
-footer p {
-    margin: 0;
+/* RESPONSIVENESS */
+
+/* For screens below 1024px */
+@media (max-width: 1024px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .nav ul {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+
+    .nav ul li {
+        margin: 10px 0;
+    }
+    
+    .profile-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .profile-photo {
+        margin: 0 auto 15px;
+    }
+    
+    .profile-details {
+        text-align: center;
+    }
 }
 
-.container {
-    color: #ffffff;
+/* For screens below 768px */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 20px;
+    }
+
+    .profile-section {
+        padding: 20px;
+    }
+
+    .history-item {
+        padding: 15px;
+    }
+
+    .action-btn {
+        width: 80%;
+    }
+}
+
+/* For mobile screens below 480px */
+@media (max-width: 480px) {
+    .profile-photo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-details h2 {
+        font-size: 24px;
+    }
+
+    .profile-details p {
+        font-size: 16px;
+    }
+
+    .history-item h4 {
+        font-size: 20px;
+    }
+
+    .action-btn {
+        width: 90%;
+    }
 }
