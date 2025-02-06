@@ -54,7 +54,7 @@ a {
     color: #f3a847;
 }
 
-/* Hero Section */
+/* Main Section */
 .main {
     color: #fff;
     text-align: center;
@@ -193,25 +193,6 @@ html {
     color: #ffb300;
 }
 
-.service-cards {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-}
-/* .service-cards {
-    overflow:scroll;
-    white-space: nowrap;
-    position: relative;
-    width: 100%;
-    background-color: rgb(38, 3, 105);
-    padding: 10px 0;
-} */
-
-.service-card {
-    display: inline-block;
-    white-space: nowrap;
-}
-/* Add this to your existing .service-cards styles */
 @keyframes scroll {
     0% {
         transform: translateX(0);
@@ -220,7 +201,6 @@ html {
         transform: translateX(-100%);
     }
 }
-
 .service-cards {
     display: flex;
     justify-content: space-around;
@@ -231,6 +211,15 @@ html {
     background-color: rgb(20, 16, 37);
     animation: scroll 10s linear infinite;  /* Apply the scroll animation */
 }
+
+
+.service-card {
+    display: inline-block;
+    white-space: nowrap;
+}
+/* Add this to your existing .service-cards styles */
+
+
 
 .service-card {
     display: inline-block;
@@ -457,44 +446,7 @@ html {
     .testimonial-card h3 {
         font-size: 16px;
     }
-    /* .search-bar {
-        position: relative;
-        width: 300px;
-        margin: 50px auto;
-        font-family: Arial, sans-serif;
-    }
-    .suggestions-container {
-        position: absolute;
-        background-color: #fff;
-        border: 1px solid #ccc;
-        width: 100%;
-        z-index: 100;
-        display: none;
-        max-height: 200px;
-        overflow-y: auto;
-        margin-top: 5px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    #search-input {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-    .suggestion-item {
-        padding: 8px;
-        cursor: pointer;
-        font-size: 14px;
-    }
-    
-    .suggestion-item:hover {
-        background-color: #f0f0f0;
-    }
-    
-    .search-bar {
-        position: relative;
-    } */
+ 
 
 }
 .search-bar input {
