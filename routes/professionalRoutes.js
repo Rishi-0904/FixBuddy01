@@ -3,7 +3,14 @@ const multer = require("multer");
 const bcrypt = require("bcryptjs");
 const Professional = require("../models/professional");
 
+const cors = require("cors");
+
 const router = express.Router();
+
+router.use(cors());
+router.use(express.json()); 
+router.use(express.urlencoded({ extended: true }));
+
 
 // Multer storage for file uploads
 const storage = multer.diskStorage({
@@ -14,6 +21,7 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
+
 const upload = multer({ storage });
 
 // Route to handle form submission
@@ -47,10 +55,13 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
   }
 });
 
-router.post("/prologin", async (req, res) => {
+router.post("/submit-login", async (req, res) => {
     try {
+      console.log("Received request body:", req.body); // ✅ Debugging step
+
       const { email, password } = req.body;
   
+
       // Check if professional exists
       const professional = await Professional.findOne({ email });
       if (!professional) {

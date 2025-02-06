@@ -18,9 +18,11 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, 'uploads')));  // Serve static files
 app.use('/uploads', express.static('uploads'));
 
-app.use("/api/professionals", professionalRoutes);
+app.use("/api/professionals", professionalRoutes); 
+  
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
+
 app.use(cookieParser());  // This should be before authenticateJWT
 app.use(authenticateJWT);
 app.set("view engine" , "ejs")
@@ -119,6 +121,7 @@ app.get('/prologin' , (req,res)=>{
 app.get('/pestcontrol' , (req,res)=>{
     res.render("pestcontrol")
 })
+
 app.get('/professionals', (req, res) => {
     Professional.find()
         .then(professionals => {
