@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixBuddy Professional Login</title>
+    <link rel="stylesheet" href="prologin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        <div class="logo">
+            <h1>Fix <span>Buddy</span></h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="testimonials.html">Testimonials</a></li>
+                <li><a href="signup.html">Sign Up</a></li>
+                <li><a href="contact-us.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Login Section -->
+    <section class="login">
+        <div class="container">
+            <h2>Professional Login</h2>
+            <p>Welcome back! Please enter your credentials to access your professional dashboard.</p>
+
+            <!-- Login Form -->
+            <div class="form-container">
+                <form id="login-form" action="/submit-login" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
+    </footer>
+
+    <!-- JavaScript for Login Form Validation -->
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Basic validation (just checks for empty fields)
+            if (!email || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+
+            // Simulate successful login (replace with your server-side logic)
+            alert("Login successful! Redirecting to dashboard...");
+            
+            // Optionally, redirect after successful login (replace with your actual dashboard URL)
+            // window.location.href = '/dashboard';
+        });
+    </script>
+
+</body>
+</html>
