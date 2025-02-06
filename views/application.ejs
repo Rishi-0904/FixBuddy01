@@ -106,7 +106,15 @@
                         <label for="certificates">Upload Certificates</label>
                         <input type="file" id="certificates" name="certificates" accept=".pdf, .jpg, .jpeg, .png" required>
                     </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Create a password">
+                    </div>
 
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your password">
+                    </div>
                     <div class="form-group">
                         <button type="submit">Submit Application</button>
                     </div>
@@ -146,6 +154,24 @@
     <footer>
         <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
+    <script>
+        document.getElementById("application-form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
 
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            // Check if password and confirm password match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return;
+            }
+
+            // If everything is fine, simulate form submission (replace this with actual server-side logic)
+            alert("Application submitted successfully!");
+            // You can submit the form here if everything is correct
+            document.getElementById("application-form").submit();
+        });
+    </script>
 </body>
 </html>
