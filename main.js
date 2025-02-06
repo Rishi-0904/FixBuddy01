@@ -59,6 +59,9 @@ const User = mongoose.model("User", userSchema);
 app.get('/' , (req,res)=>{
     res.render("index",{ user: req.user })
 })
+app.get('/dashboard' , (req,res)=>{
+    res.render("dashboard" , { user: req.user })
+})
 app.get('/check' , (req,res)=>{
     res.render("check",{ user: req.user })
 })
