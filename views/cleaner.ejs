@@ -1,159 +1,80 @@
+<!-- electrician.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cleaners Profiles</title>
-  <link rel="stylesheet" href="electrician.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricians Profiles</title>
+    <link rel="stylesheet" href="electrician.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-    <div class="logo">
-      <h1 style="color: white;">Fix <span style="color: #E1AD01;">Buddy</span></h1>
-    </div>
-    <nav class="nav">
-      <ul>
-        <li><a href="services">Services</a></li>
-        <li><a href="testimonials">Testimonials</a></li>
-        <li><a href="/login">Login</a></li>
-        <li><a href="/contact-us">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section class="profiles">
-      <h1>Meet Our Expert Cleaners</h1>
-      <div class="profile-cards">
-        <!-- Cleaner Profile 1 -->
-        <div class="profile-card">
-          <img src="/images/electricianpics/mahesh.png" alt="Ravi Sharma">
-          <h2>Ravi Sharma</h2>
-          <p>Highly experienced in both residential and office cleaning services with attention to detail.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:ravi.sharma@example.com" class="contact-btn">Contact</a>
+    <header class="header">
+        <div class="logo">
+            <h1 style="color: white;">Fix <span style="color: orange;">Buddy</span></h1>
         </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="services">Services</a></li>
+                <li><a href="testimonials">Testimonials</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- Cleaner Profile 2 -->
-        <div class="profile-card">
-          <img src="/images/electricianpics/image.png" alt="Devi laal singh">
-          <h2>Devi laal singh</h2>
-          <p>Specializing in deep cleaning, from carpets to upholstery, ensuring your space is spotless.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:anjali.devi@example.com" class="contact-btn">Contact</a>
+    <main>
+        <section class="profiles">
+            <h1>Meet Our Expert Cleaners</h1>
+            <div class="profile-cards" id="profile-cards">
+                <!-- Dynamic profiles will be loaded here -->
+            </div>
+            
+        
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
+    </footer>
+
+    <script>
+       // Fetch professional data based on the service area
+fetch('/professionals?service=cleaner')
+  .then(response => response.json())
+  .then(professionals => {
+    console.log(professionals); // Log data for debugging
+    
+    const profileCardsContainer = document.getElementById('profile-cards');
+    
+    // Loop through the fetched carpenters and create profile cards
+    professionals.forEach(prof => {
+      const profileCard = document.createElement('div');
+      profileCard.classList.add('profile-card');
+      
+      const rating = prof.rating || 0;
+      const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
+
+      profileCard.innerHTML = `
+        <img src="${prof.profilePicture || '/default-image.jpg'}" alt="${prof.name}">
+        <h2>${prof.name}</h2>
+        <p>${prof.message}</p>
+        <div class="rating">
+          ${stars}
         </div>
+        <a href="mailto:${prof.email}" class="contact-btn">Contact</a>
+      `;
+      
+      profileCardsContainer.appendChild(profileCard);
+    });
+  })
+  .catch(err => {
+    console.error("Error fetching professionals:", err);
+  });
 
-        <!-- Cleaner Profile 3 -->
-        <div class="profile-card">
-          <img src="/images/electricianpics/image.png" alt="Deepak Reddy">
-          <h2>Deepak Reddy</h2>
-          <p>Offering eco-friendly cleaning services with top-notch products to keep your space clean and safe.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:deepak.reddy@example.com" class="contact-btn">Contact</a>
-        </div>
-
-        <!-- Cleaner Profile 4 -->
-        <div class="profile-card">
-          <img src="/images/electricianpics/pramod.png" alt="Suman Arora">
-          <h2>Suman Arora</h2>
-          <p>Expert in providing residential cleaning services, ensuring a spotless home every time.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:suman.arora@example.com" class="contact-btn">Contact</a>
-        </div>
-
-        <!-- Cleaner Profile 5 -->
-        <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/indian-male-electrician-giving-thumbsup-smiling_437792-132.jpg" alt="Vikram Joshi">
-          <h2>Vikram Joshi</h2>
-          <p>With a focus on office cleanliness, Vikram provides professional cleaning for commercial spaces.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:vikram.joshi@example.com" class="contact-btn">Contact</a>
-        </div>
-
-        <!-- Cleaner Profile 6 -->
-        <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/indian-asian-handsome-electrician-engineer-action-with-yellow-safety-hat-isolated_466689-24312.jpg" alt="Neel Soni">
-          <h2>Neel Soni</h2>
-          <p>Experienced in providing sanitation services for both residential and commercial clients.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:priya.soni@example.com" class="contact-btn">Contact</a>
-        </div>
-
-        <!-- Cleaner Profile 7 -->
-        <div class="profile-card">
-          <img src="/images/electricianpics/ramu.png" alt="Sandeep Kumar">
-          <h2>Sandeep Kumar</h2>
-          <p>Offering expert cleaning services for large spaces with fast and efficient results.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:sandeep.kumar@example.com" class="contact-btn">Contact</a>
-        </div>
-
-        <!-- Cleaner Profile 8 -->
-        <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/construction-worker-happy-indian-worker-uniform-white-background_846334-2771.jpg" alt="Raju Verma">
-          <h2> Raju Verma</h2>
-          <p>Specializes in detailed deep cleaning with a focus on kitchens and bathrooms.</p>
-          <div class="rating">
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star filled">&#9733;</span>
-            <span class="star">&#9733;</span>
-            <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:aarti.verma@example.com" class="contact-btn">Contact</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
-  </footer>
-
+    </script>
+    
 </body>
 </html>

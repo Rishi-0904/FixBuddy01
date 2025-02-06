@@ -23,7 +23,25 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+router.get('/professionals', async (req, res) => {
+  const { service } = req.query; // Get the service from the query string
 
+  try {
+      // If 'service' is passed, filter professionals by the selected service
+      let filter = {};
+      if (service) {
+          filter.service = service;  // Filter by the selected service (e.g., "electrician", "carpenter", etc.)
+      }
+
+      // Fetch professionals based on the filter
+      const professionals = await Professional.find(filter);
+
+      res.json(professionals); // Send back the professionals in the response
+  } catch (err) {
+      console.error("Error fetching professionals:", err);
+      res.status(500).json({ error: "Error fetching professionals" });
+  }
+});
 // Route to handle form submission
 router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certificates" }]), async (req, res) => {
   try {

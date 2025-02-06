@@ -1,144 +1,80 @@
+<!-- electrician.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Electricians Profiles</title>
-  <link rel="stylesheet" href="electrician.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricians Profiles</title>
+    <link rel="stylesheet" href="electrician.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-      <div class="logo">
-          <h1 style="color: white;">Fix <span style="color: orange;">Buddy</span></h1>
-      </div>
-      <nav class="nav">
-          <ul>
-              <li><a href="services">Services</a></li>
-              <li><a href="testimonials">Testimonials</a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/contact-us">Contact</a></li>
-          </ul>
-      </nav>
-  </header>
+    <header class="header">
+        <div class="logo">
+            <h1 style="color: white;">Fix <span style="color: orange;">Buddy</span></h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="services">Services</a></li>
+                <li><a href="testimonials">Testimonials</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-  <section class="profiles">
-    <h1>Meet Our Expert Plumbers</h1>
-    <div class="profile-cards">
-      <div class="profile-card">
-          <img src="/images/electricianpics/mahesh.png" alt="Vikas Kumar">
-          <h2>Vikas Kumar</h2>
-          <p>Experienced plumber specializing in pipe repairs, installations, and drainage systems.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:vikas.kumar@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="/images/electricianpics/ramu.png" alt="Amit Sharma">
-          <h2>Amit Sharma</h2>
-          <p>Professional plumber with expertise in both residential and commercial plumbing systems.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:amit.sharma@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="/images/electricianpics/pramod.png" alt="Rohit Verma">
-          <h2>Rohit Verma</h2>
-          <p>Expert in water leak detection and pipe replacement with over 8 years of experience.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:rohit.verma@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="/images/electricianpics/ramu.png.png" alt="Suresh Reddy">
-          <h2>Suresh Reddy</h2>
-          <p>Certified plumber with expertise in emergency repairs, installations, and routine maintenance.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:suresh.reddy@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="/images/electricianpics/image.png" alt="Manoj Singh">
-          <h2>Manoj Singh</h2>
-          <p>Specializes in fixing clogged drains, installing water filtration systems, and pipe maintenance.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:manoj.singh@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/construction-worker-happy-indian-worker-uniform-white-background_846334-2771.jpg" alt="Harish Kumar">
-          <h2>Harish Kumar</h2>
-          <p>Provides residential plumbing solutions including bathroom, kitchen, and drainage systems.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:harish.kumar@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/indian-male-electrician-giving-thumbsup-smiling_437792-132.jpg" alt="Ajay Patel">
-          <h2>Ajay Patel</h2>
-          <p>Experienced plumber specializing in eco-friendly water-saving systems and installations.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:ajay.patel@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/indian-asian-handsome-electrician-engineer-action-with-yellow-safety-hat-isolated_466689-24312.jpg" alt="Vijay Yadav">
-          <h2>Vijay Yadav</h2>
-          <p>Specializes in pipe fitting, leak repairs, and plumbing solutions for both residential and commercial properties.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:vijay.yadav@example.com" class="contact-btn">Contact</a>
-      </div>
-    </div>
-  </section>
-</main>
+    <main>
+        <section class="profiles">
+            <h1>Meet Our Expert Plumbers</h1>
+            <div class="profile-cards" id="profile-cards">
+                <!-- Dynamic profiles will be loaded here -->
+            </div>
+            
+        
+        </section>
+    </main>
 
-<footer>
-  <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
-</footer>
+    <footer>
+        <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
+    </footer>
 
+    <script>
+       // Fetch professional data based on the service area
+fetch('/professionals?service=plumber')
+  .then(response => response.json())
+  .then(professionals => {
+    console.log(professionals); // Log data for debugging
+    
+    const profileCardsContainer = document.getElementById('profile-cards');
+    
+    // Loop through the fetched carpenters and create profile cards
+    professionals.forEach(prof => {
+      const profileCard = document.createElement('div');
+      profileCard.classList.add('profile-card');
+      
+      const rating = prof.rating || 0;
+      const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
+
+      profileCard.innerHTML = `
+        <img src="${prof.profilePicture || '/default-image.jpg'}" alt="${prof.name}">
+        <h2>${prof.name}</h2>
+        <p>${prof.message}</p>
+        <div class="rating">
+          ${stars}
+        </div>
+        <a href="mailto:${prof.email}" class="contact-btn">Contact</a>
+      `;
+      
+      profileCardsContainer.appendChild(profileCard);
+    });
+  })
+  .catch(err => {
+    console.error("Error fetching professionals:", err);
+  });
+
+    </script>
+    
 </body>
 </html>

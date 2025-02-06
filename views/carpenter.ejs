@@ -1,147 +1,80 @@
+<!-- electrician.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Electricians Profiles</title>
-  <link rel="stylesheet" href="electrician.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricians Profiles</title>
+    <link rel="stylesheet" href="electrician.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="header">
-      <div class="logo">
-          <h1 style="color: white;">Fix <span style="color: orange;">Buddy</span></h1>
-      </div>
-      <nav class="nav">
-          <ul>
-              <li><a href="services">Services</a></li>
-              <li><a href="testimonials">Testimonials</a></li>
-              <li><a href="/login">Login</a></li>
-              <li><a href="/contact-us">Contact</a></li>
-          </ul>
-      </nav>
-  </header>
+    <header class="header">
+        <div class="logo">
+            <h1 style="color: white;">Fix <span style="color: orange;">Buddy</span></h1>
+        </div>
+        <nav class="nav">
+            <ul>
+                <li><a href="services">Services</a></li>
+                <li><a href="testimonials">Testimonials</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/contact-us">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<main>
-  <section class="profiles">
-    <h1>Meet Our Expert Carpenters</h1>
-    <div class="profile-cards">
-      <div class="profile-card">
-          <img src="/images/electricianpics/pramod.png" alt="Raj Kumar">
-          <h2>Raj Kumar</h2>
-          <p>Skilled carpenter with expertise in custom furniture, woodwork, and cabinetry.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:raj.kumar@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="/images/electricianpics/mahesh.png" alt="Anil Verma">
-          <h2>Anil Verma</h2>
-          <p>Expert carpenter offering high-quality woodwork for homes and offices, specializing in flooring and paneling.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:anil.verma@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="/images/electricianpics/ramu.png" alt="Harish Yadav">
-          <h2>Harish Yadav</h2>
-          <p>Experienced carpenter specializing in custom cabinets, wood refinishing, and restoration work.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:harish.yadav@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="/images/electricianpics/ramu.png.png" alt="Prakash Singh">
-          <h2>Prakash Singh</h2>
-          <p>Specializes in designing and building custom furniture pieces for residential and commercial properties.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:prakash.singh@example.com" class="contact-btn">Contact</a>
-      </div>
-      
-      <div class="profile-card">
-          <img src="/images/electricianpics/image.png" alt="Sandeep Kumar">
-          <h2>Sandeep Kumar</h2>
-          <p>Expert in crafting fine wood furniture and providing high-quality restoration and repair services.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:sandeep.kumar@example.com" class="contact-btn">Contact</a>
-      </div>
-      
-      <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/construction-worker-happy-indian-worker-uniform-white-background_846334-2771.jpg" alt="Ravi Gupta">
-          <h2>Ravi Gupta</h2>
-          <p>Skilled carpenter specializing in wood flooring installation, cabinet building, and wood refinishing.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:ravi.gupta@example.com" class="contact-btn">Contact</a>
-      </div>
-      
-      <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/indian-male-electrician-giving-thumbsup-smiling_437792-132.jpg" alt="Nitin Sharma">
-          <h2>Nitin Sharma</h2>
-          <p>Professional carpenter specializing in bespoke wooden furniture, home renovation, and door/window installations.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:nitin.sharma@example.com" class="contact-btn">Contact</a>
-      </div>
-      <div class="profile-card">
-          <img src="https://img.freepik.com/premium-photo/indian-asian-handsome-electrician-engineer-action-with-yellow-safety-hat-isolated_466689-24312.jpg" alt="Deepak Joshi">
-          <h2>Deepak Joshi</h2>
-          <p>Specializes in custom woodwork, including cabinetry, furniture design, and wooden structures for home and office spaces.</p>
-          <div class="rating">
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star filled">&#9733;</span>
-              <span class="star">&#9733;</span>
-              <span class="star">&#9733;</span>
-          </div>
-          <a href="mailto:deepak.joshi@example.com" class="contact-btn">Contact</a>
-      </div>        
-    </div>
-  </section>
-</main>
+    <main>
+        <section class="profiles">
+            <h1>Meet Our Expert Carpenters</h1>
+            <div class="profile-cards" id="profile-cards">
+                <!-- Dynamic profiles will be loaded here -->
+            </div>
+            
+        
+        </section>
+    </main>
 
-<footer>
-  <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
-</footer>
+    <footer>
+        <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
+    </footer>
 
+    <script>
+       // Fetch professional data based on the service area
+fetch('/professionals?service=carpenter')
+  .then(response => response.json())
+  .then(professionals => {
+    console.log(professionals); // Log data for debugging
+    
+    const profileCardsContainer = document.getElementById('profile-cards');
+    
+    // Loop through the fetched carpenters and create profile cards
+    professionals.forEach(prof => {
+      const profileCard = document.createElement('div');
+      profileCard.classList.add('profile-card');
+      
+      const rating = prof.rating || 0;
+      const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
+
+      profileCard.innerHTML = `
+        <img src="${prof.profilePicture || '/default-image.jpg'}" alt="${prof.name}">
+        <h2>${prof.name}</h2>
+        <p>${prof.message}</p>
+        <div class="rating">
+          ${stars}
+        </div>
+        <a href="mailto:${prof.email}" class="contact-btn">Contact</a>
+      `;
+      
+      profileCardsContainer.appendChild(profileCard);
+    });
+  })
+  .catch(err => {
+    console.error("Error fetching professionals:", err);
+  });
+
+    </script>
+    
 </body>
 </html>
