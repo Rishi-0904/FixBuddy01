@@ -18,6 +18,7 @@ const PORT = 3000;
 app.use(express.static(path.join(__dirname, 'uploads')));  // Serve static files
 app.use('/uploads', express.static('uploads'));
 
+app.use("/api/professionals", professionalRoutes);
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: true })); 
 app.use(cookieParser());  // This should be before authenticateJWT
@@ -48,7 +49,9 @@ const userSchema = new mongoose.Schema({
     password: String
 
 });
-app.use('/submit-job-application', upload.fields([{ name: 'profile-picture' }, { name: 'certificates' }]), professionalRoutes);
+
+// app.use('/applyn', upload.fields([{ name: 'profile-picture' }, { name: 'certificates' }]), professionalRoutes);
+
 const User = mongoose.model("User", userSchema);
 
 app.get('/' , (req,res)=>{
@@ -108,6 +111,11 @@ app.get('/mover' , (req,res)=>{
 app.get('/repair' , (req,res)=>{
     res.render("repair")
 })
+
+app.get('/prologin' , (req,res)=>{
+    res.render("prologin")
+})
+
 app.get('/pestcontrol' , (req,res)=>{
     res.render("pestcontrol")
 })

@@ -57,27 +57,7 @@
         <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
 
-    <!-- JavaScript for Login Form Validation -->
-    <script>
-        document.getElementById("login-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
 
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            // Basic validation (just checks for empty fields)
-            if (!email || !password) {
-                alert("Please enter both email and password.");
-                return;
-            }
-
-            // Simulate successful login (replace with your server-side logic)
-            alert("Login successful! Redirecting to dashboard...");
-            
-            // Optionally, redirect after successful login (replace with your actual dashboard URL)
-            // window.location.href = '/dashboard';
-        });
-    </script>
 
 </body>
 </html>

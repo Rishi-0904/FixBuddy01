@@ -1,17 +1,15 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-// Professional schema
-const professionalSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    phone: String,
-    service: String,
-    experience: Number,
-    message: String,
-    profilePicture: String, // Path to the uploaded file
-    certificates: String,   // Path to the uploaded certificate file
-    createdAt: { type: Date, default: Date.now }
+const ProfessionalSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  phone: { type: String, required: true },
+  service: { type: String, required: true },
+  experience: { type: Number, required: true },
+  message: { type: String },
+  profilePicture: { type: String },
+  certificates: { type: String },
+  password: { type: String, required: true },
 });
 
-// Export the Professional model
-module.exports = mongoose.model('Professional', professionalSchema);
+module.exports = mongoose.model("Professional", ProfessionalSchema);

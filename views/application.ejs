@@ -55,7 +55,7 @@
 
             <!-- Form Container -->
             <div class="form-container">
-                <form action="/submit-job-application" method="POST" enctype="multipart/form-data">
+                <form action="/apply" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="name">Full Name</label>
                         <input type="text" id="name" name="name" required placeholder="Enter your full name">
@@ -154,24 +154,5 @@
     <footer>
         <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
-    <script>
-        document.getElementById("application-form").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
-
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirm-password").value;
-
-            // Check if password and confirm password match
-            if (password !== confirmPassword) {
-                alert("Passwords do not match. Please try again.");
-                return;
-            }
-
-            // If everything is fine, simulate form submission (replace this with actual server-side logic)
-            alert("Application submitted successfully!");
-            // You can submit the form here if everything is correct
-            document.getElementById("application-form").submit();
-        });
-    </script>
 </body>
 </html>
