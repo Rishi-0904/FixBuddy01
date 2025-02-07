@@ -62,7 +62,7 @@ header .nav ul li a:hover {
 
 .faq-item h2 {
     font-size: 1.4em;
-    color: #ff6600; /* Orange color for questions */
+    color: #ff6600; 
     margin-bottom: 10px;
     cursor: pointer;
 }
@@ -74,7 +74,7 @@ header .nav ul li a:hover {
 }
 
 .faq-item h2:hover {
-    color: #ff4500; /* Darker orange on hover */
+    color: #ff4500; 
 }
 
 /* Footer Styles */

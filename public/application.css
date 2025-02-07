@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 
 body {
@@ -68,21 +69,7 @@ a {
     text-align: center;
 }
 
-.hero .main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.hero h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 20px;
-    margin-bottom: 30px;
-}
 
 .cta-button {
     padding: 12px 25px;
@@ -197,6 +184,9 @@ a {
     color: #ffb300;
     margin-bottom: 20px;
 }
+.testimonials p{
+    padding: 20px;
+}
 
 .testimonial-cards {
     display: flex;
@@ -291,18 +281,18 @@ button[type="submit"]:hover {
 }
 /* Error message styling */
 .error-message {
-    color: red;  /* Red color for error text */
-    font-size: 14px;  /* Make the font size smaller */
-    margin-bottom: 15px;  /* Add some space below the error message */
-    padding: 10px;  /* Add padding to make it more visible */
-    background-color: #f8d7da;  /* Light red background */
-    border: 1px solid #f5c6cb;  /* Slightly darker border */
-    border-radius: 4px;  /* Rounded corners */
+    color: red;  
+    font-size: 14px;  
+    margin-bottom: 15px; 
+    padding: 10px;  
+    background-color: #f8d7da;  
+    border: 1px solid #f5c6cb;  
+    border-radius: 4px;  
 }
 
 /* Optional: Style the submit button */
 button[type="submit"] {
-    background-color: #007bff; /* Blue background for submit button */
+    background-color: #007bff; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -311,5 +301,9 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
+}
+.main h2{
+    padding: 15px;
+    font-size: 2.12em;
 }
