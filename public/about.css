@@ -1,0 +1,288 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    color: #28156f;
+    line-height: 1.6;
+}
+
+/* Header Section */
+header {
+    background-color: #28156f;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header .logo h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 600;
+    letter-spacing: 2px;
+}
+
+header .nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+header .nav ul li {
+    display: inline;
+    margin-right: 25px;
+}
+
+header .nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+header .nav ul li a:hover {
+    color: #f1c40f;
+}
+
+header .nav ul li a.active {
+    font-weight: 700;
+    border-bottom: 3px solid #f1c40f;
+    padding-bottom: 5px;
+}
+
+/* About Us Section */
+.about-us {
+    padding: 70px 0;
+    background-color: rgb(20, 16, 37);
+    text-align: center;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* Heading */
+.about-heading h2 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #28156f;
+    text-transform: uppercase;
+}
+
+.about-heading p {
+    font-size: 1.3em;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.8;
+}
+
+/* About Content */
+.about-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+    gap: 3%;
+}
+
+.section-left,
+.section-right {
+    width: 48%;
+}
+
+/* Section Titles */
+.section-left h3,
+.section-right h3 {
+    font-size: 2.4em;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #28156f;
+    letter-spacing: 1px;
+}
+
+.section-left p,
+.section-right ul {
+    font-size: 1.2em;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+/* Section Right List */
+.section-right ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.section-right ul li {
+    margin-bottom: 15px;
+    padding-left: 15px;
+    position: relative;
+}
+
+.section-right ul li:before {
+    content: "\2022";
+    color: #f1c40f;
+    font-size: 1.5em;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* Our Mission Section */
+.our-mission {
+    background-color: #f1c40f;
+    padding: 60px 0;
+    color: white;
+    text-align: center;
+}
+
+.our-mission h3 {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.our-mission p {
+    font-size: 1.3em;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: white;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+    background-color: #ffffff;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.why-choose-us h3 {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #28156f;
+    margin-bottom: 20px;
+}
+
+.why-choose-us p {
+    font-size: 1.3em;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    color: #555;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Why Choose Us Blocks */
+.why-choose-us .blocks {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.why-choose-us .block {
+    background-color: #fafafa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.why-choose-us .block:hover {
+    transform: translateY(-10px);
+}
+
+.why-choose-us .block h4 {
+    font-size: 1.8em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #28156f;
+}
+
+.why-choose-us .block p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Team Section */
+.team-section {
+    margin-top: 70px;
+    text-align: center;
+    padding: 60px 0;
+    background-color: rgb(27, 20, 56);
+}
+
+.team-section h3 {
+    font-size: 2.4em;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 40px;
+}
+
+.team-members {
+    display: flex;
+    justify-content: space-between;
+    gap: 2%;
+    margin-top: 40px;
+}
+
+/* Team Member Styling */
+.team-member {
+    width: 30%;
+    background-color: rgb(32, 26, 59);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.team-member img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.team-member h4 {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.team-member p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+/* Footer Section */
+footer {
+    text-align: center;
+    padding: 25px;
+    background-color: #28156f;
+    color: white;
+    margin-top: 80px;
+    font-size: 1.1em;
+    border-top: 4px solid #f1c40f;
+}
