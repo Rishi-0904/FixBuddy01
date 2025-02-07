@@ -32,7 +32,7 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "secretkey"); // Verify token
+    const decoded = jwt.verify(token, "secretKey"); // Verify token
     req.user = decoded; // Attach decoded user data to request object
     next();
   } catch (err) {

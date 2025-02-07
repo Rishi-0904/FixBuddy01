@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -54,5 +54,68 @@
         </div>
     </section>
 
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="contact.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <script>
+        function showAlertAndRedirect(event) {
+            event.preventDefault(); // Prevent default form submission
+            alert("Your message has been sent successfully!");
+            window.location.href = "/"; // Redirect to home page
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <h1 style="color: white;">Fix <span style="color: #E1AD01;">Buddy</span></h1>
+        </div>
+        <h1 class="contact-us">Contact Us</h1>
+        <p>We’d love to hear from you! Reach out to us for any inquiries.</p>
+    </header>
+
+    <section class="contact-container">
+        <div class="contact-form">
+            <h2>Get in Touch</h2>
+            <form onsubmit="showAlertAndRedirect(event)">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <div class="how-to-find-us">
+            <h1>How to Find Us</h1>
+            <p>If you have any questions, just fill in the contact form, and we will
+                answer you shortly. If you are living nearby, come visit us
+                at our headquarter.
+            </p>
+
+            <h2>Headquarter</h2>
+            <p><strong>Address:</strong> 211004, MNNIT Allahabad, India</p>
+            <p><strong>Phone:</strong> +91 94798 95655</p>
+            <h2>Media Inquiries</h2>
+            <p>For media inquiries, you can send us an email at</p>
+            <p>support@fixbuddy.com</p>
+        </div>
+    </section>
 </body>
 </html>

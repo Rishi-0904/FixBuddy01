@@ -26,7 +26,6 @@ const authenticateJWT = require("./middlewares/auth"); // JWT Auth Middleware
 // Set view engine
 app.set("view engine", "ejs");
 
-const { verifyToken } = require('./middlewares/auth');
 
 
 
@@ -69,10 +68,39 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 
+const { verifyToken } = require('./middlewares/auth');
+
+
 // Routes for views
-app.get('/', (req, res) => {
-    res.render("index", { user: req.user });
+// app.get('/' , (req, res) => {
+//     res.render("index", { user: req.user });
+// });
+
+app.get("/", (req, res) => {
+    const token = req.cookies.token; // Get JWT from cookies
+
+    if (!token) {
+        return res.render("index", { user: null }); // No user logged in
+    }
+
+    try {
+        const decoded = jwt.verify(token, "secretKey"); // Verify JWT
+        res.render("index", { user: decoded }); // Pass user data
+    } catch (err) {
+        res.clearCookie("token");
+        return res.render("index", { user: null }); // Invalid token
+    }
 });
+
+
+app.get('/about', (req, res) => {
+    res.render("about", { user: req.user });
+});
+
+app.get('/FAQ', (req, res) => {
+    res.render("FAQ", { user: req.user });
+});
+
 app.get('/electrician',verifyToken, (req, res) => {
     res.render("electrician", { user: req.user });
 });
