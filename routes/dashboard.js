@@ -167,7 +167,7 @@ router.get('/dashboard', verifyToken, async (req, res) => {
     }
 
     const bookings = await Booking.find({ professionalEmail: user.email }); // Get bookings for the user
-
+    console.log("Fetched bookings:", bookings); 
     // Render the dashboard page with user and booking data
     // If there are no bookings, an empty array will be passed, and it will be handled on the frontend.
     res.render('dashboard', { user, bookings });

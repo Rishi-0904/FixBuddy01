@@ -1,4 +1,3 @@
-<!-- electrician.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,13 +25,35 @@
     </header>
 
     <main>
+        <!-- Electrician Profiles Section -->
         <section class="profiles">
             <h1>Meet Our Expert Gardeners</h1>
             <div class="profile-cards" id="profile-cards">
-                <!-- Dynamic profiles will be loaded here -->
+                <!-- Dynamic profile cards will be loaded here -->
             </div>
-            
-        
+        </section>
+
+        <!-- Booking Form Section -->
+        <section id="booking-section">
+            <h3>Book a Gardener</h3>
+            <form id="booking-form">
+                <label for="clientName">Your Name:</label>
+                <input type="text" id="clientName" required />
+
+                <label for="clientEmail">Your Email:</label>
+                <input type="email" id="clientEmail" required />
+
+                <label for="serviceName">Service Required:</label>
+                <input type="text" id="serviceName" required />
+
+                <label for="date">Preferred Date:</label>
+                <input type="date" id="date" required />
+
+                <label for="message">Message (Optional):</label>
+                <textarea id="message"></textarea>
+
+                <button type="submit">Book Now</button>
+            </form>
         </section>
     </main>
 
@@ -41,40 +62,99 @@
     </footer>
 
     <script>
-       // Fetch professional data based on the service area
-fetch('/professionals?service=gardener')
-  .then(response => response.json())
-  .then(professionals => {
-    console.log(professionals); // Log data for debugging
-    
-    const profileCardsContainer = document.getElementById('profile-cards');
-    
-    // Loop through the fetched carpenters and create profile cards
-    professionals.forEach(prof => {
-      const profileCard = document.createElement('div');
-      profileCard.classList.add('profile-card');
-      
-      const rating = prof.rating || 0;
-      const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
+        // Fetch professionals (Gardeners) and display their profiles
+        fetch('/professionals?service=gardener')
+            .then(response => response.json())
+            .then(professionals => {
+                console.log(professionals); // Log data for debugging
+                
+                const profileCardsContainer = document.getElementById('profile-cards');
+                
+                // Loop through fetched electricians and create profile cards
+                professionals.forEach(prof => {
+                    const profileCard = document.createElement('div');
+                    profileCard.classList.add('profile-card');
+                    
+                    const rating = prof.rating || 0;
+                    const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
 
-      profileCard.innerHTML = `
-        <img src="${prof.profilePicture || '/default-image.jpg'}" alt="${prof.name}">
-        <h2>${prof.name}</h2>
-        <p>${prof.message}</p>
-        <div class="rating">
-          ${stars}
-        </div>
-        <a href="mailto:${prof.email}" class="contact-btn">Contact</a>
-      `;
-      
-      profileCardsContainer.appendChild(profileCard);
-    });
-  })
-  .catch(err => {
-    console.error("Error fetching professionals:", err);
-  });
+                    profileCard.innerHTML = `
+                        <img src="${prof.profilePicture || '/default-image.jpg'}" alt="${prof.name}">
+                        <h2>${prof.name}</h2>
+                        <p>${prof.message}</p>
+                        <div class="rating">
+                            ${stars}
+                        </div>
+                        <button class="select-professional" data-email="${prof.email}">Select This Professional</button>
+                    `;
+                    
+                    profileCardsContainer.appendChild(profileCard);
+                });
+            })
+            .catch(err => {
+                console.error("Error fetching professionals:", err);
+                alert('Error loading gardeners profiles');
+            });
 
+        // Handle selecting a professional
+        document.addEventListener("click", function(event) {
+            if (event.target && event.target.classList.contains("select-professional")) {
+                const professionalEmail = event.target.getAttribute("data-email");
+                localStorage.setItem("selectedProfessionalEmail", professionalEmail); // Store selected professional's email in local storage
+                alert(`You have selected the professional with email: ${professionalEmail}`);
+            }
+        });
+
+        // Handle booking form submission
+        const bookingForm = document.getElementById("booking-form");
+        const selectedProfessionalEmail = localStorage.getItem("selectedProfessionalEmail"); // Get the selected professional's email
+
+        bookingForm.addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const clientName = document.getElementById("clientName").value;
+            const clientEmail = document.getElementById("clientEmail").value;
+            const serviceName = document.getElementById("serviceName").value;
+            const date = document.getElementById("date").value;
+            const message = document.getElementById("message").value;
+
+            // Ensure a professional is selected before booking
+            if (!selectedProfessionalEmail) {
+                alert("Please select a professional first!");
+                return;
+            }
+
+            // Submit booking to the backend
+            fetch('/api/book', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,  // Include the JWT token
+    },
+    body: JSON.stringify({
+        clientName,
+        clientEmail,
+        serviceName,
+        date,
+        message,
+        professionalEmail: selectedProfessionalEmail // Pass selected professional's email
+    })
+})
+.then(response => response.json())
+.then(data => {
+    if (data.message) {
+        alert('Booking successfully created!');
+        bookingForm.reset();
+    } else {
+        alert('Failed to create booking: ' + data.error || 'Unknown error');
+    }
+})
+.catch(error => {
+    console.error('Error creating booking:', error);
+    alert('There was an error while booking: ' + error.message);
+});
+
+        });
     </script>
-    
 </body>
 </html>
