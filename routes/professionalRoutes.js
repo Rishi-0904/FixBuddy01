@@ -95,45 +95,94 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
 
 
 
+// router.post("/submit-login", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   try {
+//       console.log("Received Email:", email);
+//       console.log("Received Password:", password);
+
+//       // Find the user in the database
+//       const user = await Professional.findOne({ email });
+
+//       if (!user) {
+//           console.log("Login Failed: User not found");
+//           return res.status(401).json({ error: "Invalid email or password" });
+//       }
+
+//       // Compare the provided password with the hashed password in the database
+//       const isMatch = await bcrypt.compare(password, user.password);
+
+//       if (!isMatch) {
+//           console.log("Login Failed: Incorrect password");
+//           return res.status(401).json({ error: "Invalid email or password" });
+//       }
+
+//       console.log("Login Successful!");
+
+//       // Generate a JWT token (Optional but recommended for authentication)
+//       const token = jwt.sign({ id: user._id, email: user.email }, "your_secret_key", {
+//           expiresIn: "1h",
+//       });
+
+//       return res.status(200).json({ message: "Login successful", redirect: "/dashboard", token });
+//   } catch (error) {
+//       console.error("Error during login:", error);
+//       return res.status(500).json({ error: "Server error. Please try again later." });
+//   }
+// });
+
+
+const cookieParser = require("cookie-parser");
+
+// Use cookie parser middleware
+router.use(cookieParser());
+
 router.post("/submit-login", async (req, res) => {
-  const { email, password } = req.body;
+    const { email, password } = req.body;
 
-  try {
-      console.log("Received Email:", email);
-      console.log("Received Password:", password);
+    try {
+        console.log("Received Email:", email);
+        console.log("Received Password:", password);
 
-      // Find the user in the database
-      const user = await Professional.findOne({ email });
+        // Find the user in the database
+        const user = await Professional.findOne({ email });
 
-      if (!user) {
-          console.log("Login Failed: User not found");
-          return res.status(401).json({ error: "Invalid email or password" });
-      }
+        if (!user) {
+            console.log("Login Failed: User not found");
+            return res.status(401).json({ error: "Invalid email or password" });
+        }
 
-      // Compare the provided password with the hashed password in the database
-      const isMatch = await bcrypt.compare(password, user.password);
+        // Compare the provided password with the hashed password in the database
+        const isMatch = await bcrypt.compare(password, user.password);
 
-      if (!isMatch) {
-          console.log("Login Failed: Incorrect password");
-          return res.status(401).json({ error: "Invalid email or password" });
-      }
+        if (!isMatch) {
+            console.log("Login Failed: Incorrect password");
+            return res.status(401).json({ error: "Invalid email or password" });
+        }
 
-      console.log("Login Successful!");
+        console.log("Login Successful!");
 
-      // Generate a JWT token (Optional but recommended for authentication)
-      const token = jwt.sign({ id: user._id, email: user.email }, "your_secret_key", {
-          expiresIn: "1h",
-      });
+        // Generate a JWT token
+        const token = jwt.sign({ id: user._id, email: user.email }, "secretkey", {
+            expiresIn: "7d",
+        });
 
-      return res.status(200).json({ message: "Login successful", redirect: "/dashboard", token });
-  } catch (error) {
-      console.error("Error during login:", error);
-      return res.status(500).json({ error: "Server error. Please try again later." });
-  }
+        // Set the token in an HTTP-only cookie (secure in production)
+        res.cookie("token", token, {
+            httpOnly: true, // Prevents JavaScript from accessing the cookie
+            secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+            maxAge: 3600000, // 1 hour
+            sameSite: "Strict", // Protects against CSRF attacks
+        });
+
+        return res.status(200).json({ message: "Login successful", redirect: "/dashboard" });
+    } catch (error) {
+        console.error("Error during login:", error);
+        return res.status(500).json({ error: "Server error. Please try again later." });
+    }
 });
 
-
-  
 
 
 
