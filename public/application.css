@@ -289,3 +289,27 @@ footer {
 button[type="submit"]:hover {
     background-color: #45a049;
 }
+/* Error message styling */
+.error-message {
+    color: red;  /* Red color for error text */
+    font-size: 14px;  /* Make the font size smaller */
+    margin-bottom: 15px;  /* Add some space below the error message */
+    padding: 10px;  /* Add padding to make it more visible */
+    background-color: #f8d7da;  /* Light red background */
+    border: 1px solid #f5c6cb;  /* Slightly darker border */
+    border-radius: 4px;  /* Rounded corners */
+}
+
+/* Optional: Style the submit button */
+button[type="submit"] {
+    background-color: #007bff; /* Blue background for submit button */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

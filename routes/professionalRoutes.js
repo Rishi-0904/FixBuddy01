@@ -43,9 +43,21 @@ router.get('/professionals', async (req, res) => {
   }
 });
 // Route to handle form submission
+// Route to handle form submission
+// Route to handle form submission
 router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certificates" }]), async (req, res) => {
   try {
     const { name, email, phone, service, experience, message, password } = req.body;
+
+    // Check if email already exists in the database
+    const existingProfessional = await Professional.findOne({ email });
+    if (existingProfessional) {
+      // If the email exists, send an error message back to the form
+      return res.render('application', { 
+        error: 'This email is already in use. Please use a different email.' 
+      });
+    }
+
     const profilePicture = req.files["profile-picture"] ? req.files["profile-picture"][0].path : null;
     const certificates = req.files["certificates"] ? req.files["certificates"][0].path : null;
 
@@ -69,9 +81,18 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
     await newProfessional.save();
     return res.redirect("/prologin");
   } catch (error) {
-    res.status(500).json({ error: "Error submitting application", details: error.message });
+    console.error("Error submitting application:", error);
+    // Send back the error message
+    return res.render('application', {
+      error: 'An unexpected error occurred. Please try again later.' 
+    });
   }
 });
+
+
+
+
+
 
 router.post("/submit-login", async (req, res) => {
   const { email, password } = req.body;
