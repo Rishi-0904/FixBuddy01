@@ -95,49 +95,46 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
 
 
 
-  router.post("/submit-login", async (req, res) => {
-    try {
-      console.log("Received request body:", req.body); // ✅ Debugging step
-  
-      const { email, password } = req.body;
-  
-      // Check if professional exists
-      const professional = await Professional.findOne({ email });
-      if (!professional) {
-        return res.status(400).json({ error: "Invalid email or password" });
-      }
-  
-      // Compare hashed password
-      const isMatch = await bcrypt.compare(password, professional.password);
-      if (!isMatch) {
-        return res.status(400).json({ error: "Invalid email or password" });
-      }
-  
-      // Generate JWT Token
-      const token = jwt.sign(
-        { id: professional._id, email: professional.email },
-        "secretkey",
-        { expiresIn: "7d" } // Token valid for 7 days
-      );
-  
-      // Set token in HTTP-only cookie
-      res.cookie("token", token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-        sameSite: "Strict",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days expiration
-      });
-  
-      // Send response with user data (excluding password)
-    return res.redirect("/dashboard")
+router.post("/submit-login", async (req, res) => {
+  const { email, password } = req.body;
 
-    } catch (error) {
-      console.error("Login error:", error);
-      res.status(500).json({ error: "Server error", details: error.message });
-    }
-  });
+  try {
+      console.log("Received Email:", email);
+      console.log("Received Password:", password);
+
+      // Find the user in the database
+      const user = await Professional.findOne({ email });
+
+      if (!user) {
+          console.log("Login Failed: User not found");
+          return res.status(401).json({ error: "Invalid email or password" });
+      }
+
+      // Compare the provided password with the hashed password in the database
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
+          console.log("Login Failed: Incorrect password");
+          return res.status(401).json({ error: "Invalid email or password" });
+      }
+
+      console.log("Login Successful!");
+
+      // Generate a JWT token (Optional but recommended for authentication)
+      const token = jwt.sign({ id: user._id, email: user.email }, "your_secret_key", {
+          expiresIn: "1h",
+      });
+
+      return res.status(200).json({ message: "Login successful", redirect: "/dashboard", token });
+  } catch (error) {
+      console.error("Error during login:", error);
+      return res.status(500).json({ error: "Server error. Please try again later." });
+  }
+});
+
+
   
-  module.exports = router;
+
 
 
 
