@@ -173,7 +173,7 @@ html {
 .service-card {
     flex: 0 0 30%;
     background-color: #fff;
-    padding: 10px;
+    padding: 5px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -420,21 +420,35 @@ footer {
 .main h2{
     color:#ffffff;
     font-size: 40px;
-    padding: 20px;
+    padding: 10px;
 }
 .main p{
     color:#ffffff;
     font-size: 25px;
+    padding: 10px;
 }
 .search-button {
     /* display: flex;
     flex-direction: row; */
     background-color: #ffb300;
     color: white;
-    padding: 12px 20px ;
+    padding: 16px 9px ;
     font-size: 16px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+.rating {
+    font-size: 24px;
+    color: #f0ad4e; /* Golden color for stars */
+}
+
+.star {
+    color: #f0ad4e; /* Star color */
+    margin-right: 5px; /* Space between stars */
+}
+
+.star:hover {
+    color: #e68900; /* Color when hovered (optional) */
 }
