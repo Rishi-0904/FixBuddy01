@@ -5,6 +5,8 @@ const Professional = require("../models/professional");
 const jwt = require("jsonwebtoken");
 
 const cors = require("cors");
+const { verifyToken } = require('../middlewares/verifyToken');
+
 
 const router = express.Router();
 
@@ -183,7 +185,26 @@ router.post("/submit-login", async (req, res) => {
     }
 });
 
+router.post('/bookings', verifyToken, async (req, res) => {
+  const { clientName, clientEmail, serviceName, date, message } = req.body;
 
+  try {
+    const newBooking = new Booking({
+      professionalId: req.user.id,  // Retrieve professional's id from the verified token
+      clientName,
+      clientEmail,
+      serviceName,
+      date,
+      message,
+    });
+
+    await newBooking.save();
+    res.status(200).json({ message: 'Booking created successfully', booking: newBooking });
+  } catch (error) {
+    console.error('Error creating booking:', error);
+    res.status(500).json({ error: 'Server error', details: error.message });
+  }
+});
 
 
 

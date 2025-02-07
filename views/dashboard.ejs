@@ -24,37 +24,54 @@
     </header>
 
     <!-- Dashboard Section -->
-    <section class="dashboard">
-      <div class="container">
-        <!-- Profile Section -->
-        <div class="profile-section">
-          <div class="profile-info">
-            <img
-              id="profile-photo"
-              src="<%= user.profilePicture || '/images/default.jpg' %>"
-              alt="Profile Photo"
-              class="profile-photo"
-            />
-            <div class="profile-details">
-              <h2 id="worker-name"><%= user.name %></h2>
-              <p>
-                <strong>Service Area:</strong>
-                <span id="worker-service"><%= user.service %></span>
-              </p>
-              <p>
-                <strong>Experience:</strong>
-                <span id="worker-experience"><%= user.experience %></span> years
-              </p>
-              <p>
-                <strong>Email:</strong>
-                <span id="worker-email"><%= user.email %></span>
-              </p>
-            </div>
-          </div>
-          <a href="/profile" class="button">Update Profile</a>
+    <!-- Dashboard Section -->
+<section class="dashboard">
+  <div class="container">
+    <!-- Profile Section -->
+    <div class="profile-section">
+      <div class="profile-info">
+        <img
+          id="profile-photo"
+          src="<%= user.profilePicture || '/images/default.jpg' %>"
+          alt="Profile Photo"
+          class="profile-photo"
+        />
+        <div class="profile-details">
+          <h2 id="worker-name"><%= user.name %></h2>
+          <p><strong>Service Area:</strong> <span id="worker-service"><%= user.service %></span></p>
+          <p><strong>Experience:</strong> <span id="worker-experience"><%= user.experience %></span> years</p>
+          <p><strong>Email:</strong> <span id="worker-email"><%= user.email %></span></p>
         </div>
       </div>
-    </section>
+      <a href="/profile" class="button">Update Profile</a>
+    </div>
+
+    <!-- Booking Section -->
+    <div class="booking-section">
+      <h3>Your Bookings (<%= bookings.length %>)</h3>
+
+      <h3>Your Bookings</h3>
+      <% if (bookings && bookings.length > 0) { %>
+        <ul class="booking-list">
+          <% bookings.forEach(function(booking) { %>
+            <li class="booking-item">
+              <h4>Booking ID: <%= booking._id %></h4>
+              <p><strong>Client:</strong> <%= booking.clientName %></p>
+              <p><strong>Email:</strong> <%= booking.clientEmail %></p>
+              <p><strong>Service:</strong> <%= booking.serviceName %></p>
+              <p><strong>Date:</strong> <%= booking.date.toDateString() %></p>
+              <p><strong>Status:</strong> <%= booking.status %></p>
+              <p><strong>Message:</strong> <%= booking.message || 'No message' %></p>
+            </li>
+          <% }); %>
+        </ul>
+      <% } else { %>
+        <p>You have no bookings at the moment.</p>
+      <% } %>
+    </div>
+  </div>
+</section>
+
 
     <!-- Footer Section -->
     <footer>
@@ -63,11 +80,43 @@
 
     <!-- Logout Script -->
     <script>
-      document.getElementById('logout').addEventListener('click', () => {
-        document.cookie =
-          'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        window.location.href = '/prologin';
+      // Fetch the professional's bookings
+      fetch('/dashboard', {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,  // Ensure JWT token is passed
+        },
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.bookings) {
+          // Dynamically update the booking section in the HTML
+          const bookingList = document.querySelector('.booking-list');
+          bookingList.innerHTML = ''; // Clear current bookings if any
+          
+          data.bookings.forEach(booking => {
+            const bookingItem = document.createElement('li');
+            bookingItem.classList.add('booking-item');
+            bookingItem.innerHTML = `
+              <h4>Booking ID: ${booking._id}</h4>
+              <p><strong>Client:</strong> ${booking.clientName}</p>
+              <p><strong>Email:</strong> ${booking.clientEmail}</p>
+              <p><strong>Service:</strong> ${booking.serviceName}</p>
+              <p><strong>Date:</strong> ${new Date(booking.date).toDateString()}</p>
+              <p><strong>Status:</strong> ${booking.status}</p>
+              <p><strong>Message:</strong> ${booking.message || 'No message'}</p>
+            `;
+            bookingList.appendChild(bookingItem);
+          });
+        } else {
+          const bookingSection = document.querySelector('.booking-section');
+          bookingSection.innerHTML = '<p>You have no bookings at the moment.</p>';
+        }
+      })
+      .catch(err => {
+        console.error('Error fetching bookings:', err);
       });
     </script>
+    
   </body>
 </html>

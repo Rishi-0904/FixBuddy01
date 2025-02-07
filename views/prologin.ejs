@@ -80,7 +80,8 @@ document.getElementById("login-form").addEventListener("submit", async function 
 
         if (response.ok) {
             alert("Login successful!");
-            window.location.href = data.redirect; // ✅ Redirect to dashboard
+            // Redirect to the dashboard
+            window.location.href = data.redirect; // This should redirect to '/dashboard'
         } else {
             errorMessageElement.style.display = "block";
             errorMessageElement.innerText = data.error || "An unknown error occurred.";
@@ -91,6 +92,8 @@ document.getElementById("login-form").addEventListener("submit", async function 
         errorMessageElement.innerText = "An error occurred while trying to log in. Please try again later.";
     }
 });
+
+
 
     </script>
 

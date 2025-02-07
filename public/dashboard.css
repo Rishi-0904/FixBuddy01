@@ -163,7 +163,7 @@ body {
 
 .action-btn {
   background-color: #28a745;
-  color: white;
+  color: rgb(237, 227, 227);
   padding: 12px 20px;
   font-size: 18px;
   border: none;
@@ -192,5 +192,35 @@ footer p {
 }
 
 .container {
-  color: #ffffff;
+  color: #be2828;
+}
+.booking-section {
+  margin-top: 20px;
+}
+
+.booking-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.booking-item {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-item h4 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+.booking-item p {
+  margin: 5px 0;
+}
+
+.booking-item strong {
+  font-weight: 600;
 }

@@ -84,54 +84,103 @@
 
 
 // routes/dashboard.js
+// const express = require("express");
+// const router = express.Router();
+// const cookieParser = require("cookie-parser");
+// const jwt = require("jsonwebtoken");
+// const Professional = require("../models/professional"); // Adjust path if needed
+
+// // Use JSON body parser and cookie parser middleware on this router.
+// router.use(express.json());
+// router.use(cookieParser());
+
+// // Secret Key for JWT (ideally, store this in an environment variable)
+// const JWT_SECRET = "secretkey";
+
+// // Middleware to verify JWT from cookies.
+// const verifyToken = (req, res, next) => {
+//   console.log("req.cookies:", req.cookies);
+//   const token = req.cookies.token;
+//   if (!token) {
+//     return res.status(401).json({ error: "Unauthorized: No token provided" });
+//   }
+//   try {
+//     const decoded = jwt.verify(token, JWT_SECRET);
+//     console.log("Decoded token:", decoded);
+//     req.user = decoded; // Expected to contain properties like { id, email }
+//     next();
+//   } catch (err) {
+//     console.error("Token verification error:", err.message);
+//     return res.status(403).json({ error: "Forbidden: Invalid token" });
+//   }
+// };
+
+// // GET /api/professionals/dashboard
+// // This route is protected by the verifyToken middleware.
+// // const verifyToken = require('./middleware/verifyToken'); // Ensure this path is correct
+
+// router.get('/dashboard', verifyToken, async (req, res) => {
+//   try {
+//     const user = await Professional.findById(req.user.id);
+//     if (!user) {
+//       return res.status(404).json({ error: 'User not found' });
+//     }
+//     // Render the dashboard view with user data
+//     res.render('dashboard', { user });
+//   } catch (error) {
+//     console.error('Fetch error:', error);
+//     res.status(500).json({ error: 'Server error', details: error.message });
+//   }
+// });
+
+
+// module.exports = router;
 const express = require("express");
 const router = express.Router();
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
-const Professional = require("../models/professional"); // Adjust path if needed
+const Professional = require("../models/professional"); // Import Professional model
+const Booking = require('../models/Booking'); // Import Booking model
 
-// Use JSON body parser and cookie parser middleware on this router.
-router.use(express.json());
-router.use(cookieParser());
-
-// Secret Key for JWT (ideally, store this in an environment variable)
-const JWT_SECRET = "secretkey";
-
-// Middleware to verify JWT from cookies.
+// Middleware to verify JWT from cookies
 const verifyToken = (req, res, next) => {
-  console.log("req.cookies:", req.cookies);
   const token = req.cookies.token;
   if (!token) {
     return res.status(401).json({ error: "Unauthorized: No token provided" });
   }
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    console.log("Decoded token:", decoded);
-    req.user = decoded; // Expected to contain properties like { id, email }
+    const decoded = jwt.verify(token, "secretkey");
+    req.user = decoded; // This will have the user details like { id: user._id }
     next();
   } catch (err) {
-    console.error("Token verification error:", err.message);
     return res.status(403).json({ error: "Forbidden: Invalid token" });
   }
 };
 
-// GET /api/professionals/dashboard
-// This route is protected by the verifyToken middleware.
-// const verifyToken = require('./middleware/verifyToken'); // Ensure this path is correct
-
+// GET route to fetch dashboard data, including user and bookings
+// GET route to fetch dashboard data, including user and bookings
 router.get('/dashboard', verifyToken, async (req, res) => {
   try {
-    const user = await Professional.findById(req.user.id);
+    const user = await Professional.findById(req.user.id); // Get the user by ID from the JWT
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
-    // Render the dashboard view with user data
-    res.render('dashboard', { user });
+
+    const bookings = await Booking.find({ professionalEmail: user.email }); // Get bookings for the user
+
+    // Render the dashboard page with user and booking data
+    // If there are no bookings, an empty array will be passed, and it will be handled on the frontend.
+    res.render('dashboard', { user, bookings });
   } catch (error) {
-    console.error('Fetch error:', error);
+    console.error('Error fetching dashboard data:', error);
     res.status(500).json({ error: 'Server error', details: error.message });
   }
 });
+
+
+
+
+
 
 
 module.exports = router;

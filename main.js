@@ -1,42 +1,36 @@
 const express = require("express");
 const path = require('path');
 const multer = require('multer');
-const app = express();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
-app.use(express.static("public"))
-const cookieParser = require("cookie-parser"); 
+const cookieParser = require("cookie-parser");
 const Professional = require('./models/professional');
+const app = express();
 
-const authenticateJWT = require("./middlewares/auth");
-app.use(cors());
+// Middleware
+app.use(express.static("public"));
+app.use(express.json()); // Parses incoming JSON requests
+app.use(express.urlencoded({ extended: true })); // For URL-encoded data
+app.use(cookieParser()); // To handle cookies (JWT)
+app.use(cors()); // Enable Cross-Origin Resource Sharing (CORS)
 
+// Route files
+const bookingRoutes = require('./routes/booking');
 const professionalRoutes = require('./routes/professionalRoutes');
-const dashboardRoutes = require("./routes/dashboard"); // Adjust path as needed
+const dashboardRoutes = require("./routes/dashboard");
+const contactRouter = require("./routes/contact");
+const authenticateJWT = require("./middlewares/auth"); // JWT Auth Middleware
 
-app.use(professionalRoutes);
-app.use(dashboardRoutes);    //this is very important
+// Set view engine
+app.set("view engine", "ejs");
 
-
-// const PORT = 3000;
-const PORT = process.env.PORT || 5000;
-
-
-app.use(express.static(path.join(__dirname, 'uploads')));  // Serve static files
+// Static file serving
+app.use(express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static('uploads'));
 
-app.use("/api/professionals", dashboardRoutes);
-app.use("/api/professionals", professionalRoutes); 
-  
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: true })); 
-
-app.use(cookieParser());  // This should be before authenticateJWT
-app.use(authenticateJWT);
-app.set("view engine" , "ejs")
-// Set up file upload with multer
+// File upload configuration using multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/');
@@ -47,150 +41,102 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// Connecting  to MongoDB
+app.use(bookingRoutes);  // This will call the correct router defined in booking.js
 
-mongoose.connect("mongodb://localhost:27017/myDatabase", {
-}).then(() => console.log("MongoDB Connected"))
-  .catch(err => console.error("MongoDB Connection Error:", err));
+// Routes Setup
+app.use("/api/professionals", dashboardRoutes);
+app.use("/api/professionals", professionalRoutes);
+app.use(bookingRoutes); // Use booking routes after all middleware
+app.use(contactRouter); // Use contact routes
+app.use(professionalRoutes);
+app.use(dashboardRoutes);
 
+// MongoDB connection
+mongoose.connect("mongodb://localhost:27017/myDatabase")
+    .then(() => console.log("MongoDB Connected"))
+    .catch(err => console.error("MongoDB Connection Error:", err));
 
 // User Schema
 const userSchema = new mongoose.Schema({
     name: String,
     email: { type: String, unique: true },
     password: String
-
 });
-
-// app.use('/applyn', upload.fields([{ name: 'profile-picture' }, { name: 'certificates' }]), professionalRoutes);
 
 const User = mongoose.model("User", userSchema);
 
-app.get('/' , (req,res)=>{
-    res.render("index",{ user: req.user })
-})
-// app.get('/dashboard' , (req,res)=>{
-//     res.render("dashboard" , { user: req.user })
-// })
-app.get('/check' , (req,res)=>{
-    res.render("check",{ user: req.user })
-})
-app.get('/contact' , (req,res)=>{
-    res.render("contact")
-})
-app.get('/sign-up' , (req,res)=>{
-    res.render("sign-up")
-})
-app.get("/login" , (req , res)=>{
-    res.render("login")
-})
+// Routes for views
+app.get('/', (req, res) => {
+    res.render("index", { user: req.user });
+});
+app.get('/electrician', (req, res) => {
+    res.render("electrician", { user: req.user });
+});
+app.get('/carpenter', (req, res) => {
+    res.render("carpenter", { user: req.user });
+});
+app.get('/plumber', (req, res) => {
+    res.render("plumber", { user: req.user });
+});
+app.get('/painter', (req, res) => {
+    res.render("painter", { user: req.user });
+});
+app.get('/gardener', (req, res) => {
+    res.render("gardener", { user: req.user });
+});
+app.get('/gardener', (req, res) => {
+    res.render("gardener", { user: req.user });
+});
+app.get('/mover', (req, res) => {
+    res.render("mover", { user: req.user });
+});
+
+app.get("/login", (req, res) => {
+    res.render("login");
+});
+app.get("/application", (req, res) => {
+    res.render("application");
+});
+app.get("/prologin", (req, res) => {
+    res.render("prologin");
+});
 app.get("/logout", (req, res) => {
     res.clearCookie("token"); // Clear the JWT token cookie
     res.redirect("/"); // Redirect to homepage after logout
 });
-app.get('/application' , (req,res)=>{
-    res.render("application",{ user: req.user })
-})
-app.get('/FAQ' , (req,res)=>{
-    res.render("FAQ",{ user: req.user })
-})
-app.get('/about' , (req,res)=>{
-    res.render("about",{ user: req.user })
-})
-app.get('/electrician' , (req,res)=>{
-    res.render("electrician")
-})
-app.get('/electricians', (req, res) => {
-    Professional.find({ service: 'Electrician' }) // Filter professionals by service
-        .then(professionals => {
-            res.json(professionals); // Send data as JSON
-        })
-        .catch(err => {
-            console.error('Error fetching professionals:', err);
-            res.status(500).json({ message: 'Error fetching professionals', error: err });
-        });
+
+// Other routes (examples)
+app.get('/contact', (req, res) => {
+    res.render("contact");
 });
-app.get('/carpenter' , (req,res)=>{
-    res.render("carpenter")
-})
-app.get('/plumber' , (req,res)=>{
-    res.render("plumber")
-})
-app.get('/plumber' , (req,res)=>{
-    res.render("plumber")
-})
-app.get('/cleaner' , (req,res)=>{
-    res.render("cleaner")
-})
-app.get('/painter' , (req,res)=>{
-    res.render("painter")
-})
-app.get('/gardener' , (req,res)=>{
-    res.render("gardener")
-})
-app.get('/mover' , (req,res)=>{
-    res.render("mover")
-})
-app.get('/repair' , (req,res)=>{
-    res.render("repair")
-})
-
-app.get('/prologin' , (req,res)=>{
-    res.render("prologin")
-})
-
-app.get('/pestcontrol' , (req,res)=>{
-    res.render("pestcontrol")
-})
-
-app.get('/professionals', (req, res) => {
-    Professional.find()
-        .then(professionals => {
-            res.json(professionals);
-        })
-        .catch(err => {
-            res.status(500).json({ message: "Error fetching professionals", error: err });
-        });
+app.get('/sign-up', (req, res) => {
+    res.render("sign-up");
 });
+
+// Sign-up and Login Routes
 app.post("/sign-up", async (req, res) => {
     try {
         const { name, email, password } = req.body;
-
-        console.log(req.body); 
-
-        if (!name || !email || !password ) {
-            return  res.render("sign-up", { error: "All fields are required !!" });
+        if (!name || !email || !password) {
+            return res.render("sign-up", { error: "All fields are required !!" });
         }
 
-
-        // Checking if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) return res.render("sign-up", { error: "Email already in use !!" });
 
-        // Hashing passwords
         const hashedPassword = await bcrypt.hash(password, 10);
-
-        // Creating user
         const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
 
-        // res.status(201).json({ message: "User registered successfully" });
-        // alert("Signup Successful! Redirecting to Home Page...");
-        // window.location.href = "/"; // Redirect to home page
-
         res.render("sign-up", { error: null, success: "Signup successful! Please log in to continue." });
-
     } catch (err) {
         res.status(500).json({ message: "Error signing up", error: err.message });
     }
 });
 
-
 app.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
-
-        console.log({email, password})
 
         const user = await User.findOne({ email });
         if (!user) return res.render("login", { error: "Invalid Username or Email !!" });
@@ -199,30 +145,41 @@ app.post("/login", async (req, res) => {
         if (!isMatch) return res.render("login", { error: "Invalid Username or Email !!" });
 
         const token = jwt.sign({ id: user._id, email: user.email }, "secretKey", { expiresIn: "1h" });
-        res.cookie('token', token, { httpOnly: true }); 
-        return res.redirect("/");
-        // res.json({ message: "Login successful", token });
+        res.cookie('token', token, { httpOnly: true }); // Set the JWT token in the cookie
+        return res.redirect("/"); // Redirect after login
     } catch (err) {
         res.status(500).json({ message: "Error logging in", error: err.message });
     }
 });
 
+// Protected Route Example
+// app.get("/profile", authenticateJWT, async (req, res) => {
+//     const user = await User.findById(req.user.id);
+//     if (!user) return res.status(404).json({ message: "User not found" });
 
+//     res.json({ message: "Profile fetched", user });
+// });
 
-//  PROTECTED ROUTE 
-app.get("/profile", authenticateJWT, async (req, res) => {
-    const user = await User.findById(req.user.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
-
-    res.json({ message: "Profile fetched", user });
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({ message: 'Something went wrong!' });
 });
-const contactRouter = require("./routes/contact");
-
-app.use(contactRouter); // Mount the contact routes
-
+app.get('/dashboard', (req, res) => {
+    const user = req.user; // Get the user from the session or JWT
+  
+    // Fetch bookings for the user
+    Booking.find({ professionalId: user._id })
+      .then(bookings => {
+        res.render('dashboard', { user: user, bookings: bookings });
+      })
+      .catch(err => {
+        console.error(err);
+        res.render('dashboard', { user: user, bookings: [] });
+      });
+  });
 // Starting the Server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running...`);
+    console.log(`Server is running on port ${PORT}`);
 });
-
-
