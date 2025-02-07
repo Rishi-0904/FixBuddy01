@@ -26,6 +26,10 @@ const authenticateJWT = require("./middlewares/auth"); // JWT Auth Middleware
 // Set view engine
 app.set("view engine", "ejs");
 
+const { verifyToken } = require('./middlewares/auth');
+
+
+
 // Static file serving
 app.use(express.static(path.join(__dirname, 'uploads')));
 app.use('/uploads', express.static('uploads'));
@@ -69,25 +73,25 @@ const User = mongoose.model("User", userSchema);
 app.get('/', (req, res) => {
     res.render("index", { user: req.user });
 });
-app.get('/electrician', (req, res) => {
+app.get('/electrician',verifyToken, (req, res) => {
     res.render("electrician", { user: req.user });
 });
-app.get('/carpenter', (req, res) => {
+app.get('/carpenter',verifyToken, (req, res) => {
     res.render("carpenter", { user: req.user });
 });
-app.get('/plumber', (req, res) => {
+app.get('/plumber',verifyToken, (req, res) => {
     res.render("plumber", { user: req.user });
 });
-app.get('/painter', (req, res) => {
+app.get('/painter',verifyToken, (req, res) => {
     res.render("painter", { user: req.user });
 });
-app.get('/gardener', (req, res) => {
+app.get('/gardener',verifyToken, (req, res) => {
     res.render("gardener", { user: req.user });
 });
-app.get('/gardener', (req, res) => {
+app.get('/gardener',verifyToken, (req, res) => {
     res.render("gardener", { user: req.user });
 });
-app.get('/mover', (req, res) => {
+app.get('/mover', verifyToken , (req, res) => {
     res.render("mover", { user: req.user });
 });
 
