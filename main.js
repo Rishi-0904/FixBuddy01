@@ -78,7 +78,9 @@ app.get('/check' , (req,res)=>{
 app.get('/contact' , (req,res)=>{
     res.render("contact")
 })
-
+app.get('/sign-up' , (req,res)=>{
+    res.render("sign-up")
+})
 app.get("/login" , (req , res)=>{
     res.render("login")
 })
