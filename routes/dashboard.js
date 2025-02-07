@@ -146,14 +146,17 @@ const Booking = require('../models/Booking'); // Import Booking model
 const verifyToken = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
-    return res.status(401).json({ error: "Unauthorized: No token provided" });
+    // return res.status(401).json({ error: "Unauthorized: No token provided" });
+    return res.render("prologin", { error: "login first !!" });
   }
   try {
     const decoded = jwt.verify(token, "secretkey");
     req.user = decoded; // This will have the user details like { id: user._id }
     next();
   } catch (err) {
-    return res.status(403).json({ error: "Forbidden: Invalid token" });
+    // return res.status(403).json({ error: "Forbidden: Invalid token" });
+    return res.render("prologin", { error: "Invalid Token !!" });
+
   }
 };
 
