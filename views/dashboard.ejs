@@ -18,7 +18,8 @@
       <nav class="nav">
         <ul>
           <li><a href="/dashboard" class="active">Dashboard</a></li>
-          <li><a href="#" id="logout">Logout</a></li>
+          <li><a href="/prologout">Logout</a></li>
+
         </ul>
       </nav>
     </header>
@@ -117,6 +118,11 @@
         console.error('Error fetching bookings:', err);
       });
     </script>
+
+<script>
+  window.history.replaceState(null, null, window.location.href);
+</script>
+
     
   </body>
 </html>

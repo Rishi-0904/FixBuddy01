@@ -207,7 +207,7 @@ router.post('/bookings', verifyToken, async (req, res) => {
 });
 
 router.get("/prologout", (req, res) => {
-  res.clearCookie("token", { httpOnly: true, secure: true, sameSite: "Strict" });
+  res.clearCookie("token");
   res.redirect("/");
 });
 

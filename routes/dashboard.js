@@ -155,7 +155,7 @@ const verifyToken = (req, res, next) => {
     next();
   } catch (err) {
     // return res.status(403).json({ error: "Forbidden: Invalid token" });
-    return res.render("prologin", { error: "Invalid Token !!" });
+    return res.render("prologin", { error: "Invalid Token !!" }); 
 
   }
 };
