@@ -428,8 +428,7 @@ footer {
     padding: 10px;
 }
 .search-button {
-    /* display: flex;
-    flex-direction: row; */
+    
     background-color: #ffb300;
     color: white;
     padding: 16px 9px ;
@@ -441,14 +440,14 @@ footer {
 }
 .rating {
     font-size: 24px;
-    color: #f0ad4e; /* Golden color for stars */
+    color: #f0ad4e; 
 }
 
 .star {
-    color: #f0ad4e; /* Star color */
-    margin-right: 5px; /* Space between stars */
+    color: #f0ad4e; 
+    margin-right: 5px; 
 }
 
 .star:hover {
-    color: #e68900; /* Color when hovered (optional) */
+    color: #e68900; 
 }
