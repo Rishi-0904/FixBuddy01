@@ -1,80 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FixBuddy Professional Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
     <!-- Header Section -->
     <header class="header">
-        <div class="logo">
-            <h1>Fix <span style="color: orange;text-shadow: none;">Buddy</span></h1>
-        </div>
-        <nav class="nav">
-            <ul>
-                <li><a href="/dashboard" class="active">Dashboard</a></li>
-                <li><a href="logout.html">Logout</a></li>
-            </ul>
-        </nav>
+      <div class="logo">
+        <h1>Fix <span style="color: orange; text-shadow: none">Buddy</span></h1>
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="/dashboard" class="active">Dashboard</a></li>
+          <li><a href="#" id="logout">Logout</a></li>
+        </ul>
+      </nav>
     </header>
 
     <!-- Dashboard Section -->
     <section class="dashboard">
-        <div class="container">
-            <!-- Profile Section -->
-            <div class="profile-section">
-                <div class="profile-info">
-                    <img src="https://wallpapers.com/images/featured/cool-profile-pictures-4co57dtwk64fb7lv.jpg" alt="Worker Photo" class="profile-photo">
-                    <div class="profile-details">
-                        <h2 id="worker-name">Ravi Kumar</h2>
-                        <p><strong>Service Area:</strong> Electrician</p>
-                        <p><strong>Experience:</strong> 7 years</p>
-                        <p><strong>Email:</strong> ravikumar@example.com</p>
-                    </div>
-                </div>
-                <a href="profile.html" class="button">Update Profile</a>
+      <div class="container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="profile-info">
+            <img
+              id="profile-photo"
+              src="<%= user.profilePicture || '/images/default.jpg' %>"
+              alt="Profile Photo"
+              class="profile-photo"
+            />
+            <div class="profile-details">
+              <h2 id="worker-name"><%= user.name %></h2>
+              <p>
+                <strong>Service Area:</strong>
+                <span id="worker-service"><%= user.service %></span>
+              </p>
+              <p>
+                <strong>Experience:</strong>
+                <span id="worker-experience"><%= user.experience %></span> years
+              </p>
+              <p>
+                <strong>Email:</strong>
+                <span id="worker-email"><%= user.email %></span>
+              </p>
             </div>
-
-            <!-- Work History Section -->
-            <div class="work-history">
-                <h3>Work History</h3>
-                <div class="history-item">
-                    <h4>Completed Jobs</h4>
-                    <ul>
-                        <li><strong>Job 1:</strong> Customer: Neha Sharma, Location: 124 Patel Nagar, Date: 10 Feb 2025, Status: Completed</li>
-                        <li><strong>Job 2:</strong> Customer: Arjun Singh, Location: 78 Malviya Nagar, Date: 12 Jan 2025, Status: Completed</li>
-                    </ul>
-                    <a href="completed-jobs.html" class="button">View Completed Jobs</a>
-                </div>
-
-            
-                <div class="history-item">
-                    <h4>Upcoming Jobs</h4>
-                    <ul>
-                        <li><strong>Job 1:</strong> Customer: Amit Mishra, Location: 101 Sector 15, Date: 18 Feb 2025, Status: Scheduled</li>
-                        <li><strong>Job 2:</strong> Customer: Suman Reddy, Location: 202 Andheri West, Date: 20 Feb 2025, Status: Scheduled</li>
-                    </ul>
-                    <a href="upcoming-jobs.html" class="button">View Upcoming Jobs</a>
-                </div>
-            </div>
-
-            <!-- Quick Actions Section -->
-            <div class="quick-actions">
-                <h3>Quick Actions</h3>
-                <div class="action-buttons">
-                    <button onclick="location.href='set-availability.html'" class="action-btn">Set Availability</button>
-                </div>
-            </div>
+          </div>
+          <a href="/profile" class="button">Update Profile</a>
         </div>
+      </div>
     </section>
 
     <!-- Footer Section -->
     <footer>
-        <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
+      <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
 
-</body>
+    <!-- Logout Script -->
+    <script>
+      document.getElementById('logout').addEventListener('click', () => {
+        document.cookie =
+          'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        window.location.href = '/prologin';
+      });
+    </script>
+  </body>
 </html>

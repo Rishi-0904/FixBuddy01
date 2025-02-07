@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const bcrypt = require("bcryptjs");
 const Professional = require("../models/professional");
+const jwt = require("jsonwebtoken");
 
 const cors = require("cors");
 
@@ -94,55 +95,49 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
 
 
 
-router.post("/submit-login", async (req, res) => {
-  const { email, password } = req.body;
+  router.post("/submit-login", async (req, res) => {
+    try {
+      console.log("Received request body:", req.body); // ✅ Debugging step
+  
+      const { email, password } = req.body;
+  
+      // Check if professional exists
+      const professional = await Professional.findOne({ email });
+      if (!professional) {
+        return res.status(400).json({ error: "Invalid email or password" });
+      }
+  
+      // Compare hashed password
+      const isMatch = await bcrypt.compare(password, professional.password);
+      if (!isMatch) {
+        return res.status(400).json({ error: "Invalid email or password" });
+      }
+  
+      // Generate JWT Token
+      const token = jwt.sign(
+        { id: professional._id, email: professional.email },
+        "secretkey",
+        { expiresIn: "7d" } // Token valid for 7 days
+      );
+  
+      // Set token in HTTP-only cookie
+      res.cookie("token", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production", // Use secure cookies in production
+        sameSite: "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days expiration
+      });
+  
+      // Send response with user data (excluding password)
+    return res.redirect("/dashboard")
 
-  try {
-    // Check if both email and password are provided
-    if (!email || !password) {
-      console.log("Email or password is missing in the request body.");
-      return res.status(400).json({ error: "Email and password are required." });
+    } catch (error) {
+      console.error("Login error:", error);
+      res.status(500).json({ error: "Server error", details: error.message });
     }
-
-    console.log("Received login request with email:", email);
-
-    // First, check if the professional exists by their email
-    const professional = await Professional.findOne({ email });
-
-    if (!professional) {
-      console.log(`Professional not found with email: ${email}`);
-      // If the professional is not found, return an error
-      return res.status(400).json({ error: "Invalid email or password" });
-    }
-
-    console.log("Professional found:", professional);
-
-    // Check if the password field exists
-    if (!professional.password) {
-      console.log(`No password field found for professional: ${email}`);
-      return res.status(500).json({ error: "Password not found in the database" });
-    }
-
-    // Now that we have the professional, compare the password
-    const isMatch = await bcrypt.compare(password, professional.password);
-
-    if (!isMatch) {
-      console.log("Password does not match for email:", email);
-      // If the password doesn't match, return an error
-      return res.status(400).json({ error: "Invalid email or password" });
-    }
-
-    console.log("Login successful for email:", email);
-
-    // If both checks pass, respond with a success message
-    return res.json({ message: "Login successful" });
-
-  } catch (error) {
-    console.error("Error during login:", error);  // Log detailed error
-    // If something goes wrong, return a generic server error
-    return res.status(500).json({ error: "Server error during login", details: error.message });
-  }
-});
+  });
+  
+  module.exports = router;
 
 
 

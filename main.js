@@ -12,12 +12,22 @@ const Professional = require('./models/professional');
 
 const authenticateJWT = require("./middlewares/auth");
 app.use(cors());
+
 const professionalRoutes = require('./routes/professionalRoutes');
+const dashboardRoutes = require("./routes/dashboard"); // Adjust path as needed
+
 app.use(professionalRoutes);
-const PORT = 3000;
+app.use(dashboardRoutes);    //this is very important
+
+
+// const PORT = 3000;
+const PORT = process.env.PORT || 5000;
+
+
 app.use(express.static(path.join(__dirname, 'uploads')));  // Serve static files
 app.use('/uploads', express.static('uploads'));
 
+app.use("/api/professionals", dashboardRoutes);
 app.use("/api/professionals", professionalRoutes); 
   
 app.use(express.json()); 
@@ -59,9 +69,9 @@ const User = mongoose.model("User", userSchema);
 app.get('/' , (req,res)=>{
     res.render("index",{ user: req.user })
 })
-app.get('/dashboard' , (req,res)=>{
-    res.render("dashboard" , { user: req.user })
-})
+// app.get('/dashboard' , (req,res)=>{
+//     res.render("dashboard" , { user: req.user })
+// })
 app.get('/check' , (req,res)=>{
     res.render("check",{ user: req.user })
 })
@@ -206,3 +216,5 @@ app.use(contactRouter); // Mount the contact routes
 app.listen(PORT, () => {
     console.log(`Server is running...`);
 });
+
+
