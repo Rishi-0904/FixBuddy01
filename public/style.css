@@ -417,6 +417,9 @@ footer {
     font-size: 1.1em;
     border-top: 4px solid #f1c40f;
 }
+footer ul{
+    list-style: none;
+}
 .main h2{
     color:#ffffff;
     font-size: 40px;
