@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color:rgb(38,3,105);
     color: #333;
   }
   
@@ -20,7 +20,7 @@ body {
   
   /* Header Styles */
   .header {
-    background-color: #fff;
+    background-color: rgb(38,3,105);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 10px 0;
   }
@@ -58,7 +58,7 @@ body {
   
   /* Profile Section Styles */
   .profile-section {
-    background-color: #fff;
+    background-color: rgb(38,3,105);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     padding: 20px;
@@ -109,7 +109,7 @@ body {
   footer {
     text-align: center;
     padding: 10px 0;
-    background-color: #fff;
+    background-color: rgb(38,3,105);
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
   }
