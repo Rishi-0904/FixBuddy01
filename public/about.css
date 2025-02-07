@@ -75,13 +75,13 @@ header .nav ul li a.active {
     font-size: 3em;
     font-weight: 700;
     margin-bottom: 20px;
-    color: #28156f;
+    color: orange;
     text-transform: uppercase;
 }
 
 .about-heading p {
     font-size: 1.3em;
-    color: #555;
+    color: #bbb0b0;
     margin-top: 10px;
     line-height: 1.8;
 }
@@ -105,15 +105,16 @@ header .nav ul li a.active {
     font-size: 2.4em;
     font-weight: 600;
     margin-bottom: 25px;
-    color: #28156f;
+    color: orange;
     letter-spacing: 1px;
 }
+
 
 .section-left p,
 .section-right ul {
     font-size: 1.2em;
     line-height: 1.8;
-    color: #555;
+    color: #bbb0b0;
     margin-bottom: 15px;
 }
 
@@ -172,7 +173,7 @@ header .nav ul li a.active {
 .why-choose-us h3 {
     font-size: 2.5em;
     font-weight: 700;
-    color: #28156f;
+    color: orange;
     margin-bottom: 20px;
 }
 
@@ -180,7 +181,7 @@ header .nav ul li a.active {
     font-size: 1.3em;
     line-height: 1.8;
     margin-bottom: 40px;
-    color: #555;
+    color: #bbb0b0;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -216,7 +217,7 @@ header .nav ul li a.active {
 
 .why-choose-us .block p {
     font-size: 1.1em;
-    color: #555;
+    color: #bbb0b0;
 }
 
 /* Team Section */
@@ -230,7 +231,7 @@ header .nav ul li a.active {
 .team-section h3 {
     font-size: 2.4em;
     font-weight: 600;
-    color: #ffffff;
+    color: orange;
     margin-bottom: 40px;
 }
 
@@ -250,6 +251,7 @@ header .nav ul li a.active {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease-in-out;
+    
 }
 
 .team-member:hover {
@@ -273,7 +275,7 @@ header .nav ul li a.active {
 
 .team-member p {
     font-size: 1.1em;
-    color: #555;
+    color: #bbb0b0;
 }
 
 /* Footer Section */
@@ -282,7 +284,65 @@ footer {
     padding: 25px;
     background-color: #28156f;
     color: white;
-    margin-top: 80px;
+    margin-top: 0px;
     font-size: 1.1em;
     border-top: 4px solid #f1c40f;
+}
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .section-left,
+    .section-right {
+        width: 100%;
+    }
+    
+    .team-members {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-member {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        padding: 15px;
+    }
+
+    header .nav ul {
+        text-align: center;
+    }
+
+    header .nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .why-choose-us .blocks {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .why-choose-us .block {
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .about-heading h2,
+    .why-choose-us h3,
+    .our-mission h3,
+    .team-section h3 {
+        font-size: 1.8em;
+    }
+
+    .team-member {
+        width: 100%;
+    }
 }
