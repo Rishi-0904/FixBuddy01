@@ -62,21 +62,21 @@ a {
     display: flex;
     justify-content: center;
 }
-/* General input and button style improvements */
+
 .search-bar {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 600px; /* Limit max width for better readability */
-    margin: 0 auto; /* Center the search bar */
+    max-width: 600px;
+    margin: 0 auto;
     gap: 10px;
 }
 
 .search-bar input {
-    width: 100%;  /* Make it flexible */
-    max-width: 500px; /* Optional: limit input field width */
+    width: 100%;
+    max-width: 500px;
     padding: 12px 15px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -85,7 +85,7 @@ a {
     background-color: #fff;
     color: #333;
     box-sizing: border-box;
-    transition: all 0.3s ease; /* Smooth transition */
+    transition: all 0.3s ease;
 }
 
 .search-bar input:focus {
@@ -97,32 +97,21 @@ a {
     color: #aaa;
 }
 
-/* Search button styling */
-.search-button {
-    background-color: #ffb300;
-    color: white;
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+
 
 .search-button:hover {
-    background-color: #e68900; /* Darken the button on hover */
+    background-color: #e68900;
 }
 
 .search-button:focus {
-    outline: none; /* Remove outline on button focus */
+    outline: none;
 }
 
-/* Suggestions container */
 .suggestions-container {
     position: absolute;
-    top: 50px;  /* Position it below the input */
+    top: 50px;
     left: 0;
-    width: 100%; /* Match width with input field */
+    width: 100%;
     max-height: 200px;
     overflow-y: auto;
     background-color: #fff;
@@ -130,15 +119,14 @@ a {
     border-radius: 8px;
     z-index: 100;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    display: none;  /* Hidden initially */
+    display: none;
     transition: all 0.3s ease-in-out;
 }
-html {
-    scroll-behavior: smooth;
+
+.suggestions-container.show {
+    display: block;
 }
 
-
-/* Suggestion item styling */
 .suggestion {
     padding: 12px;
     font-size: 16px;
@@ -150,35 +138,8 @@ html {
     background-color: #f0f0f0;
 }
 
-/* When the suggestions are visible */
-.suggestions-container.show {
-    display: block;
-}
-
-/* Mobile responsiveness */
-
-.main h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.main p {
-    font-size: 18px;
-    margin-bottom: 30px;
-}
-
-.cta-button {
-    padding: 12px 25px;
-    background-color: var(--color-primary);
-    color: #fff;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-}
-
-.cta-button:hover {
-    background-color: var(--color-primary);
+html {
+    scroll-behavior: smooth;
 }
 
 /* Services Section */
@@ -193,49 +154,27 @@ html {
     color: #ffb300;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-.service-cards {
+.service-cards-wrapper {
     display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    overflow:visible;  /*Hide the overflowing content */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     position: relative;
     width: 100%;
-    background-color: rgb(20, 16, 37);
-    animation: scroll 10s linear infinite;  /* Apply the scroll animation */
 }
 
-
-.service-card {
-    display: inline-block;
-    white-space: nowrap;
-}
-/* Add this to your existing .service-cards styles */
-
-
-
-.service-card {
-    display: inline-block;
-    text-wrap:initial;
-    flex-shrink: 0; /* Prevent the cards from shrinking */
-    width: 300px;
-    /* height: 500px; */
+.service-cards {
+    display: flex;
+    gap: 50px;
+    animation: scroll 18s ease-in-out infinite;
+    transition: transform 1s ease;
 }
 
-
-
 .service-card {
+    flex: 0 0 30%;
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
-    width: 300px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     border: 2px solid;
@@ -247,20 +186,38 @@ html {
 }
 
 .service-card img {
-    width: 100%;
+    width: 85%;
     height: auto;
     border-radius: 8px;
 }
 
 .service-card h3 {
-    margin-top: 15px;
-    font-size: 22px;
+    margin-top: 10px;
+    font-size: 23px;
     color: var(--color-primary);
 }
 
 .service-card p {
-    margin-top: 10px;
-    font-size: 14px;
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    33.33% {
+        transform: translateX(-33.33%);
+    }
+    66.66% {
+        transform: translateX(-66.66%);
+    }
+    85%{
+        transform: translateX(-95%);
+    }
+    100% {
+        transform: translateX(0);
+    }
 }
 
 /* How It Works Section */
@@ -288,6 +245,9 @@ html {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
 }
 
 .step h3 {
@@ -298,6 +258,29 @@ html {
 
 .step p {
     font-size: 14px;
+}
+
+.step:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.step:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.step:nth-child(3) {
+    animation-delay: 0.7s;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Testimonials Section */
@@ -325,12 +308,15 @@ html {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     border: 2px solid;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
 }
 
 .testimonial-card p {
     font-style: italic;
     font-size: 16px;
-    color: #555;
+    color: #000000;
 }
 
 .testimonial-card h3 {
@@ -340,136 +326,18 @@ html {
     color: var(--color-primary);
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .header .logo h1 {
-        font-size: 22px;
-    }
-
-    .nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .nav ul li {
-        margin-left: 0;
-        margin-bottom: 15px;
-    }
-
-    .main {
-        flex-direction: column;
-        padding: 100px 20px;
-    }
-
-    .search-bar {
-        width: 100%;
-    }
-
-    .service-cards {
-        flex-direction: row;
-        gap: 30px;
-    }
-
-    .service-card {
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    .steps {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .step {
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    .testimonial-cards {
-        flex-direction: column;
-        gap: 30px;
-    }
-
-    .testimonial-card {
-        width: 80%;
-        margin: 0 auto;
-    }
+.testimonial-card:nth-child(1) {
+    animation-delay: 0.3s;
 }
 
-@media (max-width: 480px) {
-    .main h2 {
-        font-size: 28px;
-    }
-
-    .main p {
-        font-size: 16px;
-    }
-
-    .search-bar input {
-        width: 80%;
-    }
-
-    .search-button {
-        font-size: 14px;
-    }
-
-    .cta-button {
-        padding: 10px 20px;
-        font-size: 14px;
-    }
-    .service-cards {
-        flex-direction: row;
-        gap: 30px;
-    }
-
-    .service-card h3 {
-        font-size: 20px;
-    }
-
-    .service-card p {
-        font-size: 12px;
-    }
-
-    .step h3 {
-        font-size: 20px;
-    }
-
-    .step p {
-        font-size: 12px;
-    }
-
-    .testimonial-card h3 {
-        font-size: 16px;
-    }
- 
-
-}
-.search-bar input {
-    width: 60%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    background-color: transparent;  /* Ensures the input field background is transparent */
-    box-sizing: border-box;  /* Ensures padding doesn't affect the width */
+.testimonial-card:nth-child(2) {
+    animation-delay: 0.5s;
 }
 
-.search-bar input:focus {
-    border-color: #007bff;  /* Optional: changes border color when focused */
+.testimonial-card:nth-child(3) {
+    animation-delay: 0.7s;
 }
 
-.search-bar input::placeholder {
-    color: #999;
-}
-#search-input{
-    color: white;
-}
 /* Mobile responsiveness */
 @media (max-width: 768px) {
     .header {
@@ -492,7 +360,7 @@ html {
     }
 
     .step {
-        width: 100%;  /* Expand step section on small screens */
+        width: 100%;
     }
 
     .testimonial-cards {
@@ -505,7 +373,7 @@ html {
     }
 
     .main h2 {
-        font-size: 24px; /* Adjust size for small screens */
+        font-size: 24px;
     }
 }
 
@@ -534,72 +402,39 @@ html {
         font-size: 16px;
     }
 }
-/* Keyframes for scrolling animation */
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    25% {
-        transform: translateX(-33.33%); /* Scroll 1/3 of the total width (3 cards) */
-    }
-    50% {
-        transform: translateX(-66.66%); /* Scroll 2/3 of the total width (6 cards) */
-    }
-    75% {
-        transform: translateX(-99.99%); /* Scroll 3/3 of the total width (9 cards) */
-    }
-    100% {
-        transform: translateX(0); /* Reset back to the start */
-    }
+.faq{
+    color:#5d5d5d
 }
-
-/* Wrapper for the cards */
-.service-cards-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Hide overflowing cards */
-    position: relative;
-    width: 100%;
+.about{
+    color:#5d5d5d
 }
-
-/* Service Cards container */
-.service-cards {
-    display: flex; /* Horizontal layout */
-    gap: 20px; /* Space between cards */
-    animation: scroll 18s ease-in-out infinite; /* Infinite scroll with pause effect */
-    transition: transform 1s ease;
-}
-
-/* Individual service card */
-.service-card {
-    flex: 0 0 25%; /* Each card takes up 25% of the container width */
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+footer {
     text-align: center;
-    border: 2px solid;
-    transition: transform 0.5s ease-in-out;
+    padding: 25px;
+    background-color: #28156f;
+    color: white;
+    margin-top: 80px;
+    font-size: 1.1em;
+    border-top: 4px solid #f1c40f;
 }
-
-.service-card:hover {
-    transform: scale(1.05); /* Hover effect to slightly scale up */
+.main h2{
+    color:#ffffff;
+    font-size: 40px;
+    padding: 20px;
 }
-
-.service-card img {
-    width: 100%;
-    height: auto;
+.main p{
+    color:#ffffff;
+    font-size: 25px;
+}
+.search-button {
+    /* display: flex;
+    flex-direction: row; */
+    background-color: #ffb300;
+    color: white;
+    padding: 12px 20px ;
+    font-size: 16px;
+    border: none;
     border-radius: 8px;
-}
-
-.service-card h3 {
-    margin-top: 10px;
-    font-size: 18px;
-    color: var(--color-primary);
-}
-
-.service-card p {
-    margin-top: 5px;
-    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
