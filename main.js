@@ -91,6 +91,12 @@ app.get("/logout", (req, res) => {
 app.get('/application' , (req,res)=>{
     res.render("application",{ user: req.user })
 })
+app.get('/FAQ' , (req,res)=>{
+    res.render("FAQ",{ user: req.user })
+})
+app.get('/about' , (req,res)=>{
+    res.render("about",{ user: req.user })
+})
 app.get('/electrician' , (req,res)=>{
     res.render("electrician")
 })
