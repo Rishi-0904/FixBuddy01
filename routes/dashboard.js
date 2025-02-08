@@ -142,7 +142,6 @@ const jwt = require("jsonwebtoken");
 const Professional = require("../models/professional"); // Import Professional model
 const Booking = require('../models/Booking'); // Import Booking model
 
-// Middleware to verify JWT from cookies
 const verifyToken = (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
@@ -160,8 +159,6 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// GET route to fetch dashboard data, including user and bookings
-// GET route to fetch dashboard data, including user and bookings
 router.get('/dashboard', verifyToken, async (req, res) => {
   try {
     const user = await Professional.findById(req.user.id); // Get the user by ID from the JWT
@@ -171,8 +168,7 @@ router.get('/dashboard', verifyToken, async (req, res) => {
 
     const bookings = await Booking.find({ professionalEmail: user.email }); // Get bookings for the user
     console.log("Fetched bookings:", bookings); 
-    // Render the dashboard page with user and booking data
-    // If there are no bookings, an empty array will be passed, and it will be handled on the frontend.
+   
     res.render('dashboard', { user, bookings });
   } catch (error) {
     console.error('Error fetching dashboard data:', error);

@@ -32,11 +32,11 @@ const verifyToken = (req, res, next) => {
   }
 
   try {
-    const decoded = jwt.verify(token, "secretKey"); // Verify token
+    const decoded = jwt.verify(token, "secretKey");
     req.user = decoded; // Attach decoded user data to request object
     next();
   } catch (err) {
-    res.clearCookie("token"); // Clear invalid token
+    res.clearCookie("token"); 
     return res.render("login", { error: "Invalid Token !!" });
   }
 };

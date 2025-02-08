@@ -14,11 +14,9 @@ router.use(cors());
 router.use(express.json()); 
 router.use(express.urlencoded({ extended: true }));
 
-
-// Multer storage for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Folder where files are stored
+    cb(null, "uploads/"); 
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
@@ -27,35 +25,32 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 router.get('/professionals', async (req, res) => {
-  const { service } = req.query; // Get the service from the query string
+  const { service } = req.query; 
 
   try {
-      // If 'service' is passed, filter professionals by the selected service
+      
       let filter = {};
       if (service) {
-          filter.service = service;  // Filter by the selected service (e.g., "electrician", "carpenter", etc.)
+          filter.service = service;  
       }
 
-      // Fetch professionals based on the filter
       const professionals = await Professional.find(filter);
 
-      res.json(professionals); // Send back the professionals in the response
+      res.json(professionals); 
   } catch (err) {
       console.error("Error fetching professionals:", err);
       res.status(500).json({ error: "Error fetching professionals" });
   }
 });
-// Route to handle form submission
-// Route to handle form submission
-// Route to handle form submission
+
 router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certificates" }]), async (req, res) => {
   try {
     const { name, email, phone, service, experience, message, password } = req.body;
 
-    // Check if email already exists in the database
+    
     const existingProfessional = await Professional.findOne({ email });
     if (existingProfessional) {
-      // If the email exists, send an error message back to the form
+      
       return res.render('application', { 
         error: 'This email is already in use. Please use a different email.' 
       });
@@ -67,7 +62,7 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create new professional
+  
     const newProfessional = new Professional({
       name,
       email,
@@ -80,12 +75,11 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
       password: hashedPassword,
     });
 
-    // Save to database
     await newProfessional.save();
     return res.redirect("/prologin");
   } catch (error) {
     console.error("Error submitting application:", error);
-    // Send back the error message
+   
     return res.render('application', {
       error: 'An unexpected error occurred. Please try again later.' 
     });
@@ -137,7 +131,6 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
 
 const cookieParser = require("cookie-parser");
 
-// Use cookie parser middleware
 router.use(cookieParser());
 
 router.post("/submit-login", async (req, res) => {

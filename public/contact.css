@@ -1,4 +1,4 @@
-/* Global Styles */
+
 body {
     
     margin: 0;
@@ -7,7 +7,7 @@ body {
     color: #333;
     background-color: rgb(20, 16, 37);
 }
-/* Header Section */
+
 .contact-us{
     position: relative;
     top:-20px;
@@ -24,7 +24,7 @@ header {
     margin-top: -25px;
     margin-top:-25px;
 }
-/* adjusting logo position */
+
 #logo{
     text-align: left;
     position: relative;
@@ -32,7 +32,7 @@ header {
     left: 8px;
     font-size: large;
 }
-/* Font size of logo */
+
 .header .logo h1 {
     font-size: 26px;
 }
@@ -41,7 +41,6 @@ header {
     color: #f3a847; 
 }
 
-/* Contact Form Section */
 .contact-container {
     display: flex;
     justify-content: space-between;
@@ -61,7 +60,6 @@ header {
     color: rgb(38,3,105);
 }
 
-/* Form Styling */
 .contact-form h2, .how-to-find-us h2 {
     color: rgb(38,3,105);
     margin-bottom: 10px;
@@ -105,13 +103,12 @@ button {
 button:hover {
     background: #290366;
 }
-/* Contact Info Styling */
+
 .how-to-find-us p {
     font-size: 16px;
     margin: 8px 0;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .contact-container {
         flex-direction: column;

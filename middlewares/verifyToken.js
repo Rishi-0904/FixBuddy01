@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-// Secret key used for JWT verification (store in environment variables in production)
+// Secret key used for JWT verification
 const JWT_SECRET = "secretkey";
 
 const verifyToken = (req, res, next) => {
