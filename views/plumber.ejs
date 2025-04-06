@@ -3,11 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electricians Profiles</title>
+    <title>Plumber Services - Fix Buddy</title>
     <link rel="stylesheet" href="electrician.css">
+    <link rel="stylesheet" href="toast.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+            z-index: 1001;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        #booking-section {
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #booking-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        #booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-bottom: 20px;
+        }
+
+        #booking-form label {
+            color: #555;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        #booking-form input,
+        #booking-form textarea,
+        #booking-form select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        #booking-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        #booking-form select {
+            background-color: white;
+            cursor: pointer;
+        }
+
+        #booking-form button {
+            background-color: #ffb300;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+        }
+
+        #booking-form button:hover {
+            background-color: #e68900;
+            transform: translateY(-2px);
+        }
+
+        @media (max-height: 800px) {
+            .modal-content {
+                margin: 10px auto;
+                max-height: 95vh;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -25,136 +145,221 @@
     </header>
 
     <main>
-        <!-- Plumber Profiles Section -->
         <section class="profiles">
             <h1>Meet Our Expert Plumbers</h1>
             <div class="profile-cards" id="profile-cards">
                 <!-- Dynamic profile cards will be loaded here -->
             </div>
         </section>
-
-        <!-- Booking Form Section -->
-        <section id="booking-section">
-            <h3>Book a Plumber</h3>
-            <form id="booking-form">
-                <label for="clientName">Your Name:</label>
-                <input type="text" id="clientName" required />
-
-                <label for="clientEmail">Your Email:</label>
-                <input type="email" id="clientEmail" required />
-
-                <label for="serviceName">Service Required:</label>
-                <input type="text" id="serviceName" required />
-
-                <label for="date">Preferred Date:</label>
-                <input type="date" id="date" required />
-
-                <label for="message">Message (Optional):</label>
-                <textarea id="message"></textarea>
-
-                <button type="submit">Book Now</button>
-            </form>
-        </section>
     </main>
+
+    <!-- Modal for Booking Form -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <section id="booking-section">
+                <h3>Book a Plumber</h3>
+                <form id="booking-form">
+                    <label for="clientName">Your Name:</label>
+                    <input type="text" id="clientName" required />
+
+                    <label for="clientEmail">Your Email:</label>
+                    <input type="email" id="clientEmail" required />
+
+                    <label for="clientPhone">Your Phone:</label>
+                    <input type="tel" id="clientPhone" required />
+
+                    <label for="serviceAddress">Service Address:</label>
+                    <textarea id="serviceAddress" required></textarea>
+
+                    <label for="preferredDate">Preferred Date:</label>
+                    <input type="date" id="preferredDate" required />
+
+                    <label for="preferredTime">Preferred Time:</label>
+                    <select id="preferredTime" required>
+                        <option value="">Select a time</option>
+                        <option value="09:00">9:00 AM</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                    </select>
+
+                    <label for="serviceDescription">Additional Details (Optional):</label>
+                    <textarea id="serviceDescription"></textarea>
+
+                    <button type="submit">Book Now</button>
+                </form>
+            </section>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
 
+    <script src="toast.js"></script>
     <script>
-        // Fetch professionals (Electricians) and display their profiles
-        fetch('/professionals?service=plumber')
+        // Get modal elements
+        const modal = document.getElementById('bookingModal');
+        const closeBtn = document.getElementsByClassName('close-modal')[0];
+        const profileCards = document.getElementById('profile-cards');
+        let selectedProfessional = null;
+
+        // Function to show modal
+        function showModal(professional) {
+            selectedProfessional = professional;
+            modal.style.display = 'block';
+            // Update the form title with the professional's name
+            document.querySelector('#booking-section h3').textContent = `Book ${professional.name}`;
+        }
+
+        // Function to hide modal
+        function hideModal() {
+            modal.style.display = 'none';
+            selectedProfessional = null;
+        }
+
+        // Close modal when clicking the X button
+        closeBtn.onclick = hideModal;
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                hideModal();
+            }
+        }
+
+        // Function to display professionals
+        function displayProfessionals(professionals) {
+            const profileCardsContainer = document.getElementById('profile-cards');
+            profileCardsContainer.innerHTML = ''; // Clear existing cards
+
+            professionals.forEach(prof => {
+                const profileCard = document.createElement('div');
+                profileCard.classList.add('profile-card');
+                
+                const rating = prof.rating || 0;
+                const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
+                
+                profileCard.innerHTML = `
+                    <img src="${prof.profilePicture || '/default-image.jpg'}" alt="${prof.name}">
+                    <h2>${prof.name}</h2>
+                    <p class="experience">${prof.experience} years of experience</p>
+                    <p>${prof.message || 'Professional plumber with years of experience.'}</p>
+                    <div class="rating">${stars}</div>
+                    <button onclick="showModal(${JSON.stringify(prof).replace(/"/g, '&quot;')})">Book Now</button>
+                `;
+                
+                profileCardsContainer.appendChild(profileCard);
+            });
+        }
+
+        // Fetch and display professionals
+        fetch('/api/professionals?service=plumber')
             .then(response => response.json())
             .then(professionals => {
-                console.log(professionals); // Log data for debugging
-                
-                const profileCardsContainer = document.getElementById('profile-cards');
-                
-                // Loop through fetched electricians and create profile cards
-                professionals.forEach(prof => {
-                    const profileCard = document.createElement('div');
-                    profileCard.classList.add('profile-card');
-                    
-                    const rating = prof.rating || 0;
-                    const stars = '★'.repeat(Math.floor(rating)) + '☆'.repeat(5 - Math.floor(rating));
-
-                    profileCard.innerHTML = `
-                        <img src="${prof.profilePicture || '/default-image.jpg'}" alt="${prof.name}">
-                        <h2>${prof.name}</h2>
-                        <p>${prof.message}</p>
-                        <div class="rating">
-                            ${stars}
-                        </div>
-                        <button class="select-professional" data-email="${prof.email}">Select This Professional</button>
-                    `;
-                    
-                    profileCardsContainer.appendChild(profileCard);
-                });
+                console.log('Fetched professionals:', professionals);
+                displayProfessionals(professionals);
             })
-            .catch(err => {
-                console.error("Error fetching professionals:", err);
-                alert('Error loading plumbers profiles');
+            .catch(error => {
+                console.error('Error fetching professionals:', error);
+                const profileCardsContainer = document.getElementById('profile-cards');
+                profileCardsContainer.innerHTML = '<p class="error">Failed to load professionals. Please try again later.</p>';
             });
 
-        // Handle selecting a professional
-        document.addEventListener("click", function(event) {
-            if (event.target && event.target.classList.contains("select-professional")) {
-                const professionalEmail = event.target.getAttribute("data-email");
-                localStorage.setItem("selectedProfessionalEmail", professionalEmail); // Store selected professional's email in local storage
-                alert(`You have selected the professional with email: ${professionalEmail}`);
-            }
-        });
-
         // Handle booking form submission
-        const bookingForm = document.getElementById("booking-form");
-        const selectedProfessionalEmail = localStorage.getItem("selectedProfessionalEmail"); // Get the selected professional's email
-
-        bookingForm.addEventListener("submit", function(e) {
+        document.getElementById('booking-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            const clientName = document.getElementById("clientName").value;
-            const clientEmail = document.getElementById("clientEmail").value;
-            const serviceName = document.getElementById("serviceName").value;
-            const date = document.getElementById("date").value;
-            const message = document.getElementById("message").value;
-
-            // Ensure a professional is selected before booking
-            if (!selectedProfessionalEmail) {
-                alert("Please select a professional first!");
+            if (!selectedProfessional) {
+                showToast('Please select a professional first');
                 return;
             }
 
-            // Submit booking to the backend
-            fetch('/api/book', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,  // Include the JWT token
-    },
-    body: JSON.stringify({
-        clientName,
-        clientEmail,
-        serviceName,
-        date,
-        message,
-        professionalEmail: selectedProfessionalEmail // Pass selected professional's email
-    })
-})
-.then(response => response.json())
-.then(data => {
-    if (data.message) {
-        alert('Booking successfully created!');
-        bookingForm.reset();
-    } else {
-        alert('Failed to create booking: ' + data.error || 'Unknown error');
-    }
-})
-.catch(error => {
-    console.error('Error creating booking:', error);
-    alert('There was an error while booking: ' + error.message);
-});
+            // Disable submit button
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Submitting...';
+            submitButton.style.opacity = '0.7';
+            submitButton.style.cursor = 'not-allowed';
 
+            const formData = {
+                professionalId: selectedProfessional._id,
+                professionalName: selectedProfessional.name,
+                professionalEmail: selectedProfessional.email,
+                serviceType: 'plumber',
+                clientName: document.getElementById('clientName').value,
+                clientEmail: document.getElementById('clientEmail').value,
+                clientPhone: document.getElementById('clientPhone').value,
+                serviceAddress: document.getElementById('serviceAddress').value,
+                preferredDate: document.getElementById('preferredDate').value,
+                preferredTime: document.getElementById('preferredTime').value,
+                serviceDescription: document.getElementById('serviceDescription').value
+            };
+
+            try {
+                const response = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Show success message
+                    const successMessage = document.createElement('div');
+                    successMessage.className = 'success-message';
+                    successMessage.style.backgroundColor = '#4CAF50';
+                    successMessage.style.color = 'white';
+                    successMessage.style.padding = '15px';
+                    successMessage.style.marginTop = '20px';
+                    successMessage.style.borderRadius = '5px';
+                    successMessage.style.textAlign = 'center';
+                    successMessage.textContent = 'Booking successful! We will contact you shortly.';
+                    
+                    // Replace form with success message
+                    const form = document.getElementById('booking-form');
+                    form.style.display = 'none';
+                    form.parentNode.insertBefore(successMessage, form.nextSibling);
+                    
+                    // Hide modal after 3 seconds
+                    setTimeout(() => {
+                        hideModal();
+                        this.reset();
+                        // Reset button state
+                        submitButton.disabled = false;
+                        submitButton.textContent = 'Book Now';
+                        submitButton.style.opacity = '1';
+                        submitButton.style.cursor = 'pointer';
+                    }, 3000);
+                } else {
+                    showToast(data.error || 'Failed to book service. Please try again.');
+                    // Reset button state on error
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Book Now';
+                    submitButton.style.opacity = '1';
+                    submitButton.style.cursor = 'pointer';
+                }
+            } catch (error) {
+                console.error('Booking error:', error);
+                showToast('An error occurred. Please try again later.');
+                // Reset button state on error
+                submitButton.disabled = false;
+                submitButton.textContent = 'Book Now';
+                submitButton.style.opacity = '1';
+                submitButton.style.cursor = 'pointer';
+            }
         });
+
+        // Toast function
+        function showToast(message) {
+            toast.error('Error', message);
+        }
     </script>
 </body>
 </html>

@@ -1,0 +1,181 @@
+<!-- Booking Form Modal -->
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Book <%= serviceName %> Service</h2>
+        <form id="bookingForm" action="/book-service" method="POST">
+            <input type="hidden" name="serviceType" value="<%= serviceName %>">
+            <input type="hidden" name="professionalId" id="professionalId">
+            
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Service Address</label>
+                <textarea id="address" name="address" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Preferred Date</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time">Preferred Time</label>
+                <select id="time" name="time" required>
+                    <option value="">Select Time</option>
+                    <option value="09:00">9:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="13:00">1:00 PM</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Service Description</label>
+                <textarea id="description" name="description" placeholder="Please describe the service you need..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+
+<style>
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #666;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #ffb300;
+    outline: none;
+}
+
+.submit-btn {
+    background-color: #ffb300;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #e68900;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+        padding: 20px;
+    }
+}
+</style>
+
+<script>
+// Get the modal
+const modal = document.getElementById("bookingModal");
+const closeBtn = document.getElementsByClassName("close")[0];
+
+// Function to open modal
+function openBookingModal(professionalId) {
+    modal.style.display = "block";
+    document.getElementById("professionalId").value = professionalId;
+}
+
+// Close modal when clicking the X
+closeBtn.onclick = function() {
+    modal.style.display = "none";
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+// Handle form submission
+document.getElementById("bookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    // Here you can add form validation and submission logic
+    // For now, we'll just show a success message
+    toast.success('Success', "Booking submitted successfully! We'll contact you shortly.");
+    modal.style.display = "none";
+});
+</script> 

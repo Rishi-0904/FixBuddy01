@@ -5,9 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FixBuddy Professional Dashboard</title>
     <link rel="stylesheet" href="dashboard.css" />
+    <link rel="stylesheet" href="toast.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <style>
+      .booking-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .accept-btn, .reject-btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+      .accept-btn {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .accept-btn:hover {
+        background-color: #45a049;
+      }
+      .reject-btn {
+        background-color: #f44336;
+        color: white;
+      }
+      .reject-btn:hover {
+        background-color: #da190b;
+      }
+      .booking-item {
+        position: relative;
+      }
+      .status-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      .status-pending {
+        background-color: #ffd700;
+        color: #000;
+      }
+      .status-accepted {
+        background-color: #4CAF50;
+        color: white;
+      }
+      .status-rejected {
+        background-color: #f44336;
+        color: white;
+      }
+    </style>
   </head>
   <body>
     <!-- Header Section -->
@@ -18,111 +76,205 @@
       <nav class="nav">
         <ul>
           <li><a href="/dashboard" class="active">Dashboard</a></li>
-          <li><a href="/prologout">Logout</a></li>
-
+          <li><a href="#" onclick="handleLogout(event)">Logout</a></li>
         </ul>
       </nav>
     </header>
 
     <!-- Dashboard Section -->
-    <!-- Dashboard Section -->
-<section class="dashboard">
-  <div class="container">
-    <!-- Profile Section -->
-    <div class="profile-section">
-      <div class="profile-info">
-        <img
-          id="profile-photo"
-          src="<%= user.profilePicture || '/images/default.jpg' %>"
-          alt="Profile Photo"
-          class="profile-photo"
-        />
-        <div class="profile-details">
-          <h2 id="worker-name"><%= user.name %></h2>
-          <p><strong>Service Area:</strong> <span id="worker-service"><%= user.service %></span></p>
-          <p><strong>Experience:</strong> <span id="worker-experience"><%= user.experience %></span> years</p>
-          <p><strong>Email:</strong> <span id="worker-email"><%= user.email %></span></p>
+    <section class="dashboard">
+      <div class="container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="profile-info">
+            <img
+              id="profile-photo"
+              src="<%= user.profilePicture || '/images/default.jpg' %>"
+              alt="Profile Photo"
+              class="profile-photo"
+            />
+            <div class="profile-details">
+              <h2 id="worker-name"><%= user.name %></h2>
+              <p><strong>Service Area:</strong> <span id="worker-service"><%= user.service %></span></p>
+              <p><strong>Experience:</strong> <span id="worker-experience"><%= user.experience %></span> years</p>
+              <p><strong>Email:</strong> <span id="worker-email"><%= user.email %></span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Booking Section -->
+        <div class="booking-section">
+          <h3>Your Bookings</h3>
+          <ul class="booking-list">
+            <% if (typeof bookings !== 'undefined' && bookings && bookings.length > 0) { %>
+              <% bookings.forEach(function(booking) { %>
+                <li class="booking-item" id="booking-<%= booking._id %>">
+                  <span class="status-badge status-<%= booking.status.toLowerCase() %>">
+                    <%= booking.status %>
+                  </span>
+                  <h4>Booking ID: <%= booking._id %></h4>
+                  <p><strong>Client:</strong> <%= booking.clientName %></p>
+                  <p><strong>Email:</strong> <%= booking.clientEmail %></p>
+                  <p><strong>Phone:</strong> <%= booking.clientPhone %></p>
+                  <p><strong>Service Type:</strong> <%= booking.serviceType %></p>
+                  <p><strong>Address:</strong> <%= booking.serviceAddress %></p>
+                  <p><strong>Date:</strong> <%= new Date(booking.preferredDate).toLocaleDateString() %></p>
+                  <p><strong>Time:</strong> <%= booking.preferredTime %></p>
+                  <p><strong>Details:</strong> <%= booking.serviceDescription || 'No additional details' %></p>
+                  
+                  <% if (booking.status === 'pending') { %>
+                    <div class="booking-actions">
+                      <button onclick="updateBookingStatus('<%= booking._id %>', 'accepted')" class="accept-btn">
+                        <i class="fas fa-check"></i> Accept
+                      </button>
+                      <button onclick="updateBookingStatus('<%= booking._id %>', 'rejected')" class="reject-btn">
+                        <i class="fas fa-times"></i> Reject
+                      </button>
+                    </div>
+                  <% } %>
+                </li>
+              <% }); %>
+            <% } else { %>
+              <p>You have no bookings at the moment.</p>
+            <% } %>
+          </ul>
         </div>
       </div>
-    
-    </div>
-
-    <!-- Booking Section -->
-    <div class="booking-section">
-      <h3>Your Bookings (<%= bookings.length %>)</h3>
-
-      <h3>Your Bookings</h3>
-      <% if (bookings && bookings.length > 0) { %>
-        <ul class="booking-list">
-          <% bookings.forEach(function(booking) { %>
-            <li class="booking-item">
-              <h4>Booking ID: <%= booking._id %></h4>
-              <p><strong>Client:</strong> <%= booking.clientName %></p>
-              <p><strong>Email:</strong> <%= booking.clientEmail %></p>
-              <p><strong>Service:</strong> <%= booking.serviceName %></p>
-              <p><strong>Date:</strong> <%= booking.date.toDateString() %></p>
-              <p><strong>Status:</strong> <%= booking.status %></p>
-              <p><strong>Message:</strong> <%= booking.message || 'No message' %></p>
-            </li>
-          <% }); %>
-        </ul>
-      <% } else { %>
-        <p>You have no bookings at the moment.</p>
-      <% } %>
-    </div>
-  </div>
-</section>
-
+    </section>
 
     <!-- Footer Section -->
     <footer>
       <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
 
-    <!-- Logout Script -->
+    <script src="toast.js"></script>
     <script>
-      // Fetch the professional's bookings
-      fetch('/dashboard', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,  // Ensure JWT token is passed
-        },
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.bookings) {
-          // Dynamically update the booking section in the HTML
-          const bookingList = document.querySelector('.booking-list');
-          bookingList.innerHTML = ''; // Clear current bookings if any
-          
-          data.bookings.forEach(booking => {
-            const bookingItem = document.createElement('li');
-            bookingItem.classList.add('booking-item');
-            bookingItem.innerHTML = `
-              <h4>Booking ID: ${booking._id}</h4>
-              <p><strong>Client:</strong> ${booking.clientName}</p>
-              <p><strong>Email:</strong> ${booking.clientEmail}</p>
-              <p><strong>Service:</strong> ${booking.serviceName}</p>
-              <p><strong>Date:</strong> ${new Date(booking.date).toDateString()}</p>
-              <p><strong>Status:</strong> ${booking.status}</p>
-              <p><strong>Message:</strong> ${booking.message || 'No message'}</p>
-            `;
-            bookingList.appendChild(bookingItem);
-          });
-        } else {
-          const bookingSection = document.querySelector('.booking-section');
-          bookingSection.innerHTML = '<p>You have no bookings at the moment.</p>';
+      // Add logout handler
+      function handleLogout(event) {
+        event.preventDefault();
+        
+        // Show confirmation dialog
+        if (confirm('Are you sure you want to logout?')) {
+          // Clear any stored data
+          localStorage.clear();
+          // Redirect to homepage
+          window.location.href = '/';
         }
-      })
-      .catch(err => {
-        console.error('Error fetching bookings:', err);
-      });
+      }
+
+      // Store initial bookings data
+      const initialBookings = JSON.parse('<%- JSON.stringify(bookings) %>');
+      
+      async function fetchBookings() {
+        const bookingsList = document.querySelector('.booking-list');
+        bookingsList.innerHTML = '<p>Loading bookings...</p>';
+        
+        try {
+          const response = await fetch('/api/professional/bookings', {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          });
+
+          if (response.status === 401) {
+            toast.error('Session Expired', 'Your session has expired. Please login again.');
+            setTimeout(() => {
+              window.location.href = '/prologin';
+            }, 2000);
+            return;
+          }
+          
+          const data = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(data.error || 'Failed to fetch bookings');
+          }
+          
+          const bookings = data.bookings;
+          
+          if (!bookings || bookings.length === 0) {
+            bookingsList.innerHTML = '<p>You have no bookings at the moment.</p>';
+            return;
+          }
+          
+          renderBookings(bookings);
+        } catch (error) {
+          console.error('Error fetching bookings:', error);
+          bookingsList.innerHTML = '<p>Failed to load bookings. Please try again later.</p>';
+          toast.error('Error', error.message || 'Failed to load bookings');
+        }
+      }
+
+      function renderBookings(bookings) {
+        const bookingsList = document.querySelector('.booking-list');
+        bookingsList.innerHTML = bookings.map(booking => `
+          <li class="booking-item" id="booking-${booking._id}">
+            <span class="status-badge status-${booking.status.toLowerCase()}">
+              ${booking.status}
+            </span>
+            <h4>Booking ID: ${booking._id}</h4>
+            <p><strong>Client:</strong> ${booking.clientName}</p>
+            <p><strong>Email:</strong> ${booking.clientEmail}</p>
+            <p><strong>Phone:</strong> ${booking.clientPhone}</p>
+            <p><strong>Service Type:</strong> ${booking.serviceType}</p>
+            <p><strong>Address:</strong> ${booking.serviceAddress}</p>
+            <p><strong>Date:</strong> ${new Date(booking.preferredDate).toLocaleDateString()}</p>
+            <p><strong>Time:</strong> ${booking.preferredTime}</p>
+            <p><strong>Details:</strong> ${booking.serviceDescription || 'No additional details'}</p>
+            
+            ${booking.status === 'pending' ? `
+              <div class="booking-actions">
+                <button onclick="updateBookingStatus('${booking._id}', 'accepted')" class="accept-btn">
+                  <i class="fas fa-check"></i> Accept
+                </button>
+                <button onclick="updateBookingStatus('${booking._id}', 'rejected')" class="reject-btn">
+                  <i class="fas fa-times"></i> Reject
+                </button>
+              </div>
+            ` : ''}
+          </li>
+        `).join('');
+      }
+
+      async function updateBookingStatus(bookingId, status) {
+        try {
+          const response = await fetch(`/api/bookings/${bookingId}/status`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({ status })
+          });
+
+          if (response.status === 401) {
+            toast.error('Session Expired', 'Your session has expired. Please login again.');
+            setTimeout(() => {
+              window.location.href = '/prologin';
+            }, 2000);
+            return;
+          }
+
+          const data = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(data.error || 'Failed to update booking status');
+          }
+          
+          toast.success('Success', `Booking ${status} successfully`);
+          fetchBookings(); // Refresh the bookings list
+        } catch (error) {
+          console.error('Error updating booking status:', error);
+          toast.error('Error', error.message || 'Failed to update booking status');
+        }
+      }
+
+      // Initial fetch of bookings
+      fetchBookings();
     </script>
-
-<script>
-  window.history.replaceState(null, null, window.location.href);
-</script>
-
-    
   </body>
 </html>

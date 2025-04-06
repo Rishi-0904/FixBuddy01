@@ -6,6 +6,7 @@
   <title>sign-up Page</title>
   <link rel="stylesheet" href="sign-up.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="toast.css">
 </head>
 <body>
   <div class="login-container">
@@ -39,11 +40,9 @@
       <a href="http://localhost:3000/login">log in</a>
 
     <% if (typeof success !== "undefined" && success) { %>
+        <script src="toast.js"></script>
         <script>
-            alert("<%= success %>");
-            setTimeout(function() {
-                window.location.href = "/login"; // Redirect to home page after 2 seconds
-            });
+            toast.success('Success', '<%= success %>');
         </script>
     <% } %>
 

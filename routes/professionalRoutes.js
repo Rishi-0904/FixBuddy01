@@ -46,29 +46,43 @@ router.get('/professionals', async (req, res) => {
 router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certificates" }]), async (req, res) => {
   try {
     const { name, email, phone, service, experience, message, password } = req.body;
+    console.log("Received registration data:", { name, email, phone, service, experience });
 
-    
+    // Validate required fields
+    if (!name || !email || !phone || !service || !experience || !password) {
+      return res.render('application', { 
+        error: 'All fields are required' 
+      });
+    }
+
+    // Check if professional already exists
     const existingProfessional = await Professional.findOne({ email });
     if (existingProfessional) {
-      
       return res.render('application', { 
         error: 'This email is already in use. Please use a different email.' 
       });
     }
 
+    // Handle file uploads
     const profilePicture = req.files["profile-picture"] ? req.files["profile-picture"][0].path : null;
     const certificates = req.files["certificates"] ? req.files["certificates"][0].path : null;
+
+    if (!profilePicture || !certificates) {
+      return res.render('application', { 
+        error: 'Please upload both profile picture and certificates' 
+      });
+    }
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-  
+    // Create new professional
     const newProfessional = new Professional({
       name,
       email,
       phone,
       service,
-      experience,
+      experience: Number(experience),
       message,
       profilePicture,
       certificates,
@@ -76,10 +90,15 @@ router.post("/apply", upload.fields([{ name: "profile-picture" }, { name: "certi
     });
 
     await newProfessional.save();
-    return res.redirect("/prologin");
+    console.log("Professional registered successfully:", email);
+    
+    // Redirect to login page with success message
+    return res.render("prologin", { 
+      success: "Registration successful! Please login with your credentials.",
+      error: null 
+    });
   } catch (error) {
     console.error("Error submitting application:", error);
-   
     return res.render('application', {
       error: 'An unexpected error occurred. Please try again later.' 
     });

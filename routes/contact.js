@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET } = require('../config/auth');
 
 const router = express.Router();
 
@@ -10,6 +12,22 @@ const contactSchema = new mongoose.Schema({
 });
 
 const Contact = mongoose.model("Contact", contactSchema);
+
+// Add GET route for contact page
+router.get("/contact", (req, res) => {
+  const token = req.cookies.token;
+  let user = null;
+  
+  if (token) {
+    try {
+      user = jwt.verify(token, JWT_SECRET);
+    } catch (err) {
+      res.clearCookie("token");
+    }
+  }
+  
+  res.render("contact", { user: user });
+});
 
 router.post("/contact", async (req, res) => {
   const { name, email, message } = req.body;

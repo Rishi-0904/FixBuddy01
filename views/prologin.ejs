@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="toast.css">
 </head>
 <body>
-
     <!-- Header Section -->
     <header class="header">
         <div class="logo">
@@ -34,7 +34,7 @@
 
             <!-- Login Form -->
             <div class="form-container">
-                <form id="login-form" action="/submit-login" method="POST">
+                <form id="login-form">
                     <div class="form-group">
                         <label for="email">Email Address</label>
                         <input type="email" id="email" name="email" required placeholder="Enter your email">
@@ -47,6 +47,16 @@
 
                     <!-- Error message container -->
                     <div id="error-message" style="color: red; display: none;"></div>
+                    <% if (typeof error !== 'undefined' && error) { %>
+                        <div class="error-message">
+                            <p><%= error %></p>
+                        </div>
+                    <% } %>
+                    <% if (typeof success !== 'undefined' && success) { %>
+                        <div class="success-message" style="color: green; margin-bottom: 10px;">
+                            <p><%= success %></p>
+                        </div>
+                    <% } %>
 
                     <div class="form-group">
                         <button type="submit">Login</button>
@@ -61,41 +71,45 @@
         <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
     </footer>
 
+    <script src="toast.js"></script>
     <script>
-document.getElementById("login-form").addEventListener("submit", async function (event) {
-    event.preventDefault();
+    document.getElementById("login-form").addEventListener("submit", async function (event) {
+        event.preventDefault();
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const errorMessageElement = document.getElementById("error-message");
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const errorMessageElement = document.getElementById("error-message");
+        
+        try {
+            const response = await fetch("/prologin", {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                credentials: 'include',
+                body: JSON.stringify({ email, password }),
+            });
 
-    try {
-        const response = await fetch("/submit-login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
+            const data = await response.json();
 
-        const data = await response.json(); // Get JSON response
-
-        if (response.ok) {
-            alert("Login successful!");
-            // Redirect to the dashboard
-            window.location.href = data.redirect; // This should redirect to '/dashboard'
-        } else {
+            if (response.ok) {
+                toast.success('Success', "Login successful!");
+                window.location.href = "/dashboard";
+            } else {
+                errorMessageElement.style.display = "block";
+                errorMessageElement.innerText = data.error || "Invalid credentials";
+            }
+        } catch (error) {
+            console.error("Error:", error);
             errorMessageElement.style.display = "block";
-            errorMessageElement.innerText = data.error || "An unknown error occurred.";
+            errorMessageElement.innerText = "An error occurred while trying to log in. Please try again later.";
         }
-    } catch (error) {
-        console.error("Error:", error);
-        errorMessageElement.style.display = "block";
-        errorMessageElement.innerText = "An error occurred while trying to log in. Please try again later.";
-    }
-});
-
-
-
+    });
+    
+    <% if (typeof success !== 'undefined' && success) { %>
+        toast.success('Success', '<%= success %>');
+    <% } %>
     </script>
-
 </body>
 </html>

@@ -1,14 +1,51 @@
 const mongoose = require('mongoose');
 
 const bookingSchema = new mongoose.Schema({
-  clientName: { type: String, required: true },
-  clientEmail: { type: String, required: true },
-  serviceName: { type: String, required: true },
-  date: { type: Date, required: true },
-  message: { type: String, required: false },
-  professionalEmail: { type: String, required: true },
-  status: { type: String, default: 'pending' },
-}, { timestamps: true });
+    serviceType: {
+        type: String,
+        required: true
+    },
+    professionalId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Professional',
+        required: true
+    },
+    clientName: {
+        type: String,
+        required: true
+    },
+    clientEmail: {
+        type: String,
+        required: true
+    },
+    clientPhone: {
+        type: String,
+        required: true
+    },
+    serviceAddress: {
+        type: String,
+        required: true
+    },
+    preferredDate: {
+        type: Date,
+        required: true
+    },
+    preferredTime: {
+        type: String,
+        required: true
+    },
+    serviceDescription: {
+        type: String
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'accepted', 'rejected'],
+        default: 'pending'
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
 
-const Booking = mongoose.model('Booking', bookingSchema);
-module.exports = Booking;
+module.exports = mongoose.model('Booking', bookingSchema);

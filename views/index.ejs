@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Fix Buddy</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="toast.css">
 </head>
 <body>
     <header class="header">
         <div class="logo">
             <h1 style="color: white;">Fix <span style="color: orange;">Buddy</span></h1>
-
         </div>
         <nav class="nav">
             <ul>
@@ -24,7 +24,7 @@
                     <li><a href="">
                         <img style="height: 25px;" src="/images/profile-icon.jpg" alt="Profile" class="profile-icon">
                     </a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="#" onclick="handleLogout(event)">Logout</a></li>
                 <% } else { %>
                     <!-- If the user is not logged in, show login -->
                     <li><a href="/login">Login</a></li>
@@ -32,6 +32,7 @@
             </ul>
         </nav>
     </header>
+
 <section class="main">
     <div class="search-container">
         <div class="main-content">
@@ -55,40 +56,72 @@
    <section id="services" class="services">
     <h2>Our Services</h2>
     <div class="service-cards-wrapper">
+            <button class="nav-arrow left-arrow" onclick="scrollServices('left')">❮</button>
     <div class="service-cards" id="service-cards">
         <div class="service-card" onclick="window.location.href='/electrician'">
-            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Electrician">
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Electrician">
             <h3>Electrician</h3>
             <p>Need an electrical fix? Our skilled electricians ensure safety and efficiency every time.</p>
         </div>
         <div class="service-card" onclick="window.location.href='/carpenter'">
-            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Carpenter">
+                    <img src="https://images.unsplash.com/photo-1601524909162-ae8725290836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Carpenter">
             <h3>Carpenter</h3>
             <p>From furniture assembly to home repairs, our carpenters deliver craftsmanship you can rely on.</p>
         </div>
         <div class="service-card" onclick="window.location.href='/plumber'">
-            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Plumber">
+                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Plumber">
             <h3>Plumber</h3>
             <p>Got plumbing problems? We provide fast, reliable solutions for everything from leaks to full system installs.</p>
         </div>
-       
         <div class="service-card" onclick="window.location.href='/painter'">
-            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Painter">
+                    <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Painter">
             <h3>Painter</h3>
             <p>Enhance the beauty of your home with professional painting services for interiors and exteriors.</p>
         </div>
         <div class="service-card" onclick="window.location.href='/gardener'">
-            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Gardener">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gardener">
             <h3>Gardener</h3>
             <p>Transform your garden with expert gardening services to keep your plants healthy and vibrant.</p>
         </div>
         <div class="service-card" onclick="window.location.href='/mover'">
-            <img src="https://th.bing.com/th/id/R.abbd64f081451fc4b25b9a6b2f737a49?rik=RNt9pWm7yoneTQ&riu=http%3a%2f%2fthomasandpearl.com%2fwp-content%2fuploads%2f2015%2f02%2fconstruction-worker-disability-assistance.jpg&ehk=AuoyqSAewlXcC8NE5bEeobelBtulVxOFFlbAuw3UwUo%3d&risl=&pid=ImgRaw&r=0" alt="Mover">
+                    <img src="https://images.unsplash.com/photo-1530649159659-c3c5f4d5abaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mover">
             <h3>Mover</h3>
             <p>Need help with moving? Our team makes it easy and stress-free, no matter the size of your move.</p>
         </div>
         
+                <!-- Duplicated Cards for Seamless Loop -->
+                <div class="service-card" onclick="window.location.href='/electrician'">
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Electrician">
+                    <h3>Electrician</h3>
+                    <p>Need an electrical fix? Our skilled electricians ensure safety and efficiency every time.</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='/carpenter'">
+                    <img src="https://images.unsplash.com/photo-1601524909162-ae8725290836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Carpenter">
+                    <h3>Carpenter</h3>
+                    <p>From furniture assembly to home repairs, our carpenters deliver craftsmanship you can rely on.</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='/plumber'">
+                    <img src="https://images.unsplash.com/photo-1600566752355-35792bedcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Plumber">
+                    <h3>Plumber</h3>
+                    <p>Got plumbing problems? We provide fast, reliable solutions for everything from leaks to full system installs.</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='/painter'">
+                    <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Painter">
+                    <h3>Painter</h3>
+                    <p>Enhance the beauty of your home with professional painting services for interiors and exteriors.</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='/gardener'">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gardener">
+                    <h3>Gardener</h3>
+                    <p>Transform your garden with expert gardening services to keep your plants healthy and vibrant.</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='/mover'">
+                    <img src="https://images.unsplash.com/photo-1530649159659-c3c5f4d5abaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Mover">
+                    <h3>Mover</h3>
+                    <p>Need help with moving? Our team makes it easy and stress-free, no matter the size of your move.</p>
     </div>
+            </div>
+            <button class="nav-arrow right-arrow" onclick="scrollServices('right')">❯</button>
     </div>
 </section>
 
@@ -169,7 +202,21 @@
     <p>&copy; 2025 Fix Buddy. All rights reserved.</p>
 </footer>
 
+    <script src="toast.js"></script>
 <script>
+    // Add logout handler
+    function handleLogout(event) {
+        event.preventDefault();
+        
+        // Show confirmation dialog
+        if (confirm('Are you sure you want to logout?')) {
+            // Clear any stored data
+            localStorage.clear();
+            // Redirect to logout endpoint
+            window.location.href = '/logout';
+        }
+    }
+
     // List of available services
     const services = [
         "Electrician",
@@ -188,31 +235,41 @@
 
         // If input is not empty, show suggestions
         if (input) {
+                // Filter services that start with the input
             const filteredServices = services.filter(service =>
-                service.toLowerCase().includes(input)
+                    service.toLowerCase().startsWith(input)
             );
 
             if (filteredServices.length > 0) {
+                    suggestionsContainer.style.display = "block"; // Show the container
                 filteredServices.forEach(service => {
                     const suggestion = document.createElement("div");
                     suggestion.classList.add("suggestion");
-                    suggestion.textContent = service;
+                        // Highlight the matching part
+                        const highlightedText = service.slice(0, input.length);
+                        const remainingText = service.slice(input.length);
+                        suggestion.innerHTML = `<span style="color: #ffb300; font-weight: bold;">${highlightedText}</span>${remainingText}`;
                     suggestion.onclick = () => selectService(service);
                     suggestionsContainer.appendChild(suggestion);
                 });
             } else {
+                    suggestionsContainer.style.display = "block"; // Show the container
                 const noResults = document.createElement("div");
                 noResults.classList.add("suggestion");
                 noResults.textContent = "No services found";
                 suggestionsContainer.appendChild(noResults);
-            }
+                }
+            } else {
+                suggestionsContainer.style.display = "none"; // Hide the container when input is empty
         }
     }
 
     // Function to select a service when clicked from suggestions
     function selectService(service) {
         document.getElementById("search-input").value = service;
-        document.getElementById("suggestions-container").innerHTML = ""; // Clear suggestions
+            document.getElementById("suggestions-container").style.display = "none"; // Hide suggestions after selection
+            // Redirect to the service page when a suggestion is clicked
+            window.location.href = `/${service.toLowerCase()}`;
     }
 
     // Function to perform the search when the search button is clicked
@@ -221,12 +278,111 @@
 
         if (services.includes(query)) {
             // If the search term matches one of the services, redirect to the corresponding page
-            window.location.href = `/${query.toLowerCase()}?query=${encodeURIComponent(query)}`;
+                window.location.href = `/${query.toLowerCase()}`;
         } else {
-            alert("Please enter a valid service.");
+                if (!service) {
+                    toast.warning('Warning', "Please enter a valid service.");
+                    return;
+                }
+            }
         }
-    }
-</script>
 
+        // Close suggestions when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchBar = document.querySelector('.search-bar');
+            const suggestionsContainer = document.getElementById('suggestions-container');
+            
+            if (!searchBar.contains(event.target)) {
+                suggestionsContainer.style.display = "none";
+            }
+        });
+
+        // Add scroll control functions
+        let isAnimating = false;
+        let currentPosition = 0;
+        const cardWidth = 330; // Width of each card including gap
+        let autoScrollInterval;
+
+        // Function to handle automatic scrolling
+        function startAutoScroll() {
+            const cards = document.querySelector('.service-cards');
+            const totalCards = cards.children.length;
+            const maxScroll = -(totalCards / 2) * cardWidth;
+
+            autoScrollInterval = setInterval(() => {
+                if (!isAnimating) {
+                    currentPosition -= 1; // Reduced speed for smoother movement
+                    
+                    if (currentPosition <= maxScroll) {
+                        currentPosition = 0;
+                        cards.style.transition = 'none';
+                        cards.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
+                        cards.offsetHeight;
+                        cards.style.transition = 'transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)';
+                    }
+                    
+                    cards.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
+                }
+            }, 16); // Adjusted to match 60fps (1000ms/60 ≈ 16ms)
+        }
+
+        // Function to handle manual scrolling
+        function scrollServices(direction) {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const cards = document.querySelector('.service-cards');
+            const totalCards = cards.children.length;
+            const maxScroll = -(totalCards / 2) * cardWidth;
+
+            if (direction === 'left') {
+                currentPosition = Math.min(currentPosition + cardWidth, 0);
+                if (currentPosition === 0) {
+                    setTimeout(() => {
+                        cards.style.transition = 'none';
+                        currentPosition = maxScroll / 2;
+                        cards.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
+                        cards.offsetHeight;
+                        cards.style.transition = 'transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)';
+                    }, 300);
+                }
+            } else {
+                currentPosition = Math.max(currentPosition - cardWidth, maxScroll);
+                if (currentPosition <= maxScroll) {
+                    setTimeout(() => {
+                        cards.style.transition = 'none';
+                        currentPosition = maxScroll / 2;
+                        cards.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
+                        cards.offsetHeight;
+                        cards.style.transition = 'transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)';
+                    }, 300);
+                }
+            }
+
+            cards.style.transform = `translate3d(${currentPosition}px, 0, 0)`;
+
+            setTimeout(() => {
+                isAnimating = false;
+            }, 300);
+        }
+
+        // Start auto-scrolling when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelector('.service-cards');
+            cards.style.transition = 'transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1)';
+            cards.style.willChange = 'transform'; // Optimize performance
+            startAutoScroll();
+        });
+
+        // Pause auto-scroll on hover
+        document.querySelector('.service-cards-wrapper').addEventListener('mouseenter', () => {
+            clearInterval(autoScrollInterval);
+        });
+
+        // Resume auto-scroll when mouse leaves
+        document.querySelector('.service-cards-wrapper').addEventListener('mouseleave', () => {
+            startAutoScroll();
+        });
+</script>
 </body>
 </html>
