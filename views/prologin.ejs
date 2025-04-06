@@ -9,6 +9,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="toast.css">
+    <style>
+        /* Header Styles to match homepage */
+        .header {
+            background-color: rgb(38, 3, 105);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 30px;
+        }
+
+        .logo h1 {
+            font-size: 26px;
+            color: white;
+        }
+
+        .logo span {
+            color: #f3a847;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav ul li {
+            margin-left: 20px;
+        }
+
+        .nav ul li a {
+            color: #fff;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav ul li a:hover {
+            color: #f3a847;
+        }
+    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -18,8 +57,8 @@
         </div>
         <nav class="nav">
             <ul>
+                <li><a href="/">Home</a></li>
                 <li><a href="/FAQ">FAQ</a></li>
-                <li><a href="/#testimonials">Testimonials</a></li>
                 <li><a href="/application">Professional Sign Up</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
@@ -95,7 +134,7 @@
 
             if (response.ok) {
                 toast.success('Success', "Login successful!");
-                window.location.href = "/dashboard";
+                window.location.href = "/dashboard?type=professional";
             } else {
                 errorMessageElement.style.display = "block";
                 errorMessageElement.innerText = data.error || "Invalid credentials";
@@ -106,10 +145,12 @@
             errorMessageElement.innerText = "An error occurred while trying to log in. Please try again later.";
         }
     });
+    </script>
     
     <% if (typeof success !== 'undefined' && success) { %>
+    <script>
         toast.success('Success', '<%= success %>');
-    <% } %>
     </script>
+    <% } %>
 </body>
 </html>

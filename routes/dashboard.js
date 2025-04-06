@@ -3,29 +3,30 @@ const router = express.Router();
 const cookieParser = require("cookie-parser");
 const Professional = require("../models/professional");
 const Booking = require('../models/Booking');
-const { verifyToken } = require('../config/auth');
+const { verifyToken, requireProfessional } = require('../config/auth');
 
 // Middleware
 router.use(cookieParser());
 
-// View Routes
-router.get('/dashboard', verifyToken, async (req, res) => {
+// Only handle professional-specific dashboard routes in this file
+// This will be mounted at /professional/dashboard
+router.get('/professional/dashboard', [verifyToken, requireProfessional], async (req, res) => {
   try {
-    const user = await Professional.findById(req.user.id);
-    if (!user) {
+    const professional = await Professional.findById(req.user.id);
+    if (!professional) {
       res.clearCookie("token");
-      return res.render("prologin", { error: "User not found. Please login again." });
+      return res.render("prologin", { error: "Professional not found. Please login again." });
     }
 
-    const bookings = await Booking.find({ professionalId: user._id });
-    console.log("Fetched bookings for user:", user.email, bookings.length);
+    const bookings = await Booking.find({ professionalId: professional._id });
+    console.log("Fetched bookings for professional:", professional.email, bookings.length);
     
     return res.render('dashboard', { 
-      user: user,
+      user: professional,
       bookings: bookings
     });
   } catch (error) {
-    console.error('Error fetching dashboard data:', error);
+    console.error('Error fetching professional dashboard data:', error);
     return res.render('dashboard', { 
       user: req.user,
       bookings: [],
@@ -35,7 +36,7 @@ router.get('/dashboard', verifyToken, async (req, res) => {
 });
 
 // API Routes
-router.get('/api/professional/bookings', verifyToken, async (req, res) => {
+router.get('/api/professional/bookings', [verifyToken, requireProfessional], async (req, res) => {
   try {
     const bookings = await Booking.find({ professionalId: req.user.id });
     res.json({ success: true, bookings });
@@ -48,7 +49,7 @@ router.get('/api/professional/bookings', verifyToken, async (req, res) => {
   }
 });
 
-router.post('/api/bookings/:bookingId/status', verifyToken, async (req, res) => {
+router.post('/api/bookings/:bookingId/status', [verifyToken, requireProfessional], async (req, res) => {
   try {
     const { bookingId } = req.params;
     const { status } = req.body;

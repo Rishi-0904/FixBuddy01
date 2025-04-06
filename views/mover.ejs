@@ -138,7 +138,20 @@
             <ul>
                 <li><a href="services">Services</a></li>
                 <li><a href="testimonials">Testimonials</a></li>
-                <li><a href="/login">Login</a></li>
+                <% if (user) { %>
+                    <!-- If the user is logged in, show dashboard and logout -->
+                    <li><a href="/dashboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 5px;">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                        Dashboard
+                    </a></li>
+                    <li><a href="#" onclick="document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; window.location.href = '/';">Logout</a></li>
+                <% } else { %>
+                    <li><a href="/login">Login</a></li>
+                <% } %>
                 <li><a href="/contact-us">Contact</a></li>
             </ul>
         </nav>
@@ -188,16 +201,22 @@
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <section id="booking-section">
-                <h3>Book a Mover</h3>
+                <h3>Book an Mover</h3>
                 <form id="booking-form">
-                    <label for="clientName">Your Name:</label>
-                    <input type="text" id="clientName" required />
+                    <div class="form-group">
+                        <label for="clientName">Your Name:</label>
+                        <input type="text" id="clientName" required />
+                    </div>
 
-                    <label for="clientEmail">Your Email:</label>
-                    <input type="email" id="clientEmail" required />
+                    <div class="form-group">
+                        <label for="clientEmail">Your Email:</label>
+                        <input type="email" id="clientEmail" required <% if (user && user.email) { %>value="<%= user.email %>" readonly<% } %> />
+                    </div>
 
-                    <label for="clientPhone">Your Phone:</label>
-                    <input type="tel" id="clientPhone" required />
+                    <div class="form-group">
+                        <label for="clientPhone">Your Phone:</label>
+                        <input type="tel" id="clientPhone" required />
+                    </div>
 
                     <label for="serviceAddress">Service Address:</label>
                     <textarea id="serviceAddress" required></textarea>
@@ -239,10 +258,19 @@
         // Function to show modal
         function showModal(professional) {
             try {
-                selectedProfessional = professional;
+                // Parse the professional data if it's a string
+                const profData = typeof professional === 'string' ? JSON.parse(professional.replace(/\\'/g, "'")) : professional;
+                selectedProfessional = profData;
                 modal.style.display = 'block';
                 // Update the form title with the professional's name
-                document.querySelector('#booking-section h3').textContent = `Book ${professional.name}`;
+                document.querySelector('#booking-section h3').textContent = `Book ${profData.name}`;
+                
+                // Set user email if logged in
+                const userEmail = '<%= user ? user.email : "" %>';
+                if (userEmail) {
+                    document.getElementById('clientEmail').value = userEmail;
+                    document.getElementById('clientEmail').setAttribute('readonly', true);
+                }
             } catch (error) {
                 console.error('Error showing modal:', error);
                 showToast('Error selecting professional. Please try again.');

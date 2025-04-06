@@ -48,8 +48,8 @@ const contactRouter = require("./routes/contact");
 app.use("/api", bookingRoutes);  // Mount at /api to handle /api/book directly
 app.use("/api", professionalRoutes); // Mount professional routes at /api
 
-// Dashboard Routes - Mount at root to handle both API and view routes
-app.use("/", dashboardRoutes);
+// Professional Dashboard Routes - Mount at "/professional" path prefix
+app.use("/professional", dashboardRoutes);
 
 // Other View Routes
 app.use(contactRouter);
@@ -357,9 +357,110 @@ app.get('/mover', async (req, res) => {
 app.get("/login", (req, res) => {
     res.render("login");
 });
+
+// User login route
+app.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        console.log("User login attempt for email:", email);
+
+        // Find the user in the database
+        const user = await User.findOne({ email });
+        if (!user) {
+            console.log("Login Failed: User not found");
+            return res.render("login", { error: "Invalid email or password" });
+        }
+
+        // Compare the provided password with the hashed password in the database
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            console.log("Login Failed: Invalid password");
+            return res.render("login", { error: "Invalid email or password" });
+        }
+
+        // Create token
+        const token = generateToken({
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            role: 'user' // Explicitly set role to 'user'
+        });
+
+        // Set cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Lax',
+            maxAge: 24 * 60 * 60 * 1000 // 24 hours
+        });
+
+        console.log("User Login Successful!");
+        res.redirect('/');
+    } catch (err) {
+        console.error("Login Error:", err);
+        res.render("login", { error: "An error occurred while trying to log in. Please try again later." });
+    }
+});
+
+// Sign-up routes
+app.get("/sign-up", (req, res) => {
+    res.render("sign-up", { error: null, success: null });
+});
+
+app.post("/sign-up", async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+        console.log("Sign-up attempt for email:", email);
+
+        // Check if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            console.log("Sign-up Failed: User already exists");
+            return res.render("sign-up", { error: "Email already registered", success: null });
+        }
+
+        // Hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create new user
+        const user = new User({
+            name,
+            email,
+            password: hashedPassword
+        });
+
+        await user.save();
+        console.log("User created successfully:", email);
+
+        // Create token
+        const token = generateToken({
+            id: user._id,
+            email: user.email,
+            name: user.name,
+            role: 'user' // Explicitly set role to 'user'
+        });
+
+        // Set cookie
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'Lax',
+            maxAge: 24 * 60 * 60 * 1000 // 24 hours
+        });
+
+        res.render("sign-up", { error: null, success: "Account created successfully! Redirecting to homepage..." });
+        
+        // JavaScript redirect will happen via the success message in the view
+    } catch (err) {
+        console.error("Sign-up Error:", err);
+        res.render("sign-up", { error: "An error occurred while signing up. Please try again later.", success: null });
+    }
+});
+
 app.get("/application", (req, res) => {
     res.render("application");
 });
+
 app.get("/prologin", (req, res) => {
     res.render("prologin", { error: null, success: null });
 });
@@ -406,7 +507,8 @@ app.post("/application", upload.fields([
             name: professional.name,
             service: professional.service,
             experience: professional.experience,
-            profilePicture: professional.profilePicture
+            profilePicture: professional.profilePicture,
+            role: 'professional' // Explicitly set role to 'professional'
         });
 
         // Set cookie
@@ -420,7 +522,7 @@ app.post("/application", upload.fields([
         res.status(201).json({ 
             success: true, 
             message: "Professional registered successfully", 
-            redirect: "/dashboard" 
+            redirect: "/dashboard?type=professional" 
         });
     } catch (err) {
         console.error("Signup Error:", err);
@@ -455,7 +557,8 @@ app.post("/prologin", async (req, res) => {
             name: professional.name,
             service: professional.service,
             experience: professional.experience,
-            profilePicture: professional.profilePicture || '/images/default.jpg'
+            profilePicture: professional.profilePicture || '/images/default.jpg',
+            role: 'professional' // Explicitly set role to 'professional'
         });
         
         // Set cookie with token
@@ -472,6 +575,121 @@ app.post("/prologin", async (req, res) => {
         console.error("Login Error:", err);
         res.status(500).json({ error: "An error occurred while trying to log in. Please try again later." });
     }
+});
+
+// Dashboard route
+app.get('/dashboard', verifyToken, async (req, res) => {
+  try {
+    console.log('Dashboard route - User data:', {
+      id: req.user.id,
+      email: req.user.email,
+      name: req.user.name,
+      role: req.user.role
+    });
+    
+    // Check if the user is a professional or regular user
+    if (req.user.role === 'professional') {
+      console.log('Rendering professional dashboard');
+      // For professionals - fetch bookings where they are the professional
+      const bookings = await Booking.find({ professionalId: req.user.id })
+        .sort({ updatedAt: -1 }) // Sort by latest updated first
+        .lean();
+
+      console.log(`Found ${bookings ? bookings.length : 0} bookings for professional`);
+
+      return res.render('dashboard', { 
+        user: req.user,
+        bookings: bookings || []
+      });
+    } else {
+      console.log('Rendering user dashboard');
+      // For regular users - fetch bookings where they are the client
+      const bookings = await Booking.find({ clientEmail: req.user.email })
+        .sort({ updatedAt: -1 }) // Sort by latest updated first
+        .lean();
+
+      console.log(`Found ${bookings ? bookings.length : 0} bookings for user`);
+
+      return res.render('user-dashboard', { 
+        user: req.user,
+        bookings: bookings || [],
+        prologin: false
+      });
+    }
+  } catch (error) {
+    console.error('Dashboard error:', error);
+    res.status(500).render('error', { 
+      error: 'Failed to load dashboard', 
+      message: 'An error occurred while loading your dashboard. Please try again later.' 
+    });
+  }
+});
+
+// Routes for professionals to accept or reject bookings
+app.post('/api/bookings/:id/accept', verifyToken, async (req, res) => {
+  try {
+    // Verify the user is a professional
+    if (req.user.role !== 'professional') {
+      return res.status(403).json({ error: 'Only professionals can accept bookings' });
+    }
+
+    const bookingId = req.params.id;
+    const booking = await Booking.findById(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    // Verify the professional is assigned to this booking
+    if (booking.professionalId.toString() !== req.user.id) {
+      return res.status(403).json({ error: 'You are not authorized to accept this booking' });
+    }
+
+    booking.status = 'accepted';
+    booking.updatedAt = new Date();
+    await booking.save();
+
+    res.json({ success: true, message: 'Booking accepted successfully' });
+  } catch (error) {
+    console.error('Error accepting booking:', error);
+    res.status(500).json({ error: 'Failed to accept booking. Please try again.' });
+  }
+});
+
+app.post('/api/bookings/:id/reject', verifyToken, async (req, res) => {
+  try {
+    // Verify the user is a professional
+    if (req.user.role !== 'professional') {
+      return res.status(403).json({ error: 'Only professionals can reject bookings' });
+    }
+
+    const bookingId = req.params.id;
+    const booking = await Booking.findById(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+
+    // Verify the professional is assigned to this booking
+    if (booking.professionalId.toString() !== req.user.id) {
+      return res.status(403).json({ error: 'You are not authorized to reject this booking' });
+    }
+
+    booking.status = 'rejected';
+    booking.updatedAt = new Date();
+    await booking.save();
+
+    res.json({ success: true, message: 'Booking rejected successfully' });
+  } catch (error) {
+    console.error('Error rejecting booking:', error);
+    res.status(500).json({ error: 'Failed to reject booking. Please try again.' });
+  }
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ success: true, message: 'Logged out successfully' });
 });
 
 // Add error handling middleware

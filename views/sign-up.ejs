@@ -10,7 +10,7 @@
 </head>
 <body>
   <div class="login-container">
-    <form id="login-form" , action="/sign-up" , method="post">
+    <form id="login-form" action="/sign-up" method="post">
       <h1 style="color: rgb(255, 255, 255);text-shadow: 1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black;">Fix <span style="color: orange;text-shadow: none;">Buddy</span></h1>
       
       <!-- Username Block -->
@@ -43,6 +43,9 @@
         <script src="toast.js"></script>
         <script>
             toast.success('Success', '<%= success %>');
+            setTimeout(function() {
+                window.location.href = '/';
+            }, 2000);
         </script>
     <% } %>
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FixBuddy Professional Dashboard</title>
+    <title>Professional Dashboard - Fix Buddy</title>
     <link rel="stylesheet" href="dashboard.css" />
     <link rel="stylesheet" href="toast.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -11,270 +11,472 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
-      .booking-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 10px;
+      :root {
+        --color-primary: rgb(38, 3, 105);
+        --color-secondary: #ffb300;
+        --color-accent: #f3a847;
+        --color-bg: rgb(20, 16, 37);
+        --color-bg-light: rgba(38, 3, 105, 0.05);
+        --color-text: #fff;
+        --color-text-dark: #333;
+        --color-border: #ccc;
       }
-      .accept-btn, .reject-btn {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--color-bg);
+        color: var(--color-text);
+      }
+
+      .header {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: 5px;
-        font-size: 14px;
-        transition: all 0.3s ease;
+        padding: 15px 30px;
+        background-color: var(--color-primary);
+        color: var(--color-text);
       }
-      .accept-btn {
-        background-color: #4CAF50;
-        color: white;
-      }
-      .accept-btn:hover {
-        background-color: #45a049;
-      }
-      .reject-btn {
-        background-color: #f44336;
-        color: white;
-      }
-      .reject-btn:hover {
-        background-color: #da190b;
-      }
-      .booking-item {
-        position: relative;
-      }
-      .status-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 12px;
+
+      .logo {
+        font-size: 1.5rem;
         font-weight: bold;
       }
+
+      .logo span {
+        color: var(--color-accent);
+      }
+
+      .nav ul {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav ul li {
+        margin-left: 1.5rem;
+      }
+
+      .nav ul li a {
+        color: var(--color-text);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .nav ul li a:hover {
+        color: var(--color-accent);
+      }
+
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      .welcome-section {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .welcome-section h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--color-secondary);
+      }
+
+      .welcome-section p {
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+      }
+
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .profile-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--color-secondary);
+      }
+
+      .bookings-section {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 2rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .bookings-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        color: var(--color-secondary);
+        display: flex;
+        align-items: center;
+      }
+
+      .bookings-section h2 svg {
+        margin-right: 0.5rem;
+      }
+
+      .bookings-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .bookings-table th, .bookings-table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .bookings-table th {
+        font-weight: 600;
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--color-accent);
+      }
+
+      .bookings-table tr:hover {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+
       .status-pending {
-        background-color: #ffd700;
-        color: #000;
+        color: #f59e0b;
+        background-color: rgba(245, 158, 11, 0.2);
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        display: inline-block;
       }
+
       .status-accepted {
-        background-color: #4CAF50;
+        color: #10b981;
+        background-color: rgba(16, 185, 129, 0.2);
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        display: inline-block;
+      }
+
+      .status-rejected {
+        color: #ef4444;
+        background-color: rgba(239, 68, 68, 0.2);
+        padding: 0.25rem 0.5rem;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        display: inline-block;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .action-button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .accept-button {
+        background-color: rgba(16, 185, 129, 0.7);
         color: white;
       }
-      .status-rejected {
-        background-color: #f44336;
+
+      .accept-button:hover {
+        background-color: rgba(16, 185, 129, 1);
+      }
+
+      .reject-button {
+        background-color: rgba(239, 68, 68, 0.7);
         color: white;
+      }
+
+      .reject-button:hover {
+        background-color: rgba(239, 68, 68, 1);
+      }
+
+      .no-bookings {
+        text-align: center;
+        padding: 2rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .no-bookings svg {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .no-bookings p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+      }
+
+      .logout-btn {
+        background-color: transparent;
+        border: 1px solid var(--color-text);
+        color: var(--color-text);
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .logout-btn:hover {
+        background-color: var(--color-accent);
+        color: var(--color-primary);
+        border-color: var(--color-accent);
+      }
+
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          padding: 1rem;
+        }
+        
+        .nav ul {
+          margin-top: 1rem;
+        }
+        
+        .nav ul li {
+          margin-left: 1rem;
+        }
+        
+        .welcome-section {
+          flex-direction: column;
+          text-align: center;
+        }
+        
+        .profile-image {
+          margin: 0 auto 1rem auto;
+        }
+        
+        .bookings-table {
+          display: block;
+          overflow-x: auto;
+        }
       }
     </style>
   </head>
   <body>
-    <!-- Header Section -->
     <header class="header">
       <div class="logo">
-        <h1>Fix <span style="color: orange; text-shadow: none">Buddy</span></h1>
+        <h1>Fix <span>Buddy</span></h1>
       </div>
       <nav class="nav">
         <ul>
-          <li><a href="/dashboard" class="active">Dashboard</a></li>
-          <li><a href="#" onclick="handleLogout(event)">Logout</a></li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/profile">Profile</a></li>
+          <li><button class="logout-btn" onclick="handleLogout()">Logout</button></li>
         </ul>
       </nav>
     </header>
 
-    <!-- Dashboard Section -->
-    <section class="dashboard">
-      <div class="container">
-        <!-- Profile Section -->
-        <div class="profile-section">
-          <div class="profile-info">
-            <img
-              id="profile-photo"
-              src="<%= user.profilePicture || '/images/default.jpg' %>"
-              alt="Profile Photo"
-              class="profile-photo"
-            />
-            <div class="profile-details">
-              <h2 id="worker-name"><%= user.name %></h2>
-              <p><strong>Service Area:</strong> <span id="worker-service"><%= user.service %></span></p>
-              <p><strong>Experience:</strong> <span id="worker-experience"><%= user.experience %></span> years</p>
-              <p><strong>Email:</strong> <span id="worker-email"><%= user.email %></span></p>
-            </div>
+    <div class="dashboard-container">
+      <section class="welcome-section">
+        <div class="profile-info">
+          <h1>Welcome, <%= user.name %></h1>
+          <p>Manage your booking requests and update your availability.</p>
+        </div>
+        <img class="profile-image" src="<%= user.profilePicture || '/images/default.jpg' %>" alt="Profile">
+      </section>
+
+      <section class="bookings-section">
+        <h2>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+          </svg>
+          Booking Requests
+        </h2>
+
+        <% if (bookings && bookings.length > 0) { %>
+          <div style="overflow-x: auto;">
+            <table class="bookings-table">
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Service</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% bookings.forEach(function(booking) { %>
+                  <tr data-booking-id="<%= booking._id %>">
+                    <td>
+                      <div>
+                        <strong><%= booking.clientName %></strong><br>
+                        <%= booking.clientEmail %><br>
+                        <%= booking.clientPhone %>
+                      </div>
+                    </td>
+                    <td><%= booking.serviceType.charAt(0).toUpperCase() + booking.serviceType.slice(1) %></td>
+                    <td><%= new Date(booking.preferredDate).toLocaleDateString() %></td>
+                    <td><%= booking.preferredTime %></td>
+                    <td class="status-cell">
+                      <% if (booking.status === 'pending') { %>
+                        <span class="status-pending">Pending</span>
+                      <% } else if (booking.status === 'accepted') { %>
+                        <span class="status-accepted">Accepted</span>
+                      <% } else if (booking.status === 'rejected') { %>
+                        <span class="status-rejected">Rejected</span>
+                      <% } %>
+                    </td>
+                    <td>
+                      <% if (booking.status === 'pending') { %>
+                        <div class="action-buttons">
+                          <button 
+                            class="action-button accept-button" 
+                            onclick="handleBookingAction('<%= booking._id %>', 'accept')">
+                            Accept
+                          </button>
+                          <button 
+                            class="action-button reject-button" 
+                            onclick="handleBookingAction('<%= booking._id %>', 'reject')">
+                            Reject
+                          </button>
+                        </div>
+                      <% } else { %>
+                        <div>
+                          <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem;">
+                            <% if (booking.status === 'accepted') { %>
+                              Booking confirmed
+                            <% } else { %>
+                              Booking rejected
+                            <% } %>
+                          </span>
+                        </div>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
           </div>
-        </div>
-
-        <!-- Booking Section -->
-        <div class="booking-section">
-          <h3>Your Bookings</h3>
-          <ul class="booking-list">
-            <% if (typeof bookings !== 'undefined' && bookings && bookings.length > 0) { %>
-              <% bookings.forEach(function(booking) { %>
-                <li class="booking-item" id="booking-<%= booking._id %>">
-                  <span class="status-badge status-<%= booking.status.toLowerCase() %>">
-                    <%= booking.status %>
-                  </span>
-                  <h4>Booking ID: <%= booking._id %></h4>
-                  <p><strong>Client:</strong> <%= booking.clientName %></p>
-                  <p><strong>Email:</strong> <%= booking.clientEmail %></p>
-                  <p><strong>Phone:</strong> <%= booking.clientPhone %></p>
-                  <p><strong>Service Type:</strong> <%= booking.serviceType %></p>
-                  <p><strong>Address:</strong> <%= booking.serviceAddress %></p>
-                  <p><strong>Date:</strong> <%= new Date(booking.preferredDate).toLocaleDateString() %></p>
-                  <p><strong>Time:</strong> <%= booking.preferredTime %></p>
-                  <p><strong>Details:</strong> <%= booking.serviceDescription || 'No additional details' %></p>
-                  
-                  <% if (booking.status === 'pending') { %>
-                    <div class="booking-actions">
-                      <button onclick="updateBookingStatus('<%= booking._id %>', 'accepted')" class="accept-btn">
-                        <i class="fas fa-check"></i> Accept
-                      </button>
-                      <button onclick="updateBookingStatus('<%= booking._id %>', 'rejected')" class="reject-btn">
-                        <i class="fas fa-times"></i> Reject
-                      </button>
-                    </div>
-                  <% } %>
-                </li>
-              <% }); %>
-            <% } else { %>
-              <p>You have no bookings at the moment.</p>
-            <% } %>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer Section -->
-    <footer>
-      <p>&copy; 2025 FixBuddy - Your Trusted Service Provider</p>
-    </footer>
+        <% } else { %>
+          <div class="no-bookings">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+            </svg>
+            <p>You don't have any booking requests yet</p>
+            <p>Check back later for new bookings</p>
+          </div>
+        <% } %>
+      </section>
+    </div>
 
     <script src="toast.js"></script>
     <script>
-      // Add logout handler
-      function handleLogout(event) {
-        event.preventDefault();
-        
-        // Show confirmation dialog
-        if (confirm('Are you sure you want to logout?')) {
-          // Clear any stored data
-          localStorage.clear();
-          // Redirect to homepage
+      function handleLogout() {
+        // First make a proper logout request to the server
+        fetch('/logout', {
+          method: 'GET',
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json',
+          }
+        })
+        .then(() => {
+          // Clear cookies client-side as well
+          document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          // Show success message
+          toast.success('Success', 'Logged out successfully');
+          // Redirect to home page after a short delay
+          setTimeout(() => {
+            window.location.href = '/';
+          }, 500);
+        })
+        .catch(error => {
+          console.error('Logout error:', error);
+          // Still redirect even if there's an error
+          document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
           window.location.href = '/';
-        }
+        });
       }
-
-      // Store initial bookings data
-      const initialBookings = JSON.parse('<%- JSON.stringify(bookings) %>');
       
-      async function fetchBookings() {
-        const bookingsList = document.querySelector('.booking-list');
-        bookingsList.innerHTML = '<p>Loading bookings...</p>';
-        
+      async function handleBookingAction(bookingId, action) {
         try {
-          const response = await fetch('/api/professional/bookings', {
-            method: 'GET',
-            credentials: 'include',
+          // Disable buttons first to prevent multiple clicks
+          const row = document.querySelector(`tr[data-booking-id="${bookingId}"]`);
+          const buttons = row.querySelectorAll('button');
+          buttons.forEach(button => {
+            button.disabled = true;
+            button.style.opacity = '0.7';
+            button.style.cursor = 'not-allowed';
+          });
+          
+          const response = await fetch(`/api/bookings/${bookingId}/${action}`, {
+            method: 'POST',
             headers: {
-              'Accept': 'application/json',
               'Content-Type': 'application/json'
             }
           });
-
-          if (response.status === 401) {
-            toast.error('Session Expired', 'Your session has expired. Please login again.');
-            setTimeout(() => {
-              window.location.href = '/prologin';
-            }, 2000);
-            return;
-          }
           
           const data = await response.json();
           
-          if (!response.ok) {
-            throw new Error(data.error || 'Failed to fetch bookings');
-          }
-          
-          const bookings = data.bookings;
-          
-          if (!bookings || bookings.length === 0) {
-            bookingsList.innerHTML = '<p>You have no bookings at the moment.</p>';
-            return;
-          }
-          
-          renderBookings(bookings);
-        } catch (error) {
-          console.error('Error fetching bookings:', error);
-          bookingsList.innerHTML = '<p>Failed to load bookings. Please try again later.</p>';
-          toast.error('Error', error.message || 'Failed to load bookings');
-        }
-      }
-
-      function renderBookings(bookings) {
-        const bookingsList = document.querySelector('.booking-list');
-        bookingsList.innerHTML = bookings.map(booking => `
-          <li class="booking-item" id="booking-${booking._id}">
-            <span class="status-badge status-${booking.status.toLowerCase()}">
-              ${booking.status}
-            </span>
-            <h4>Booking ID: ${booking._id}</h4>
-            <p><strong>Client:</strong> ${booking.clientName}</p>
-            <p><strong>Email:</strong> ${booking.clientEmail}</p>
-            <p><strong>Phone:</strong> ${booking.clientPhone}</p>
-            <p><strong>Service Type:</strong> ${booking.serviceType}</p>
-            <p><strong>Address:</strong> ${booking.serviceAddress}</p>
-            <p><strong>Date:</strong> ${new Date(booking.preferredDate).toLocaleDateString()}</p>
-            <p><strong>Time:</strong> ${booking.preferredTime}</p>
-            <p><strong>Details:</strong> ${booking.serviceDescription || 'No additional details'}</p>
+          if (response.ok) {
+            // Update UI
+            const statusCell = row.querySelector('.status-cell');
+            const actionsCell = row.querySelector('td:last-child');
             
-            ${booking.status === 'pending' ? `
-              <div class="booking-actions">
-                <button onclick="updateBookingStatus('${booking._id}', 'accepted')" class="accept-btn">
-                  <i class="fas fa-check"></i> Accept
-                </button>
-                <button onclick="updateBookingStatus('${booking._id}', 'rejected')" class="reject-btn">
-                  <i class="fas fa-times"></i> Reject
-                </button>
-              </div>
-            ` : ''}
-          </li>
-        `).join('');
-      }
-
-      async function updateBookingStatus(bookingId, status) {
-        try {
-          const response = await fetch(`/api/bookings/${bookingId}/status`, {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({ status })
-          });
-
-          if (response.status === 401) {
-            toast.error('Session Expired', 'Your session has expired. Please login again.');
-            setTimeout(() => {
-              window.location.href = '/prologin';
-            }, 2000);
-            return;
+            if (action === 'accept') {
+              statusCell.innerHTML = '<span class="status-accepted">Accepted</span>';
+              actionsCell.innerHTML = '<div><span style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem;">Booking confirmed</span></div>';
+              toast.success('Success', 'Booking accepted successfully');
+            } else {
+              statusCell.innerHTML = '<span class="status-rejected">Rejected</span>';
+              actionsCell.innerHTML = '<div><span style="color: rgba(255, 255, 255, 0.7); font-size: 0.875rem;">Booking rejected</span></div>';
+              toast.success('Success', 'Booking rejected successfully');
+            }
+          } else {
+            // Re-enable buttons on error
+            buttons.forEach(button => {
+              button.disabled = false;
+              button.style.opacity = '1';
+              button.style.cursor = 'pointer';
+            });
+            
+            toast.error('Error', data.error || 'Failed to update booking status');
           }
-
-          const data = await response.json();
-          
-          if (!response.ok) {
-            throw new Error(data.error || 'Failed to update booking status');
-          }
-          
-          toast.success('Success', `Booking ${status} successfully`);
-          fetchBookings(); // Refresh the bookings list
         } catch (error) {
-          console.error('Error updating booking status:', error);
-          toast.error('Error', error.message || 'Failed to update booking status');
+          console.error('Error updating booking:', error);
+          toast.error('Error', 'An error occurred. Please try again.');
+          
+          // Re-enable buttons on error
+          const row = document.querySelector(`tr[data-booking-id="${bookingId}"]`);
+          const buttons = row.querySelectorAll('button');
+          buttons.forEach(button => {
+            button.disabled = false;
+            button.style.opacity = '1';
+            button.style.cursor = 'pointer';
+          });
         }
       }
-
-      // Initial fetch of bookings
-      fetchBookings();
     </script>
   </body>
 </html>

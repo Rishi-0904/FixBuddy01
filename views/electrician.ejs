@@ -10,6 +10,45 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <style>
+        /* Header Styles to match homepage */
+        .header {
+            background-color: rgb(38, 3, 105);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 30px;
+        }
+
+        .logo h1 {
+            font-size: 26px;
+            color: white;
+        }
+
+        .logo span {
+            color: #f3a847;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav ul li {
+            margin-left: 20px;
+        }
+
+        .nav ul li a {
+            color: #fff;
+            font-size: 16px;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav ul li a:hover {
+            color: #f3a847;
+        }
+
+        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -132,14 +171,27 @@
 <body>
     <header class="header">
         <div class="logo">
-            <h1 style="color: white;">Fix <span style="color: orange;">Buddy</span></h1>
+            <h1>Fix <span>Buddy</span></h1>
         </div>
         <nav class="nav">
             <ul>
-                <li><a href="services">Services</a></li>
-                <li><a href="testimonials">Testimonials</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/contact-us">Contact</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/services">Services</a></li>
+                <% if (user) { %>
+                    <!-- If the user is logged in, show dashboard and logout -->
+                    <li><a href="/dashboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 5px;">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                        Dashboard
+                    </a></li>
+                    <li><a href="#" onclick="handleLogout(event)">Logout</a></li>
+                <% } else { %>
+                    <li><a href="/login">Login</a></li>
+                <% } %>
+                <li><a href="/contact">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -167,7 +219,7 @@
 
                     <div class="form-group">
                         <label for="clientEmail">Your Email:</label>
-                        <input type="email" id="clientEmail" required />
+                        <input type="email" id="clientEmail" required <% if (user && user.email) { %>value="<%= user.email %>" readonly<% } %> />
                     </div>
 
                     <div class="form-group">
@@ -230,6 +282,13 @@
             modal.style.display = 'block';
             // Update the form title with the professional's name
             document.querySelector('#booking-section h3').textContent = `Book ${professional.name}`;
+            
+            // Set user email if logged in
+            const userEmail = '<%= user ? user.email : "" %>';
+            if (userEmail) {
+                document.getElementById('clientEmail').value = userEmail;
+                document.getElementById('clientEmail').setAttribute('readonly', true);
+            }
         }
 
         // Function to hide modal
@@ -379,6 +438,35 @@
                 submitButton.style.cursor = 'pointer';
             }
         });
+
+        // Handle logout function
+        function handleLogout(event) {
+            event.preventDefault();
+            // First make a proper logout request to the server
+            fetch('/logout', {
+                method: 'GET',
+                credentials: 'same-origin',
+                headers: {
+                    'Accept': 'application/json',
+                }
+            })
+            .then(() => {
+                // Clear cookies client-side as well
+                document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                // Show success message
+                toast.success('Success', 'Logged out successfully');
+                // Redirect to home page after a short delay
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 500);
+            })
+            .catch(error => {
+                console.error('Logout error:', error);
+                // Still redirect even if there's an error
+                document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                window.location.href = '/';
+            });
+        }
     </script>
 </body>
 </html>
